@@ -1,13 +1,31 @@
+import { EnvelopeSimple, FacebookLogo, InstagramLogo, LinkedinLogo, MapPin, Phone, PinterestLogo, TwitterLogo } from 'phosphor-react';
 import styled from 'styled-components'
-import image from '../assets/rvore-geneal-gica-de-madeira-rvore-geneal-gica-livre.jpg'
 
 type Props = {}
 
 const Wrapper = styled.footer`
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 5%;
+    height: 432px;
+`;
+const WrapperCenter = styled.div`
+    width: 33%;
+`;
+const FooterWrapper = styled.div`
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
+`;
+const Last = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    p {
+      margin-bottom: 2rem;
+    }
 `;
 const Img = styled.img`
     height: 100vh;
@@ -15,84 +33,38 @@ const Img = styled.img`
 
 const Footer = (props: Props) => {
   return (
-    <Wrapper className="footer_section">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4 footer-col">
-            <div className="footer_contact">
-              <h4>
-                Contact Us
-              </h4>
-              <div className="contact_link_box">
-                <a href="">
-                  <i className="fa fa-map-marker" aria-hidden="true"></i>
-                  <span>
-                    Location
-                  </span>
-                </a>
-                <a href="">
-                  <i className="fa fa-phone" aria-hidden="true"></i>
-                  <span>
-                    Call +01 1234567890
-                  </span>
-                </a>
-                <a href="">
-                  <i className="fa fa-envelope" aria-hidden="true"></i>
-                  <span>
-                    demo@gmail.com
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 footer-col">
-            <div className="footer_detail">
-              <a href="" className="footer-logo">
-                Feane
-              </a>
-              <p>
-                Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-              </p>
-              <div className="footer_social">
-                <a href="">
-                  <i className="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i className="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i className="fa fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i className="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-                <a href="">
-                  <i className="fa fa-pinterest" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 footer-col">
-            <h4>
-              Opening Hours
-            </h4>
-            <p>
-              Everyday
-            </p>
-            <p>
-              10.00 Am -10.00 Pm
-            </p>
-          </div>
-        </div>
-        <div className="footer-info">
+    <Wrapper>
+      <FooterWrapper>
+        <div>
+          <h4>Entre em Contato</h4>
           <p>
-            &copy; <span id="displayYear"></span> All Rights Reserved By
-            <a href="https://html.design/">Free Html Templates</a><br></br>
-            &copy; <span id="displayYear"></span> Distributed By
-            <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+            <MapPin size={32} />
+            Rua Paulo Malschitzki, 200, Joinville - SC
+          </p>
+          <p>
+            <Phone size={32} />
+            Celular (12) 98158-0992
+          </p>
+          <p>
+            <EnvelopeSimple size={32} />
+            eduardojerbr@gmail.com
           </p>
         </div>
-      </div>
+        <WrapperCenter>
+          <h2>Maria</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla corporis corrupti numquam l</p>
+        <div><FacebookLogo size={32} /> <TwitterLogo size={32} /><LinkedinLogo size={32} /><InstagramLogo size={32} /><PinterestLogo size={32} /></div>
+        </WrapperCenter>
+        <div>
+          <h4>Horário de Atendimento</h4>
+          <p>Todos os dias</p>
+          <p>08:00 às 17:00</p>
+        </div>
+      </FooterWrapper>
+      <Last>
+        <p>&copy; 2022 Todos os Direitos Reservados</p>
+        <p>Desenvolvido com s2 por José Eduardo Ribeiro</p>
+      </Last>
     </Wrapper>
   )
 }
