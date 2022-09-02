@@ -10,13 +10,16 @@ const Wrapper = styled.footer`
     padding: 0 5%;
     height: 432px;
 `;
-const WrapperCenter = styled.div`
-    width: 33%;
-`;
 const FooterWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    div {
+      width: 33%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 `;
 const Last = styled.div`
     display: flex;
@@ -26,44 +29,112 @@ const Last = styled.div`
     p {
       margin-bottom: 2rem;
     }
+    p span {
+      color: #f00;
+    }
 `;
-const Img = styled.img`
-    height: 100vh;
+const Contacts = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3 {
+      font-size: 2rem;
+      font-family: 'Dancing Script';
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-top: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+    p span {
+      color: #EEBB61;
+      margin-right: 5px;
+    }
+`;
+const Company = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      font-size: 3rem;
+      font-family: 'Dancing Script';
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #EEBB61;
+      text-shadow: 1px 1px #000;
+    }
+    p {
+      margin-bottom: 0.8rem;
+    }
+    div {
+      width: 100%;
+      color: #EEBB61;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    div span {
+      margin: 0 0.5rem;
+      cursor: pointer;
+    }
+    div span:hover {
+      color: #fff;
+    }
+`;
+const Hours = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3 {
+      font-size: 2rem;
+      font-family: 'Dancing Script';
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    p {
+      margin-top: 0.7rem;
+    }
+    p span {
+      color: #EEBB61;
+      margin: 0 0.5rem;
+    }
 `;
 
 const Footer = (props: Props) => {
   return (
     <Wrapper>
       <FooterWrapper>
-        <div>
-          <h4>Entre em Contato</h4>
-          <p>
-            <MapPin size={32} />
-            Rua Paulo Malschitzki, 200, Joinville - SC
-          </p>
-          <p>
-            <Phone size={32} />
-            Celular (12) 98158-0992
-          </p>
-          <p>
-            <EnvelopeSimple size={32} />
-            eduardojerbr@gmail.com
-          </p>
-        </div>
-        <WrapperCenter>
+        <Contacts>
+          <h3>Entre em Contato</h3>
+          <p><span><MapPin size={20} weight="fill"/></span> Rua Paulo Malschitzki, 200, Joinville - SC</p>
+          <p><span><Phone size={20} weight="fill"/></span> (12) 98158-0992</p>
+          <p><span><EnvelopeSimple size={20} weight="fill"/></span> eduardojerbr@gmail.com</p>
+        </Contacts>
+        <Company>
           <h2>Maria</h2>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla corporis corrupti numquam l</p>
-        <div><FacebookLogo size={32} /> <TwitterLogo size={32} /><LinkedinLogo size={32} /><InstagramLogo size={32} /><PinterestLogo size={32} /></div>
-        </WrapperCenter>
-        <div>
-          <h4>Horário de Atendimento</h4>
-          <p>Todos os dias</p>
-          <p>08:00 às 17:00</p>
-        </div>
+          <p>Artigos personalizados em MDF e acrílico, corte e </p>
+          <p>impresão a laser, presentes e muito mais!</p>
+          <div>
+            <span><FacebookLogo size={32} /></span>
+            <span><TwitterLogo size={32} /></span>
+            <span><LinkedinLogo size={32} /></span>
+            <span><InstagramLogo size={32} /></span>
+            <span><PinterestLogo size={32} /></span>
+          </div>
+        </Company>
+        <Hours>
+          <h3>Atendimento</h3>
+          <p>Segunda à Sábado</p>
+          <p><span>08:00 </span> às <span> 17:00</span></p>
+        </Hours>
       </FooterWrapper>
       <Last>
-        <p>&copy; 2022 Todos os Direitos Reservados</p>
-        <p>Desenvolvido com s2 por José Eduardo Ribeiro</p>
+        <p>&copy; Princesa Maria - Todos os direitos reservados.</p>
+        <p>Desenvolvido com <span> &#x2764; </span> por <a target={"_blank"} href="http://www.eduardojer.tech">José Eduardo Ribeiro</a></p>
       </Last>
     </Wrapper>
   )
