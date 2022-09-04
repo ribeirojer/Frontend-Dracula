@@ -17,16 +17,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --cor-A: #006d77;
+  --cor-B: #83c5be;
+  --cor-C: #edf6f9;
+  --cor-D: #ffddd2;
+  --cor-E: #e29578;
+
 }
 body {
-  background-color: #213547;
+  background-color: var(--cor-A);
   color: #fff;
-}
-a {
-  font-weight: 500;
-  color: #fff;
-  text-decoration: none;
-}
-a:hover {
-  color: #8f8142;
 }
