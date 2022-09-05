@@ -5,22 +5,50 @@ type Props = {}
 
 const Wrapper = styled.section`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     padding: 0 5%;
+    background-image: linear-gradient(to right, var(--cor-A), var(--cor-B));
 `;
-const Img = styled.img`
+const Carrousel = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+
+    h1 {
+      font-family: 'Dancing Script';
+      font-size: 3rem;
+      line-height: 3.6rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      margin: 0.5rem 0;
+    }
+`;
+const ImgWrapper = styled.div`
     height: 100vh;
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 400px;
+      border-radius: 2rem;
+      box-shadow: 0px 0px 5px #f2f7f2;
+    }
 `;
 
 const Hero = (props: Props) => {
   return (
     <Wrapper>
-      <div>
-        <h1>título</h1>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat, cupiditate nisi nihil fugit rem ratione velit modi culpa repudiandae laboriosam? At praesentium, magni officiis aliquam facere quas amet ipsam autem!</p>
-      </div>
-      <Img src={image} alt="main_image" />
+      <Carrousel>
+        <h1>Princesa Maria</h1>
+        <p>Somos uma loja especializada em artigos decorativos e presentes feitos com corte e impressão a laser, trabalhamos com acrílicos, MDF e madeiras finas.</p>
+        <p>Quer presentear alguém? aqui é o lugar certo!</p>
+      </Carrousel>
+      <ImgWrapper>
+        <img src={image} alt="main_image" />
+      </ImgWrapper>
     </Wrapper>
   )
 }
