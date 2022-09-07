@@ -35,11 +35,17 @@ const Wrapper = styled.section`
       color: var(--cor-C);
       background-color: var(--cor-A);
     }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: var(--cor-A);
+      color: var(--cor-C);
+    }
 `;
 const Products = styled.div`
     display: flex;
     align-items: center;
     gap: 3rem;
+    margin-bottom: 2rem;
 `;
 const CardB = styled.div`
   display: flex;
@@ -111,6 +117,77 @@ const ListProducts = (props: Props) => {
           </div>
         </CardB>
       </Products>
+      <Products>
+        <CardB>
+          <ImgWrapper>
+            <img src={image} alt="" />
+          </ImgWrapper>
+          <h2>Tábua de carne</h2>
+          <p>tábua impressa com o desenho que você quiser</p>
+          <div>
+            <span>R$ 30,00</span>
+            <ShoppingCart />
+          </div>
+        </CardB>
+        <CardB>
+          <ImgWrapper>
+            <img src={image} alt="" />
+          </ImgWrapper>
+          <h2>Tábua de carne</h2>
+          <p>tábua impressa com o desenho que você quiser</p>
+          <div>
+            <span>R$ 30,00</span>
+            <ShoppingCart />
+          </div>
+        </CardB>
+        <CardB>
+          <ImgWrapper>
+            <img src={image} alt="" />
+          </ImgWrapper>
+          <h2>Tábua de carne</h2>
+          <p>tábua impressa com o desenho que você quiser</p>
+          <div>
+            <span>R$ 30,00</span>
+            <ShoppingCart />
+          </div>
+        </CardB>
+      </Products>
+      <Products>
+        <CardB>
+          <ImgWrapper>
+            <img src={image} alt="" />
+          </ImgWrapper>
+          <h2>Tábua de carne</h2>
+          <p>tábua impressa com o desenho que você quiser</p>
+          <div>
+            <span>R$ 30,00</span>
+            <ShoppingCart />
+          </div>
+        </CardB>
+        <CardB>
+          <ImgWrapper>
+            <img src={image} alt="" />
+          </ImgWrapper>
+          <h2>Tábua de carne</h2>
+          <p>tábua impressa com o desenho que você quiser</p>
+          <div>
+            <span>R$ 30,00</span>
+            <ShoppingCart />
+          </div>
+        </CardB>
+        <CardB>
+          <ImgWrapper>
+            <img src={image} alt="" />
+          </ImgWrapper>
+          <h2>Tábua de carne</h2>
+          <p>tábua impressa com o desenho que você quiser</p>
+          <div>
+            <span>R$ 30,00</span>
+            <ShoppingCart />
+          </div>
+        </CardB>
+      </Products>
+      <button>Ver Mais</button>
     </Wrapper>
   )
 }

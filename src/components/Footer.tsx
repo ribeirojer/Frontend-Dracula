@@ -21,24 +21,12 @@ const FooterWrapper = styled.div`
       align-items: center;
     }
 `;
-const Last = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5rem;
-    p {
-      margin-bottom: 2rem;
-    }
-    p span {
-      color: #f00;
-    }
-`;
 const Contacts = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     h3 {
-      font-size: 2rem;
+      font-size: 28px;
       font-family: 'Dancing Script';
       font-weight: 700;
       margin-bottom: 1rem;
@@ -51,7 +39,6 @@ const Contacts = styled.div`
 
     }
     p span {
-      color: #EEBB61;
       margin-right: 5px;
     }
 `;
@@ -60,19 +47,16 @@ const Company = styled.div`
     flex-direction: column;
     align-items: center;
     h2 {
-      font-size: 3rem;
+      font-size: 38px;
       font-family: 'Dancing Script';
       font-weight: 700;
       margin-bottom: 1.5rem;
-      color: #EEBB61;
-      text-shadow: 1px 1px #000;
     }
     p {
       margin-bottom: 0.8rem;
     }
     div {
       width: 100%;
-      color: #EEBB61;
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -82,7 +66,7 @@ const Company = styled.div`
       cursor: pointer;
     }
     div span:hover {
-      color: #fff;
+      color: var(--cor-E);
     }
 `;
 const Hours = styled.div`
@@ -90,7 +74,7 @@ const Hours = styled.div`
     flex-direction: column;
     align-items: center;
     h3 {
-      font-size: 2rem;
+      font-size: 28px;
       font-family: 'Dancing Script';
       font-weight: 700;
       margin-bottom: 1rem;
@@ -99,8 +83,23 @@ const Hours = styled.div`
       margin-top: 0.7rem;
     }
     p span {
-      color: #EEBB61;
       margin: 0 0.5rem;
+    }
+`;
+const Last = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+    p {
+      margin-bottom: 2rem;
+    }
+    p span {
+      color: #f00;
+    }
+    a {
+      color: var(--cor-C);
+      text-decoration: none;
     }
 `;
 
