@@ -27,5 +27,6 @@
 }
 body {
   background-color: var(--cor-A);
-  color: #fff;
+  /*color: #fff;*/
+  color: var(--cor-C);
 }

@@ -1,5 +1,5 @@
-import { MagnifyingGlass, ShoppingCart, UserCircle } from 'phosphor-react';
-import { Link, Navigate } from 'react-router-dom';
+import { MagnifyingGlass, ShoppingCart, UserCirclePlus } from 'phosphor-react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 type Props = {}
@@ -13,6 +13,7 @@ const HeaderWrapper = styled.header`
     width: 100%;
     height: 88px;
     padding: 0 5%;
+    z-index: 2;
 `;
 const Logo = styled.span`
     font-size: 2.5rem;
@@ -49,12 +50,32 @@ const User = styled.div`
     justify-content: flex-end;
     font-size: 2rem;
     width: 33%;
+    span a {
+        color: #fff;
+        margin: 0 0 0 0.5rem;
+    }
+`;
+const ButtonSearch = styled.div`
+    display: flex;
+    position: relative;
+    input {
+        display: none;
+        z-index: 2;
+    }
+    &:hover input {
+        display: block;
+    }
+    svg {
+        position: absolute;
+        right: 0.5rem;
+    }
+    &:hover svg {
+        color: var(--cor-B);
+        z-index: 3;
+    }
 `;
 
 const Header = (props: Props) => {
-
-    const navigate = Navigate;
-
   return (
     <HeaderWrapper>
         <Logo>
@@ -72,9 +93,12 @@ const Header = (props: Props) => {
             </li>
         </List>
         <User>
-            <span><Link to={"/search"}><MagnifyingGlass size={32} /></Link></span>
+            <ButtonSearch>
+                <input type="text" />
+                <MagnifyingGlass size={32} />
+            </ButtonSearch>
             <span><Link to={"/shop"}><ShoppingCart size={32} weight="fill" /></Link></span>
-            <span><Link to={"/user"}><UserCircle size={32} weight="fill" /></Link></span>
+            <span><Link to={"/user"}><UserCirclePlus size={32} weight="fill" /></Link></span>
         </User>
     </HeaderWrapper>
   )

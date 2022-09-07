@@ -5,17 +5,16 @@ type Props = {}
 
 const Wrapper = styled.section`
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    position: relative;
     padding: 0 5%;
+    height: 100vh;
     background-image: linear-gradient(to right, var(--cor-A), var(--cor-B));
 `;
 const Carrousel = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 50%;
-
     h1 {
       font-family: 'Dancing Script';
       font-size: 3rem;
@@ -27,14 +26,19 @@ const Carrousel = styled.div`
     }
 `;
 const ImgWrapper = styled.div`
-    height: 100vh;
     display: flex;
     align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
 
     img {
-      height: 400px;
-      border-radius: 2rem;
-      box-shadow: 0px 0px 5px #f2f7f2;
+      height: 500px;
+      width: 550px;
+      //border-radius: 2rem;
+      //box-shadow: 0px 0px 5px #f2f7f2;
     }
 `;
 
