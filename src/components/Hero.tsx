@@ -31,14 +31,11 @@ const ImgWrapper = styled.div`
     position: absolute;
     right: 0;
     bottom: 0;
-    display: flex;
     align-items: flex-end;
 
     img {
       height: 500px;
       width: 550px;
-      //border-radius: 2rem;
-      //box-shadow: 0px 0px 5px #f2f7f2;
     }
 `;
 
