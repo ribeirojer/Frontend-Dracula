@@ -7,7 +7,7 @@ const Wrapper = styled.section`
     display: flex;
     align-items: center;
     position: relative;
-    padding: 0 5%;
+    padding: 0 8%;
     height: 100vh;
     background-image: linear-gradient(to right, var(--cor-A), var(--cor-B));
 `;

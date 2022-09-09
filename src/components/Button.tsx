@@ -3,7 +3,7 @@ import styled from 'styled-components'
 type Props = {}
 
 type PropTypeBg = {
-    background: string;
+    background: string|null;
   };
   
 const Banner = styled.button.attrs((props: PropTypeBg) => ({
@@ -14,7 +14,7 @@ background: props.background,
     text-transform: uppercase;
     display: inline-block;
     padding: 10px 55px;
-    background-color: var(--cor-B);
+    background-color: ${(props) => props.background || '#8e5572' };
     color: #ffffff;
     border-radius: 45px;
     -webkit-transition: all 0.3s;
@@ -23,11 +23,11 @@ background: props.background,
     cursor: pointer;
 
     &:hover {
-      background-color: ${(props) => props.background};
+      background-color: var(--cor-A);
     }
 `;
 
-const Button = ({ cor, texto }: { cor:string, texto:string|null}) => {
+const Button = ({ cor, texto }: { cor:string|null, texto:string|null}) => {
 
   return (
     <Banner background={cor}>{texto}</Banner>

@@ -87,7 +87,7 @@ const Home = (props: Props) => {
           <div>
             <h1>Princesa Maria</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid repellat magni doloribus numquam libero quos ab eaque ipsum officia itaque deleniti quaerat corporis beatae natus perspiciatis quas, repudiandae labore quae!</p>
-            <Button cor='#1a2026' texto='Saiba Mais'/>
+            <Button cor='' texto='Saiba Mais'/>
           </div>
         </Company>
         <ContactsMaps>
@@ -100,7 +100,7 @@ const Home = (props: Props) => {
             </form>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d23794.594973182444!2d-48.84988049039123!3d-26.25560995099244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaff6766822b412e1!2sUdesc%20Joinville!5e0!3m2!1spt-BR!2sbr!4v1662576883382!5m2!1spt-BR!2sbr" width="600" height="450"  allowFullScreen={false} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>{/*style="border:0;"*/}
           </div>
-          <Button cor='#1a2026' texto='Enviar'/>
+          <Button cor='' texto='Enviar'/>
         </ContactsMaps>
         <Depoiments>
           <h1>Seção depoimentos</h1>

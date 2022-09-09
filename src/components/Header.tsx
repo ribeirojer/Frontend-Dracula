@@ -12,14 +12,13 @@ const HeaderWrapper = styled.header`
     top: 0;
     width: 100%;
     height: 88px;
-    padding: 0 5%;
+    padding: 0 8%;
     z-index: 2;
 `;
 const Logo = styled.span`
     font-size: 2.5rem;
     font-family: 'Dancing Script';
     font-weight: 700;
-    width: 33%;
     a {
         color: #fff;
         text-decoration: none;
@@ -29,7 +28,6 @@ const Logo = styled.span`
 const List = styled.ul`
     display: flex;
     list-style: none;
-    width: 33%;
     li a {
         padding: 0.3rem 1rem;
         border: 2px solid #fff;
@@ -49,7 +47,6 @@ const User = styled.div`
     display: flex;
     justify-content: flex-end;
     font-size: 2rem;
-    width: 33%;
     span a {
         color: #fff;
         margin: 0 0 0 0.5rem;

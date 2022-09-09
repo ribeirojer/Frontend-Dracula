@@ -1,6 +1,7 @@
 import { ShoppingCart } from 'phosphor-react';
 import styled from 'styled-components'
 import image from '../assets/4.jpg'
+import Button from './Button';
 
 type Props = {}
 
@@ -34,11 +35,6 @@ const Wrapper = styled.section`
     li:hover {
       color: var(--cor-C);
       background-color: var(--cor-A);
-    }
-    button {
-      padding: 0.5rem 1rem;
-      background-color: var(--cor-A);
-      color: var(--cor-C);
     }
 `;
 const Products = styled.div`
@@ -187,7 +183,7 @@ const ListProducts = (props: Props) => {
           </div>
         </CardB>
       </Products>
-      <button>Ver Mais</button>
+      <Button cor='' texto='Ver Mais'/>
     </Wrapper>
   )
 }
