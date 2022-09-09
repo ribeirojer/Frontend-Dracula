@@ -4,11 +4,13 @@ import styled from 'styled-components'
 type Props = {}
 
 const Wrapper = styled.footer`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 5%;
-    height: 432px;
+  background-color: var(--cor-A);
+  color: var(--cor-C);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 8%;
+  height: 432px;
 `;
 const FooterWrapper = styled.div`
     display: flex;

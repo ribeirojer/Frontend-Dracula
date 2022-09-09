@@ -43,6 +43,12 @@ h2 {
   line-height: 2.4rem;
   font-weight: 700;
 }
+h3 {
+  font-size: 28px;
+  font-family: 'Dancing Script';
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
 ul {
   display: flex;
   list-style-type: none;

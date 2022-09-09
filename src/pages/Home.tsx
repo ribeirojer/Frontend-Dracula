@@ -230,4 +230,3 @@ const Home = (props: Props) => {
   )
 }
 export default Home;
-//<a href="https://www.flaticon.com/free-icons/princess" title="princess icons">Princess icons created by Freepik - Flaticon</a>
