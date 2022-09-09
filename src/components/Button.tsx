@@ -10,7 +10,6 @@ const Banner = styled.button.attrs((props: PropTypeBg) => ({
 background: props.background,
 }))<PropTypeBg>`
     margin-top: 15px;
-    border: none;
     text-transform: uppercase;
     display: inline-block;
     padding: 10px 55px;
@@ -19,11 +18,15 @@ background: props.background,
     border-radius: 45px;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
-    border: none;
     cursor: pointer;
+    border: 2px solid ${(props) => props.background || '#8e5572' };
+    font-weight: 700;
 
     &:hover {
-      background-color: var(--cor-A);
+      color: ${(props) => props.background || '#8e5572' };
+      background-color: transparent;
+      border: 2px solid ${(props) => props.background || '#8e5572' };
+      font-weight: 700;
     }
 `;
 

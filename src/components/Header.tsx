@@ -26,8 +26,7 @@ const Logo = styled.span`
     
 `;
 const List = styled.ul`
-    display: flex;
-    list-style: none;
+
     li a {
         padding: 0.3rem 1rem;
         border: 2px solid #fff;

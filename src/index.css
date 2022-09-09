@@ -24,11 +24,26 @@
   --cor-B-hover: rgba(142, 85, 115, 0.808);
   --cor-C: rgba(242, 247, 242, 1);
   --cor-D: rgba(136, 102, 93, 1);
-  --cor-E: rgba(247, 179, 43, 1);
+  --cor-E: #a86815;
 
 }
 body {
-  background-color: var(--cor-A);
-  /*color: #fff;*/
-  color: var(--cor-C);
+  background-color: var(--cor-C);
+  color: var(--cor-A);
+}
+h1 {
+  font-family: 'Dancing Script';
+  font-size: 3rem;
+  line-height: 3.6rem;
+  font-weight: 700;
+}
+h2 {
+  font-family: 'Dancing Script';
+  font-size: 2rem;
+  line-height: 2.4rem;
+  font-weight: 700;
+}
+ul {
+  display: flex;
+  list-style-type: none;
 }
