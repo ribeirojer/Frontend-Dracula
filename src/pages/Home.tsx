@@ -8,6 +8,7 @@ import image4 from '../assets/undraw_design_inspiration_re_tftx.svg'
 
 import Button from '../components/Button';
 import CardProduct from '../components/CardProduct';
+import Products from '../components/Products';
 
 type Props = {}
 
@@ -74,21 +75,12 @@ const ProductsSection = styled.section`
       margin: 0 0.5rem;
       cursor: pointer;
       border-radius: 25px;
+      transition: 0.3s;
     }
     li:hover {
       color: var(--cor-C);
       background-color: var(--cor-A);
     }
-`;
-const Products = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    max-width: 84%;
 `;
 
 const CompanySection = styled.section`
@@ -155,6 +147,7 @@ const Home = (props: Props) => {
           <h1>Princesa Maria</h1>
           <p>Somos uma loja especializada em artigos decorativos e presentes feitos com corte e impressão a laser, trabalhamos com acrílicos, MDF e madeiras finas.</p>
           <p>Quer presentear alguém? aqui é o lugar certo!</p>
+          <Link to={'/produtos'}><Button cor='' texto='Ver produtos'/></Link>
         </Carrousel>
         <ImgHero src={image} alt="main_image" />
       </HeroSection>
@@ -186,20 +179,10 @@ const Home = (props: Props) => {
           <li>Todos</li>
           <li>Decorativos</li>
           <li>Úteis</li>
-          <li>Diversos</li>
+          <li>Personalizados</li>
         </ul>
-        <Products>
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-          <CardProduct />
-        </Products>
-        <Button cor='' texto='Ver Mais'/>
+        <Products></Products>
+        <Link to={'/produtos'}><Button cor='#a86815' texto='Ver Mais'/></Link>
       </ProductsSection>
       <CompanySection>
         <img src={image4} alt="" />

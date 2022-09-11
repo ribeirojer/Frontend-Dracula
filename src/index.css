@@ -52,4 +52,5 @@ h3 {
 ul {
   display: flex;
   list-style-type: none;
+  margin: 1rem 0;
 }
