@@ -1,5 +1,7 @@
 import { EnvelopeSimple, FacebookLogo, InstagramLogo, LinkedinLogo, MapPin, Phone, PinterestLogo, TwitterLogo } from 'phosphor-react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
+import image from '../assets/woman.png'
 
 type Props = {}
 
@@ -27,20 +29,12 @@ const Contacts = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    h3 {
-      font-size: 28px;
-      font-family: 'Dancing Script';
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
     p {
       margin-top: 0.7rem;
       display: flex;
       align-items: center;
-      justify-content: center;
-
     }
-    p span {
+    p svg {
       margin-right: 5px;
     }
 `;
@@ -48,12 +42,6 @@ const Company = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    h2 {
-      font-size: 38px;
-      font-family: 'Dancing Script';
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-    }
     p {
       margin-bottom: 0.8rem;
     }
@@ -63,13 +51,34 @@ const Company = styled.div`
       flex-direction: row;
       justify-content: center;
     }
-    div span {
+    div a {
+      color: var(--cor-C);
       margin: 0 0.5rem;
       cursor: pointer;
+      transition: 0.3s;
     }
-    div span:hover {
+    div a:hover {
       color: var(--cor-E);
     }
+`;
+const Logo = styled.span`
+    font-size: 2rem;
+    font-family: 'Dancing Script';
+    font-weight: 700;
+    margin-bottom: 1rem;
+    a {
+        display: flex;
+        align-items: center;
+        color: var(--cor-C);
+        text-decoration: none;
+    }
+    img {
+        border: 1px solid #fff;
+        border-radius: 50%;
+        height: 40px;
+        margin-right: 0.5rem;
+    }
+    
 `;
 const Hours = styled.div`
     display: flex;
@@ -111,20 +120,22 @@ const Footer = (props: Props) => {
       <FooterWrapper>
         <Contacts>
           <h3>Entre em Contato</h3>
-          <p><span><MapPin size={20} weight="fill"/></span> Rua Paulo Malschitzki, 200, Joinville - SC</p>
-          <p><span><Phone size={20} weight="fill"/></span> (12) 98158-0992</p>
-          <p><span><EnvelopeSimple size={20} weight="fill"/></span> eduardojerbr@gmail.com</p>
+          <p><MapPin size={20} weight="fill"/> Rua Paulo Malschitzki, 200, Joinville - SC</p>
+          <p><Phone size={20} weight="fill"/> (12) 98158-0992</p>
+          <p><EnvelopeSimple size={20} weight="fill"/> eduardojerbr@gmail.com</p>
         </Contacts>
-        <Company>
-          <h2>Maria</h2>
+        <Company>          
+          <Logo>
+              <Link to={"/"}><img src={image} alt="" />Maria</Link>
+          </Logo>
           <p>Artigos personalizados em MDF e acrílico, corte e </p>
           <p>impresão a laser, presentes e muito mais!</p>
           <div>
-            <span><FacebookLogo size={32} /></span>
-            <span><TwitterLogo size={32} /></span>
-            <span><LinkedinLogo size={32} /></span>
-            <span><InstagramLogo size={32} /></span>
-            <span><PinterestLogo size={32} /></span>
+            <a href='https://www.facebook.com' target={'_blank'}><FacebookLogo size={32} /></a>
+            <a href='https://www.twitter.com' target={'_blank'}><TwitterLogo size={32} /></a>
+            <a href='https://www.linkedin.com' target={'_blank'}><LinkedinLogo size={32} /></a>
+            <a href='https://www.instagram.com' target={'_blank'}><InstagramLogo size={32} /></a>
+            <a href='https://www.pinterest.com' target={'_blank'}><PinterestLogo size={32} /></a>
           </div>
         </Company>
         <Hours>
