@@ -4,14 +4,13 @@ e-commerce de produtos de impressão a laser em madeira e acrílico.
 Projeto pessoal aberto a contribuição!
 
 ## Coisas para fazer:
-* Melhorar o cabeçalho
-* Melhorar a seção hero
-* desenvolver o card
-* seção de informações da empresa
-* seção de contato (com formulário e mapa)
+* Melhorar o cabeçalho (ao submit, levar para a pagina de produtos)
+* Melhorar a seção hero (colocar um carrousel com ao menos três itens)
+* desenvolver o card (card de produtos pode melhorar)
 * seção de depoimento
 
 ## Design:
-* Paleta:  \#006d77, \#83c5be, \#edf6f9, \#ffddd2, \#e29578
-* sistematizar o design (tamanho de texto e espaçamentos, fontes)
+* Paleta: \#1a2026; \#8e5572; \#f2f7f2; \#88665d; \#a86815;
+* sistematizar o design (tamanho de texto e espaçamentos)
+* Fontes: Dancing Script, Open Sans
 * site para inspiração: https://technext.github.io/feane/
