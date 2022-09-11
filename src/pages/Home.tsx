@@ -90,6 +90,9 @@ const CompanySection = styled.section`
   align-items: center;
   padding: 0 8%;
   height: 110vh;
+  p {
+    margin: 1rem 0;
+  }
 `;
 const ContactsMaps = styled.section`
     padding: 90px 8%;
@@ -188,8 +191,8 @@ const Home = (props: Props) => {
         <img src={image4} alt="" />
         <div>
           <h1>Princesa Maria</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid repellat magni doloribus numquam libero quos ab eaque ipsum officia itaque deleniti quaerat corporis beatae natus perspiciatis quas, repudiandae labore quae!</p>
-          <Button cor='' texto='Saiba Mais'/>
+          <p>Somos uma loja especializada em artigos decorativos e presentes feitos com corte e impressão a laser, trabalhamos com acrílicos, MDF e madeiras finas.</p>
+          <Link to={'/maria'}><Button cor='' texto='Saiba Mais'/></Link>
         </div>
       </CompanySection>
       <ContactsMaps>

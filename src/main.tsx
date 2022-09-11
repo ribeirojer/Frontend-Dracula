@@ -9,6 +9,7 @@ import Impressao from './pages/Impressao'
 import Produtos from './pages/Produtos'
 import Search from './pages/Search'
 import Shop from './pages/Shop'
+import Sobre from './pages/Sobre'
 import User from './pages/User'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <Route path="shop" element={<Shop />} />
           <Route path="user" element={<User />} />
           <Route path="produtos" element={<Produtos />} />
+          <Route path="maria" element={<Sobre />} />
           <Route path="search" element={<Search />} />
         </Route>
       </Routes>
