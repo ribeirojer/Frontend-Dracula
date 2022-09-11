@@ -1,6 +1,7 @@
 import { MagnifyingGlass, ShoppingCart, UserCirclePlus } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
+import image from '../assets/woman.png'
 
 type Props = {}
 
@@ -16,36 +17,50 @@ const HeaderWrapper = styled.header`
     z-index: 2;
 `;
 const Logo = styled.span`
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-family: 'Dancing Script';
     font-weight: 700;
     a {
-        color: #fff;
+        display: flex;
+        align-items: center;
+        color: var(--cor-C);
         text-decoration: none;
+    }
+    img {
+        border: 1px solid #fff;
+        border-radius: 50%;
+        height: 40px;
+        margin-right: 0.5rem;
     }
     
 `;
 const List = styled.ul`
 
     li a {
-        padding: 0.3rem 1rem;
-        border: 2px solid #fff;
-        border-radius: 1rem 1rem 0 1rem;
+        padding: 0.5rem 1.5rem;
         margin: 0 0.5rem;
+        cursor: pointer;
+        border-radius: 25px;
         color: #fff;
         font-weight: 500;
         text-decoration: none;
+        text-transform: uppercase;
         transition: 0.3s;
     }
     li:hover a {
         color: var(--cor-A);
         background-color: #fff;
     }
+    li:last-child a {
+        border: 1px solid #fff;
+    }
 `;
 const User = styled.div`
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     font-size: 2rem;
+    width: 253px;
     span a {
         color: #fff;
         margin: 0 0 0 0.5rem;
@@ -53,6 +68,7 @@ const User = styled.div`
 `;
 const ButtonSearch = styled.div`
     display: flex;
+    align-items: center;
     position: relative;
     input {
         display: none;
@@ -60,10 +76,20 @@ const ButtonSearch = styled.div`
     }
     &:hover input {
         display: block;
+        padding: 8px 16px;
+        color: var(--cor-B);
+        border-radius: 45px;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+        border: 2px solid var(--cor-B);
+        font-weight: 700;
+        cursor: text;
     }
     svg {
+        color: #fff;
         position: absolute;
         right: 0.5rem;
+        cursor: pointer;
     }
     &:hover svg {
         color: var(--cor-B);
@@ -75,7 +101,7 @@ const Header = (props: Props) => {
   return (
     <HeaderWrapper>
         <Logo>
-            <Link to={"/"}>Maria</Link>
+            <Link to={"/"}><img src={image} alt="" />Maria</Link>
         </Logo>
         <List>
             <li>

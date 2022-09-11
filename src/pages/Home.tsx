@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import { ShoppingCart } from 'phosphor-react';
 
 import image from '../assets/rvore-geneal-gica-de-madeira-rvore-geneal-gica-livre.jpg'
 import image2 from '../assets/6248ae73cf0ddd13b383a5cb829f99ba.jpg'
