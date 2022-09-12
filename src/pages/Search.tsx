@@ -4,7 +4,10 @@ type Props = {}
 
 const Search = (props: Props) => {
   return (
-    <div>Search</div>
+    <div>
+      <p>pesquisa vida do input na home</p>
+      <p>filtrar produtos</p>
+    </div>
   )
 }
 

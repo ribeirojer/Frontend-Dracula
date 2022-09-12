@@ -4,7 +4,7 @@ type Props = {}
 
 const Produtos = (props: Props) => {
   return (
-    <div>Produtos</div>
+    <div>fundir essa página com a página de search</div>
   )
 }
 

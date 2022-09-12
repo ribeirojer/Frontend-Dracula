@@ -4,7 +4,10 @@ type Props = {}
 
 const User = (props: Props) => {
   return (
-    <div>User</div>
+    <div>
+      <p>exibir informações do usuário, endereço e tudo mais</p>
+      <p>informações podem ser editadas</p>
+    </div>
   )
 }
 
