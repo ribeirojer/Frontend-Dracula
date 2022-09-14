@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const Main = styled.div`
@@ -12,8 +12,13 @@ const Main = styled.div`
 type Props = {}
 
 const Corte = (props: Props) => {
+  const [text, setText] = useState('Palavra')
   return (
-    <Main>Pagina em desenvolvimento Corte</Main>
+    <Main>
+      <h1>{text}</h1>
+      <input onChange={(e)=>{setText(e.target.value)}} type="text" placeholder={text} />
+      <p>Digite o palavra desejada</p>
+    </Main>
   )
 }
 
