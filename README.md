@@ -8,6 +8,10 @@ Projeto pessoal aberto a contribuição!
 * Melhorar a seção hero (colocar um carrousel com ao menos três itens)
 * desenvolver o card (card de produtos pode melhorar)
 * seção de depoimento
+* pagina do usuário
+* implementar endereço com autocomplete
+* implementar meio de pagamento com Stribe
+* prevenir ataques
 
 ## Design:
 * Paleta: \#1a2026; \#8e5572; \#f2f7f2; \#88665d; \#a86815;
