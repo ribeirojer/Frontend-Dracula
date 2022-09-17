@@ -1,5 +1,5 @@
 import { MagnifyingGlass, ShoppingCart, UserCirclePlus } from 'phosphor-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import image from '../assets/woman.png'
 
@@ -66,7 +66,7 @@ const User = styled.div`
         margin: 0 0 0 0.5rem;
     }
 `;
-const ButtonSearch = styled.div`
+const ButtonSearch = styled.form`
     display: flex;
     align-items: center;
     position: relative;
@@ -98,6 +98,11 @@ const ButtonSearch = styled.div`
 `;
 
 const Header = (props: Props) => {
+
+    const navigate = useNavigate()
+    function handleSubmit(q:string): void {
+        navigate('/produtos')
+    }
   return (
     <HeaderWrapper>
         <Logo>
@@ -116,7 +121,7 @@ const Header = (props: Props) => {
         </List>
         <User>
             <ButtonSearch>
-                <input type="text" />
+                <input onSubmit={(e:any)=>{handleSubmit(e.target.value)}} type="text" />
                 <MagnifyingGlass size={32} />
             </ButtonSearch>
             <span><Link to={"/shop"}><ShoppingCart size={32} weight="fill" /></Link></span>
