@@ -62,27 +62,6 @@ const CardInfo = styled.div`
   padding: 1rem;
   gap: 1rem;
 `;
-const ProductsSection = styled.section`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 3rem;
-
-    li {
-      padding: 7px 25px;
-      margin: 0 0.5rem;
-      cursor: pointer;
-      border-radius: 25px;
-      transition: 0.3s;
-    }
-    li:hover {
-      color: var(--cor-C);
-      background-color: var(--cor-A);
-    }
-`;
-
 const CompanySection = styled.section`
   color: var(--cor-C);
   background-image: linear-gradient(to right, var(--cor-B), var(--cor-A));
@@ -176,17 +155,7 @@ const Home = (props: Props) => {
           </CardInfo>
         </CardA>
       </CorteImpressaoSection>
-      <ProductsSection>
-        <h1>Nossos Produtos</h1>
-        <ul>
-          <li>Todos</li>
-          <li>Decorativos</li>
-          <li>Úteis</li>
-          <li>Personalizados</li>
-        </ul>
-        <Products></Products>
-        <Link to={'/produtos'}><Button cor='#a86815' texto='Ver Mais'/></Link>
-      </ProductsSection>
+      <Products></Products>
       <CompanySection>
         <img src={image4} alt="" />
         <div>
