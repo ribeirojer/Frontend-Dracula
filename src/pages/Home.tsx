@@ -115,9 +115,14 @@ const Depoiments = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0 5%;
+    padding: 0 8%;
     height: 100vh;
+`;
+const DWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-A);
+    color: var(--cor-C);
 `;
 
 
@@ -177,8 +182,17 @@ const Home = (props: Props) => {
         <Button cor='' texto='Enviar'/>
       </ContactsMaps>
       <Depoiments>
-        <h1>Seção depoimentos</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti incidunt ipsa odio itaque debitis id reiciendis et quam adipisci! Quasi, laborum! Neque pariatur quibusdam aliquid molestiae nulla quasi sed suscipit?</p>
+        <h1>O que nossos clientes dizem:</h1>
+        <DWrapper>
+          <div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis tenetur repellendus blanditiis provident, ipsum iusto deserunt cum, a ullam, minima vitae numquam animi asperiores delectus fugiat harum repellat quasi assumenda.</p>
+            <h3>José Eduardo</h3>
+            <p>Dono de Padaria</p>
+          </div>
+          <div>
+            <ImgL src={image2} alt="imagem_letra_caixa" />
+          </div>
+        </DWrapper>
       </Depoiments>
     </>
   )
