@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Button from '../components/Button';
 
 type Props = {}
 
@@ -6,7 +7,6 @@ const Wrapper = styled.section`
   background-color: var(--cor-B);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   h2 {
     margin: 120px 0 1rem 0;
@@ -38,6 +38,165 @@ const Wrapper = styled.section`
 .hide {
   display: none !important;
 }
+
+`;
+
+const Formu = styled.form`
+  width: 100%;
+  input {
+    width: 56%;
+    padding: 8px 16px;
+    color: var(--cor-B);
+    border-radius: 45px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border: 2px solid var(--cor-B);
+    font-weight: 700;
+    cursor: text;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+`;
+const Shop = (props: Props) => {
+  
+  return (
+    <Wrapper id="checkout-page">
+      <div id="fade" className="hide">
+        <div id="loader" className="spinner-border text-info hide" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div id="message" className="hide">
+          <div className="alert alert-light" role="alert">
+            <h4>Mensagem:</h4>
+            <p></p>
+            <button id="close-message" type="button" className="btn btn-secondary">
+              Fechar
+            </button>
+          </div>
+        </div>
+      </div>
+      <h2>Cadastre o seu endereço</h2>
+      <p>Preencha os campos para podermos enviar seus produtos</p>
+      <Formu id="address-form">
+        <div>
+            <input type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />
+            <label htmlFor="cep">Digite o seu CEP</label>
+        </div>
+        <div>
+          <div>
+            <input type="text" id="address" name="address" placeholder="Rua" disabled required data-input />
+            <label htmlFor="address">Rua</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="number"
+              name="number"
+              placeholder="Digite o número da residência"
+              disabled
+              required
+              data-input
+            />
+            <label htmlFor="number">Digite o número da residência</label>
+          </div>
+        </div>{/*
+        <div>
+          <div>
+            <input
+              type="text"
+              id="complement"
+              name="complement"
+              placeholder="Digite o complemento"
+              disabled
+              data-input
+            />
+            <label htmlFor="complement">Digite o complemento</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              id="neighborhood"
+              name="neighborhood"
+              placeholder="Bairro"
+              disabled
+              required
+              data-input
+            />
+            <label htmlFor="neighborhood">Bairro</label>
+          </div>
+        </div>
+        <div>
+          <div>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              placeholder="Cidade"
+              disabled
+              required
+              data-input
+            />
+            <label htmlFor="city">Cidade</label>
+          </div>
+          <div>
+            <select
+              id="region"
+              disabled
+              required
+              data-input
+            >
+              <option selected>Estado</option>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
+          </div>
+        </div>*/}
+        <Button cor="" texto="Cadastrar"></Button>
+      </Formu>
+    </Wrapper>
+  )
+}
+
+export default Shop;
+    /*<div>
+        <div>Carrinho</div>
+        <p>fluxo principal</p>
+        <p>bem organizado com os produtos que o usuário escolheu</p>
+        <p>ao fechar a compra obter informações de endereço</p>
+        <p>confirmar enderecos e informações</p>
+        <p>desenvonver métodos de pagamento</p>
+    </div>*/
+
+    
 /*
 #message {
   width: 40%;
@@ -141,26 +300,8 @@ const Wrapper = styled.section`
   }
 }
  */
-`;
 
-const Formu = styled.form`
-  input {
-    padding: 8px 16px;
-    color: var(--cor-B);
-    border-radius: 45px;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-    border: 2px solid var(--cor-B);
-    font-weight: 700;
-    cursor: text;
-  }
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-const Shop = (props: Props) => {
+/*
   const addressForm = document.querySelector("#address-form");
   const cepInput = document.querySelector("#cep");
   const addressInput = document.querySelector("#address");
@@ -169,7 +310,6 @@ const Shop = (props: Props) => {
   const regionInput = document.querySelector("#region");
   const formInputs = document.querySelectorAll("[data-input]");
   const closeButton = document.querySelector("#close-message");
-/*
 // Validate CEP Input
 cepInput!.addEventListener("keypress", (e) => {
   const onlyNumbers = /[0-9]|\./;
@@ -292,135 +432,3 @@ addressForm.addEventListener("submit", (e) => {
   }, 1000);
 });
 */
-  return (
-    <Wrapper id="checkout-page">
-      <div id="fade" className="hide">
-        <div id="loader" className="spinner-border text-info hide" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <div id="message" className="hide">
-          <div className="alert alert-light" role="alert">
-            <h4>Mensagem:</h4>
-            <p></p>
-            <button id="close-message" type="button" className="btn btn-secondary">
-              Fechar
-            </button>
-          </div>
-        </div>
-      </div>
-      <h2>Cadastre o seu endereço</h2>
-      <p>Preencha os campos para podermos enviar seus produtos</p>
-      <Formu id="address-form">
-        <div>
-            <input type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />
-            <label htmlFor="cep">Digite o seu CEP</label>
-        </div>
-        <div>
-          <div>
-            <input type="text" id="address" name="address" placeholder="Rua" disabled required data-input />
-            <label htmlFor="address">Rua</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              id="number"
-              name="number"
-              placeholder="Digite o número da residência"
-              disabled
-              required
-              data-input
-            />
-            <label htmlFor="number">Digite o número da residência</label>
-          </div>
-        </div>
-        <div>
-          <div>
-            <input
-              type="text"
-              id="complement"
-              name="complement"
-              placeholder="Digite o complemento"
-              disabled
-              data-input
-            />
-            <label htmlFor="complement">Digite o complemento</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              id="neighborhood"
-              name="neighborhood"
-              placeholder="Bairro"
-              disabled
-              required
-              data-input
-            />
-            <label htmlFor="neighborhood">Bairro</label>
-          </div>
-        </div>
-        <div>
-          <div>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              placeholder="Cidade"
-              disabled
-              required
-              data-input
-            />
-            <label htmlFor="city">Cidade</label>
-          </div>
-          <div>
-            <select
-              id="region"
-              disabled
-              required
-              data-input
-            >
-              <option selected>Estado</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-            </select>
-          </div>
-        </div>
-        <button id="save-btn" type="submit">Cadastrar</button>
-      </Formu>
-    </Wrapper>
-  )
-}
-
-export default Shop;
-    /*<div>
-        <div>Carrinho</div>
-        <p>fluxo principal</p>
-        <p>bem organizado com os produtos que o usuário escolheu</p>
-        <p>ao fechar a compra obter informações de endereço</p>
-        <p>confirmar enderecos e informações</p>
-        <p>desenvonver métodos de pagamento</p>
-    </div>*/
