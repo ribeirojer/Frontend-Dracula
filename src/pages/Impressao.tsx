@@ -9,12 +9,18 @@ const Main = styled.div`
     width: 100%;
     height: 100vh;
 `;
+
 type Props = {}
 
 const Impressao = (props: Props) => {
-  return (
-    <Main>Pagina em desenvolvimento Impressao</Main>
-  )
+    const [text, setText] = useState('Palavra');
+    
+    return (
+    <Main>
+      <h1>{text}</h1>
+      <input onChange={(e)=>{setText(e.target.value)}} type="text" placeholder={text} />
+      <p>Digite o palavra desejada</p>
+    </Main>
 }
 
 export default Impressao;
