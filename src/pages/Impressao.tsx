@@ -1,5 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
+import React, { useState } from 'react'
+
 
 const Main = styled.div`
     background-color: var(--cor-B);
