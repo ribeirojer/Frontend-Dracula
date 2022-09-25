@@ -103,7 +103,7 @@ const Shop = (props: Props) => {
             />
             <label htmlFor="number">Digite o número da residência</label>
           </div>
-        </div>{/*
+        </div>
         <div>
           <div>
             <input
@@ -179,7 +179,7 @@ const Shop = (props: Props) => {
               <option value="TO">Tocantins</option>
             </select>
           </div>
-        </div>*/}
+        </div>
         <Button cor="" texto="Cadastrar"></Button>
       </Formu>
     </Wrapper>
