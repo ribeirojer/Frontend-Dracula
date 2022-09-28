@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const Main = styled.div`
     background-color: var(--cor-B);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
