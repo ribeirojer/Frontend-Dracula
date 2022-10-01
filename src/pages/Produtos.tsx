@@ -10,7 +10,7 @@ const Produtos = (props: Props) => {
   return (
     <div>
         <p>fundir essa página com a página de search</p>
-        <button type="submit" onSubmit="">comprar</button>
+        <button type="submit" onSubmit={()=>{}}>comprar</button>
     </div>
   )
 }
