@@ -1,5 +1,6 @@
+import 'dracula-ui/styles/dracula-ui.css'
+import { Button, Input } from 'dracula-ui'
 import styled from 'styled-components'
-import Button from '../components/Button';
 
 type Props = {}
 
@@ -43,7 +44,7 @@ const Wrapper = styled.section`
 
 const Formu = styled.form`
   width: 100%;
-  input {
+  /*input {
     width: 56%;
     padding: 8px 16px;
     color: var(--cor-B);
@@ -53,7 +54,7 @@ const Formu = styled.form`
     border: 2px solid var(--cor-B);
     font-weight: 700;
     cursor: text;
-  }
+  }*/
   div {
     display: flex;
     justify-content: center;
@@ -83,7 +84,7 @@ const Shop = (props: Props) => {
       <p>Preencha os campos para podermos enviar seus produtos</p>
       <Formu id="address-form">
         <div>
-            <input type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />
+            <Input color="white"  type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />;
             <label htmlFor="cep">Digite o seu CEP</label>
         </div>
         <div>
@@ -180,7 +181,7 @@ const Shop = (props: Props) => {
             </select>
           </div>
         </div>
-        <Button cor="" texto="Cadastrar"></Button>
+        <Button color="pink">Botão</Button>
       </Formu>
     </Wrapper>
   )
