@@ -193,6 +193,26 @@ const Home = (props: Props) => {
             <ImgL src={image2} alt="imagem_letra_caixa" />
           </div>
         </DWrapper>
+        <DWrapper>
+          <div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis tenetur repellendus blanditiis provident, ipsum iusto deserunt cum, a ullam, minima vitae numquam animi asperiores delectus fugiat harum repellat quasi assumenda.</p>
+            <h3>Fernando Lima</h3>
+            <p>Gerente de Marcenaria</p>
+          </div>
+          <div>
+            <ImgL src={image2} alt="imagem_letra_caixa" />
+          </div>
+        </DWrapper>
+        <DWrapper>
+          <div>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis tenetur repellendus blanditiis provident, ipsum iusto deserunt cum, a ullam, minima vitae numquam animi asperiores delectus fugiat harum repellat quasi assumenda.</p>
+            <h3>Eliana Aparecida</h3>
+            <p>Design de Interiores</p>
+          </div>
+          <div>
+            <ImgL src={image2} alt="imagem_letra_caixa" />
+          </div>
+        </DWrapper>
       </Depoiments>
     </>
   )
