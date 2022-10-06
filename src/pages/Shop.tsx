@@ -1,5 +1,4 @@
-import 'dracula-ui/styles/dracula-ui.css'
-import { Button, Input } from 'dracula-ui'
+import Button from '../components/Button'
 import styled from 'styled-components'
 
 type Props = {}
@@ -44,9 +43,10 @@ const Wrapper = styled.section`
 
 const Formu = styled.form`
   width: 100%;
-  /*input {
+  input, #address {
     width: 56%;
     padding: 8px 16px;
+    margin-bottom: 16px;
     color: var(--cor-B);
     border-radius: 45px;
     -webkit-transition: 0.3s;
@@ -54,7 +54,11 @@ const Formu = styled.form`
     border: 2px solid var(--cor-B);
     font-weight: 700;
     cursor: text;
-  }*/
+  }
+  #address, #number {
+    width: 27%;
+    margin: 0 0.5rem 0;
+  }
   div {
     display: flex;
     justify-content: center;
@@ -84,15 +88,12 @@ const Shop = (props: Props) => {
       <p>Preencha os campos para podermos enviar seus produtos</p>
       <Formu id="address-form">
         <div>
-            <Input color="white"  type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />;
-            <label htmlFor="cep">Digite o seu CEP</label>
+            <input type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />
+            {/*<label htmlFor="cep">Digite o seu CEP</label>*/}
         </div>
         <div>
-          <div>
             <input type="text" id="address" name="address" placeholder="Rua" disabled required data-input />
-            <label htmlFor="address">Rua</label>
-          </div>
-          <div>
+            {/* <label htmlFor="address">Rua</label>*/}
             <input
               type="text"
               id="number"
@@ -102,8 +103,7 @@ const Shop = (props: Props) => {
               required
               data-input
             />
-            <label htmlFor="number">Digite o número da residência</label>
-          </div>
+            {/*<label htmlFor="number">Digite o número da residência</label>*/}
         </div>
         <div>
           <div>
@@ -181,7 +181,7 @@ const Shop = (props: Props) => {
             </select>
           </div>
         </div>
-        <Button color="pink">Botão</Button>
+        <Button cor='' texto={'Prosseguir'}></Button>
       </Formu>
     </Wrapper>
   )
