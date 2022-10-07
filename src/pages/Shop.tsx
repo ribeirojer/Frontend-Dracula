@@ -8,15 +8,14 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   h2 {
     margin: 120px 0 1rem 0;
   }
+  p {
+    margin: 0 0 1rem 0;
+  }
   
-#checkout-page {
-  background-color: var(--bg-color);
-  color: var(--primary-color);
-}
-
 #fade {
   position: fixed;
   top: 0;
@@ -30,42 +29,35 @@ const Wrapper = styled.section`
   z-index: 10;
 }
 
-#fade .spinner-border {
-  width: 60px;
-  height: 60px;
-}
-
 .hide {
   display: none !important;
 }
 
 `;
-
 const Formu = styled.form`
   width: 100%;
-  input, #address {
-    width: 56%;
-    padding: 8px 16px;
-    margin-bottom: 16px;
-    color: var(--cor-B);
-    border-radius: 45px;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-    border: 2px solid var(--cor-B);
-    font-weight: 700;
-    cursor: text;
-  }
-  #address, #number {
-    width: 27%;
-    margin: 0 0.5rem 0;
-  }
   div {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
+  }
+  #cep {
+    width: 56%;
+  }
+  div input, div select {
+    width: 27%;
+    padding: 8px 16px;
+    margin: 0 16px 1rem;
+    color: var(--cor-B);
+    border-radius: 45px;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    border: 2px solid transparent;
+    font-weight: 700;
+    cursor: text;
   }
 `;
+
 const Shop = (props: Props) => {
   
   return (
@@ -73,15 +65,6 @@ const Shop = (props: Props) => {
       <div id="fade" className="hide">
         <div id="loader" className="spinner-border text-info hide" role="status">
           <span className="visually-hidden">Loading...</span>
-        </div>
-        <div id="message" className="hide">
-          <div className="alert alert-light" role="alert">
-            <h4>Mensagem:</h4>
-            <p></p>
-            <button id="close-message" type="button" className="btn btn-secondary">
-              Fechar
-            </button>
-          </div>
         </div>
       </div>
       <h2>Cadastre o seu endereço</h2>
@@ -106,7 +89,6 @@ const Shop = (props: Props) => {
             {/*<label htmlFor="number">Digite o número da residência</label>*/}
         </div>
         <div>
-          <div>
             <input
               type="text"
               id="complement"
@@ -115,9 +97,7 @@ const Shop = (props: Props) => {
               disabled
               data-input
             />
-            <label htmlFor="complement">Digite o complemento</label>
-          </div>
-          <div>
+            {/*<label htmlFor="complement">Digite o complemento</label>*/}
             <input
               type="text"
               id="neighborhood"
@@ -127,29 +107,12 @@ const Shop = (props: Props) => {
               required
               data-input
             />
-            <label htmlFor="neighborhood">Bairro</label>
-          </div>
+            {/*<label htmlFor="neighborhood">Bairro</label>*/}
         </div>
         <div>
-          <div>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              placeholder="Cidade"
-              disabled
-              required
-              data-input
-            />
-            <label htmlFor="city">Cidade</label>
-          </div>
-          <div>
-            <select
-              id="region"
-              disabled
-              required
-              data-input
-            >
+            <input type="text" id="city" name="city" placeholder="Cidade" disabled required data-input/>
+            {/*<label htmlFor="city">Cidade</label>*/}
+            <select id="region" disabled required data-input>
               <option selected>Estado</option>
               <option value="AC">Acre</option>
               <option value="AL">Alagoas</option>
@@ -179,7 +142,6 @@ const Shop = (props: Props) => {
               <option value="SE">Sergipe</option>
               <option value="TO">Tocantins</option>
             </select>
-          </div>
         </div>
         <Button cor='' texto={'Prosseguir'}></Button>
       </Formu>
