@@ -12,7 +12,8 @@ Projeto pessoal aberto a contribuição!
 * implementar endereço com autocomplete
 * implementar meio de pagamento com Stribe
 * prevenir ataques
-* Responsividade 
+* Responsividade
+* atualizar fotos
 
 ## Design:
 * Paleta: \#1a2026; \#8e5572; \#f2f7f2; \#88665d; \#a86815;
