@@ -1,4 +1,4 @@
-import image3 from "../assets/corte-e-gravacao-laser-mdf-e-acrilico-01.jpg";
+import image3 from "../assets/logo.png";
 
 type Props = {};
 

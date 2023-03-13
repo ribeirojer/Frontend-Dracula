@@ -23,104 +23,6 @@ const Wrapper = styled.footer`
   padding: 0 8%;
   height: 432px;
 `;
-const FooterWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  div {
-    width: 33%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-const Contacts = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
-    margin-top: 0.7rem;
-    display: flex;
-    align-items: center;
-  }
-  p svg {
-    margin-right: 5px;
-  }
-`;
-const Company = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  p {
-    margin-bottom: 0.8rem;
-  }
-  div {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  div a {
-    color: var(--cor-C);
-    margin: 0 0.5rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  div a:hover {
-    color: var(--cor-E);
-  }
-`;
-const Logo = styled.span`
-  font-size: 2rem;
-  font-family: "Dancing Script";
-  font-weight: 700;
-  margin-bottom: 1rem;
-  a {
-    display: flex;
-    align-items: center;
-    color: var(--cor-C);
-    text-decoration: none;
-  }
-  img {
-    border: 1px solid #fff;
-    border-radius: 50%;
-    height: 40px;
-    margin-right: 0.5rem;
-  }
-`;
-const Hours = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  h3 {
-    font-size: 28px;
-    font-family: "Dancing Script";
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  p {
-    margin-top: 0.7rem;
-  }
-  p span {
-    margin: 0 0.5rem;
-  }
-`;
-const Last = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 5rem;
-  p {
-    margin-bottom: 2rem;
-  }
-  p span {
-    color: #f00;
-  }
-  a {
-    color: var(--cor-C);
-    text-decoration: none;
-  }
-`;
 
 const Footer = (props: Props) => {
   return (
@@ -130,7 +32,7 @@ const Footer = (props: Props) => {
           <div className="row">
             <div className="col-md-3 col-xs-6">
               <div className="footer">
-                <h3 className="footer-title">About Us</h3>
+                <h3 className="footer-title">Sobre a Empresa</h3>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut.
@@ -138,17 +40,17 @@ const Footer = (props: Props) => {
                 <ul className="footer-links">
                   <li>
                     <a href="#">
-                      <i className="fa fa-map-marker"></i>1734 Stonecoal Road
+                      <i className="fa fa-map-marker"></i>Rua Paulo Malschitzki, 240, Joinville - SC
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i className="fa fa-phone"></i>+021-95-51-84
+                      <i className="fa fa-phone"></i>+55 (12) 98158-0992
                     </a>
                   </li>
                   <li>
                     <a href="#">
-                      <i className="fa fa-envelope-o"></i>email@email.com
+                      <i className="fa fa-envelope-o"></i>contato@electro.com
                     </a>
                   </li>
                 </ul>
@@ -157,10 +59,10 @@ const Footer = (props: Props) => {
 
             <div className="col-md-3 col-xs-6">
               <div className="footer">
-                <h3 className="footer-title">Categories</h3>
+                <h3 className="footer-title">Categorias</h3>
                 <ul className="footer-links">
                   <li>
-                    <a href="#">Hot deals</a>
+                    <a href="#">Promoção</a>
                   </li>
                   <li>
                     <a href="#">Laptops</a>
@@ -169,10 +71,10 @@ const Footer = (props: Props) => {
                     <a href="#">Smartphones</a>
                   </li>
                   <li>
-                    <a href="#">Cameras</a>
+                    <a href="#">Câmeras</a>
                   </li>
                   <li>
-                    <a href="#">Accessories</a>
+                    <a href="#">Acessórios</a>
                   </li>
                 </ul>
               </div>
@@ -182,22 +84,22 @@ const Footer = (props: Props) => {
 
             <div className="col-md-3 col-xs-6">
               <div className="footer">
-                <h3 className="footer-title">Information</h3>
+                <h3 className="footer-title">Informações</h3>
                 <ul className="footer-links">
                   <li>
-                    <a href="#">About Us</a>
+                    <a href="#">Sobre a empresa</a>
                   </li>
                   <li>
-                    <a href="#">Contact Us</a>
+                    <a href="#">Entre em contato</a>
                   </li>
                   <li>
-                    <a href="#">Privacy Policy</a>
+                    <a href="#">Política de Privacidade</a>
                   </li>
                   <li>
-                    <a href="#">Orders and Returns</a>
+                    <a href="#">Ordens e Retornos</a>
                   </li>
                   <li>
-                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Termos e Condições</a>
                   </li>
                 </ul>
               </div>
@@ -205,22 +107,22 @@ const Footer = (props: Props) => {
 
             <div className="col-md-3 col-xs-6">
               <div className="footer">
-                <h3 className="footer-title">Service</h3>
+                <h3 className="footer-title">Serviços</h3>
                 <ul className="footer-links">
                   <li>
-                    <a href="#">My Account</a>
+                    <a href="#">Minha Conta</a>
                   </li>
                   <li>
-                    <a href="#">View Cart</a>
+                    <a href="#">Ver Carrinho</a>
                   </li>
                   <li>
-                    <a href="#">Wishlist</a>
+                    <a href="#">Lista de Desejos</a>
                   </li>
                   <li>
-                    <a href="#">Track My Order</a>
+                    <a href="#">Finalizar minha ordem</a>
                   </li>
                   <li>
-                    <a href="#">Help</a>
+                    <a href="#">Ajuda</a>
                   </li>
                 </ul>
               </div>
@@ -267,12 +169,8 @@ const Footer = (props: Props) => {
               </ul>
               <span className="copyright">
                 Copyright &copy;
-                <script>document.write(new Date().getFullYear());</script> All
-                rights reserved | This template is made with{" "}
-                <i className="fa fa-heart-o" aria-hidden="true"></i> by{" "}
-                <a href="https://colorlib.com" target="_blank">
-                  Colorlib
-                </a>
+                <script>document.write(new Date().getFullYear());</script> Todos
+                os direitos reservados
               </span>
             </div>
           </div>
