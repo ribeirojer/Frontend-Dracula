@@ -1,7 +1,7 @@
-import Button from '../components/Button'
-import styled from 'styled-components'
+import Button from "../components/Button";
+import styled from "styled-components";
 
-type Props = {}
+type Props = {};
 
 const Wrapper = styled.section`
   background-color: var(--cor-B);
@@ -15,24 +15,23 @@ const Wrapper = styled.section`
   p {
     margin: 0 0 1rem 0;
   }
-  
-#fade {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
 
-.hide {
-  display: none !important;
-}
+  #fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
 
+  .hide {
+    display: none !important;
+  }
 `;
 const Formu = styled.form`
   width: 100%;
@@ -44,7 +43,8 @@ const Formu = styled.form`
   #cep {
     width: 56%;
   }
-  div input, div select {
+  div input,
+  div select {
     width: 27%;
     padding: 8px 16px;
     margin: 0 16px 1rem;
@@ -59,339 +59,641 @@ const Formu = styled.form`
 `;
 
 const Shop = (props: Props) => {
-  
   return (
-    <Wrapper id="checkout-page">
-      <div id="fade" className="hide">
-        <div id="loader" className="spinner-border text-info hide" role="status">
-          <span className="visually-hidden">Loading...</span>
+    <>
+      <div id="breadcrumb" className="section">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <ul className="breadcrumb-tree">
+                <li>
+                  <a href="#">Home</a>
+                </li>
+                <li>
+                  <a href="#">All Categories</a>
+                </li>
+                <li>
+                  <a href="#">Accessories</a>
+                </li>
+                <li className="active">Headphones (227,490 Results)</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <h2>Cadastre o seu endereço</h2>
-      <p>Preencha os campos para podermos enviar seus produtos</p>
-      <Formu id="address-form">
-        <div>
-            <input type="text" id="cep" name="cep" placeholder="Digite o seu CEP" maxLength={8} minLength={8} required />
-            {/*<label htmlFor="cep">Digite o seu CEP</label>*/}
+
+      <div className="section">
+        <div className="container">
+          <div className="row">
+            <div id="aside" className="col-md-3">
+              <div className="aside">
+                <h3 className="aside-title">Categories</h3>
+                <div className="checkbox-filter">
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="category-1" />
+                    <label htmlFor="category-1">
+                      <span></span>
+                      Laptops
+                      <small>(120)</small>
+                    </label>
+                  </div>
+
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="category-2" />
+                    <label htmlFor="category-2">
+                      <span></span>
+                      Smartphones
+                      <small>(740)</small>
+                    </label>
+                  </div>
+
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="category-3" />
+                    <label htmlFor="category-3">
+                      <span></span>
+                      Cameras
+                      <small>(1450)</small>
+                    </label>
+                  </div>
+
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="category-4" />
+                    <label htmlFor="category-4">
+                      <span></span>
+                      Accessories
+                      <small>(578)</small>
+                    </label>
+                  </div>
+
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="category-5" />
+                    <label htmlFor="category-5">
+                      <span></span>
+                      Laptops
+                      <small>(120)</small>
+                    </label>
+                  </div>
+
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="category-6" />
+                    <label htmlFor="category-6">
+                      <span></span>
+                      Smartphones
+                      <small>(740)</small>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="aside">
+                <h3 className="aside-title">Price</h3>
+                <div className="price-filter">
+                  <div id="price-slider"></div>
+                  <div className="input-number price-min">
+                    <input id="price-min" type="number" />
+                    <span className="qty-up">+</span>
+                    <span className="qty-down">-</span>
+                  </div>
+                  <span>-</span>
+                  <div className="input-number price-max">
+                    <input id="price-max" type="number" />
+                    <span className="qty-up">+</span>
+                    <span className="qty-down">-</span>
+                  </div>
+                </div>
+              </div>
+              <div className="aside">
+                <h3 className="aside-title">Brand</h3>
+                <div className="checkbox-filter">
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="brand-1" />
+                    <label htmlFor="brand-1">
+                      <span></span>
+                      SAMSUNG
+                      <small>(578)</small>
+                    </label>
+                  </div>
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="brand-2" />
+                    <label htmlFor="brand-2">
+                      <span></span>
+                      LG
+                      <small>(125)</small>
+                    </label>
+                  </div>
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="brand-3" />
+                    <label htmlFor="brand-3">
+                      <span></span>
+                      SONY
+                      <small>(755)</small>
+                    </label>
+                  </div>
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="brand-4" />
+                    <label htmlFor="brand-4">
+                      <span></span>
+                      SAMSUNG
+                      <small>(578)</small>
+                    </label>
+                  </div>
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="brand-5" />
+                    <label htmlFor="brand-5">
+                      <span></span>
+                      LG
+                      <small>(125)</small>
+                    </label>
+                  </div>
+                  <div className="input-checkbox">
+                    <input type="checkbox" id="brand-6" />
+                    <label htmlFor="brand-6">
+                      <span></span>
+                      SONY
+                      <small>(755)</small>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div className="aside">
+                <h3 className="aside-title">Top selling</h3>
+                <div className="product-widget">
+                  <div className="product-img">
+                    <img src="./img/product01.png" alt="" />
+                  </div>
+                  <div className="product-body">
+                    <p className="product-category">Category</p>
+                    <h3 className="product-name">
+                      <a href="#">product name goes here</a>
+                    </h3>
+                    <h4 className="product-price">
+                      $980.00 <del className="product-old-price">$990.00</del>
+                    </h4>
+                  </div>
+                </div>
+
+                <div className="product-widget">
+                  <div className="product-img">
+                    <img src="./img/product02.png" alt="" />
+                  </div>
+                  <div className="product-body">
+                    <p className="product-category">Category</p>
+                    <h3 className="product-name">
+                      <a href="#">product name goes here</a>
+                    </h3>
+                    <h4 className="product-price">
+                      $980.00 <del className="product-old-price">$990.00</del>
+                    </h4>
+                  </div>
+                </div>
+
+                <div className="product-widget">
+                  <div className="product-img">
+                    <img src="./img/product03.png" alt="" />
+                  </div>
+                  <div className="product-body">
+                    <p className="product-category">Category</p>
+                    <h3 className="product-name">
+                      <a href="#">product name goes here</a>
+                    </h3>
+                    <h4 className="product-price">
+                      $980.00 <del className="product-old-price">$990.00</del>
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="store" className="col-md-9">
+              <div className="store-filter clearfix">
+                <div className="store-sort">
+                  <label>
+                    Sort By:
+                    <select className="input-select">
+                      <option value="0">Popular</option>
+                      <option value="1">Position</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Show:
+                    <select className="input-select">
+                      <option value="0">20</option>
+                      <option value="1">50</option>
+                    </select>
+                  </label>
+                </div>
+                <ul className="store-grid">
+                  <li className="active">
+                    <i className="fa fa-th"></i>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-th-list"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div className="row">
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product01.png" alt="" />
+                      <div className="product-label">
+                        <span className="sale">-30%</span>
+                        <span className="new">NEW</span>
+                      </div>
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating">
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                      </div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product02.png" alt="" />
+                      <div className="product-label">
+                        <span className="new">NEW</span>
+                      </div>
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating">
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star-o"></i>
+                      </div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="clearfix visible-sm visible-xs"></div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product03.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating"></div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="clearfix visible-lg visible-md"></div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product04.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating"></div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="clearfix visible-sm visible-xs"></div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product05.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating"></div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product06.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating">
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star-o"></i>
+                      </div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="clearfix visible-lg visible-md visible-sm visible-xs"></div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product07.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating">
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                        <i className="fa fa-star"></i>
+                      </div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product08.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating"></div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="clearfix visible-sm visible-xs"></div>
+
+                <div className="col-md-4 col-xs-6">
+                  <div className="product">
+                    <div className="product-img">
+                      <img src="./img/product09.png" alt="" />
+                    </div>
+                    <div className="product-body">
+                      <p className="product-category">Category</p>
+                      <h3 className="product-name">
+                        <a href="#">product name goes here</a>
+                      </h3>
+                      <h4 className="product-price">
+                        $980.00 <del className="product-old-price">$990.00</del>
+                      </h4>
+                      <div className="product-rating"></div>
+                      <div className="product-btns">
+                        <button className="add-to-wishlist">
+                          <i className="fa fa-heart-o"></i>
+                          <span className="tooltipp">add to wishlist</span>
+                        </button>
+                        <button className="add-to-compare">
+                          <i className="fa fa-exchange"></i>
+                          <span className="tooltipp">add to compare</span>
+                        </button>
+                        <button className="quick-view">
+                          <i className="fa fa-eye"></i>
+                          <span className="tooltipp">quick view</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div className="add-to-cart">
+                      <button className="add-to-cart-btn">
+                        <i className="fa fa-shopping-cart"></i> add to cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="store-filter clearfix">
+                <span className="store-qty">Showing 20-100 products</span>
+                <ul className="store-pagination">
+                  <li className="active">1</li>
+                  <li>
+                    <a href="#">2</a>
+                  </li>
+                  <li>
+                    <a href="#">3</a>
+                  </li>
+                  <li>
+                    <a href="#">4</a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-angle-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-            <input type="text" id="address" name="address" placeholder="Rua" disabled required data-input />
-            {/* <label htmlFor="address">Rua</label>*/}
-            <input
-              type="text"
-              id="number"
-              name="number"
-              placeholder="Digite o número da residência"
-              disabled
-              required
-              data-input
-            />
-            {/*<label htmlFor="number">Digite o número da residência</label>*/}
-        </div>
-        <div>
-            <input
-              type="text"
-              id="complement"
-              name="complement"
-              placeholder="Digite o complemento"
-              disabled
-              data-input
-            />
-            {/*<label htmlFor="complement">Digite o complemento</label>*/}
-            <input
-              type="text"
-              id="neighborhood"
-              name="neighborhood"
-              placeholder="Bairro"
-              disabled
-              required
-              data-input
-            />
-            {/*<label htmlFor="neighborhood">Bairro</label>*/}
-        </div>
-        <div>
-            <input type="text" id="city" name="city" placeholder="Cidade" disabled required data-input/>
-            {/*<label htmlFor="city">Cidade</label>*/}
-            <select id="region" disabled required data-input>
-              <option selected>Estado</option>
-              <option value="AC">Acre</option>
-              <option value="AL">Alagoas</option>
-              <option value="AP">Amapá</option>
-              <option value="AM">Amazonas</option>
-              <option value="BA">Bahia</option>
-              <option value="CE">Ceará</option>
-              <option value="DF">Distrito Federal</option>
-              <option value="ES">Espírito Santo</option>
-              <option value="GO">Goiás</option>
-              <option value="MA">Maranhão</option>
-              <option value="MT">Mato Grosso</option>
-              <option value="MS">Mato Grosso do Sul</option>
-              <option value="MG">Minas Gerais</option>
-              <option value="PA">Pará</option>
-              <option value="PB">Paraíba</option>
-              <option value="PR">Paraná</option>
-              <option value="PE">Pernambuco</option>
-              <option value="PI">Piauí</option>
-              <option value="RJ">Rio de Janeiro</option>
-              <option value="RN">Rio Grande do Norte</option>
-              <option value="RS">Rio Grande do Sul</option>
-              <option value="RO">Rondônia</option>
-              <option value="RR">Roraima</option>
-              <option value="SC">Santa Catarina</option>
-              <option value="SP">São Paulo</option>
-              <option value="SE">Sergipe</option>
-              <option value="TO">Tocantins</option>
-            </select>
-        </div>
-        <Button cor='' texto={'Prosseguir'}></Button>
-      </Formu>
-    </Wrapper>
-  )
-}
+      </div>
+    </>
+  );
+};
 
 export default Shop;
-    /*<div>
-        <div>Carrinho</div>
-        <p>fluxo principal</p>
-        <p>bem organizado com os produtos que o usuário escolheu</p>
-        <p>ao fechar a compra obter informações de endereço</p>
-        <p>confirmar enderecos e informações</p>
-        <p>desenvonver métodos de pagamento</p>
-    </div>*/
-
-    
-/*
-#message {
-  width: 40%;
-}
-
-.alert.alert-light p {
-  border-bottom: 1px solid #333;
-  padding: 1.2em 0;
-}
-
-#order-form-container {
-  padding: 1.5em;
-}
-
-#steps {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border-color);
-  position: relative;
-}
-
-.step {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.step i {
-  background-color: var(--secondary-bg-color);
-  width: 45px;
-  height: 45px;
-  line-height: 45px;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 1.2em;
-  margin-bottom: 0.3em;
-}
-
-.step .active {
-  background-color: var(--secondary-color);
-}
-
-.step p {
-  color: var(--text-color);
-}
-
-.line {
-  border-bottom: 1px solid var(--border-color);
-  position: absolute;
-  top: 22.5px;
-  width: 90%;
-  left: 5%;
-  z-index: -1;
-}
-
-#order-form-container {
-  max-width: 700px;
-}
-
-#order-form-container input,
-#order-form-container select {
-  background-color: var(--bg-color);
-  border: 2px solid var(--border-color);
-  color: var(--primary-color);
-}
-
-#order-form-container select {
-  padding: 1rem 0.75rem;
-}
-
-#order-form-container label {
-  color: var(--text-color);
-}
-
-#order-form-container input:disabled,
-#order-form-container select:disabled {
-  background-color: var(--secondary-bg-color);
-  color: var(--text-color);
-}
-
-#order-form-container input:focus {
-  border-color: var(--secondary-color);
-}
-
-#order-form-container .form-floating > label {
-  left: 1em;
-}
-
-#save-btn {
-  background-color: #25cc88;
-  border: none;
-  height: 3em;
-  width: 8em;
-  border-radius: 1.5em;
-}
-
-@media (min-width: 500px) {
-  #save-btn {
-    width: 8em;
-  }
-}
- */
-
-/*
-  const addressForm = document.querySelector("#address-form");
-  const cepInput = document.querySelector("#cep");
-  const addressInput = document.querySelector("#address");
-  const cityInput = document.querySelector("#city");
-  const neighborhoodInput = document.querySelector("#neighborhood");
-  const regionInput = document.querySelector("#region");
-  const formInputs = document.querySelectorAll("[data-input]");
-  const closeButton = document.querySelector("#close-message");
-// Validate CEP Input
-cepInput!.addEventListener("keypress", (e) => {
-  const onlyNumbers = /[0-9]|\./;
-  const key = String.fromCharCode(e.keyCode);
-
-  console.log(key);
-
-  console.log(onlyNumbers.test(key));
-
-  // allow only numbers
-  if (!onlyNumbers.test(key)) {
-    e.preventDefault();
-    return;
-  }
-});
-
-// Evento to get address
-cepInput!.addEventListener("keyup", (e) => {
-  const inputValue = e.target.value;
-
-  //   Check if we have a CEP
-  if (inputValue.length === 8) {
-    getAddress(inputValue);
-  }
-});
-
-// Get address from API
-const getAddress = async (cep: any) => {
-  toggleLoader();
-
-  cepInput!.blur();
-
-  const apiUrl = `https://viacep.com.br/ws/${cep}/json/`;
-
-  const response = await fetch(apiUrl);
-
-  const data = await response.json();
-
-  console.log(data);
-  console.log(formInputs);
-  console.log(data.erro);
-
-  // Show error and reset form
-  if (data.erro === "true") {
-    if (!addressInput.hasAttribute("disabled")) {
-      toggleDisabled();
-    }
-
-    addressForm.reset();
-    toggleLoader();
-    toggleMessage("CEP Inválido, tente novamente.");
-    return;
-  }
-
-  // Activate disabled attribute if form is empty
-  if (addressInput.value === "") {
-    toggleDisabled();
-  }
-
-  addressInput.value = data.logradouro;
-  cityInput.value = data.localidade;
-  neighborhoodInput.value = data.bairro;
-  regionInput.value = data.uf;
-
-  toggleLoader();
-};
-
-// Add or remove disable attribute
-const toggleDisabled = () => {
-  if (regionInput.hasAttribute("disabled")) {
-    formInputs.forEach((input) => {
-      input.removeAttribute("disabled");
-    });
-  } else {
-    formInputs.forEach((input) => {
-      input.setAttribute("disabled", "disabled");
-    });
-  }
-};
-
-// Show or hide loader
-const toggleLoader = () => {
-  const fadeElement = document.querySelector("#fade");
-  const loaderElement = document.querySelector("#loader");
-
-  fadeElement.classList.toggle("hide");
-  loaderElement.classList.toggle("hide");
-};
-
-// Show or hide message
-const toggleMessage = (msg) => {
-  const fadeElement = document.querySelector("#fade");
-  const messageElement = document.querySelector("#message");
-
-  const messageTextElement = document.querySelector("#message p");
-
-  messageTextElement.innerText = msg;
-
-  fadeElement.classList.toggle("hide");
-  messageElement.classList.toggle("hide");
-};
-
-// Close message modal
-closeButton.addEventListener("click", () => toggleMessage());
-
-// Save address
-addressForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  toggleLoader();
-
-  setTimeout(() => {
-    toggleLoader();
-
-    toggleMessage("Endereço salvo com sucesso!");
-
-    addressForm.reset();
-
-    toggleDisabled();
-  }, 1000);
-});
-*/

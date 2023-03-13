@@ -1,6 +1,6 @@
-import image3 from '../assets/corte-e-gravacao-laser-mdf-e-acrilico-01.jpg'
+import image3 from "../assets/corte-e-gravacao-laser-mdf-e-acrilico-01.jpg";
 
-type Props = {}
+type Props = {};
 
 const User = (props: Props) => {
   return (
@@ -9,7 +9,7 @@ const User = (props: Props) => {
       <p>exibir informações do usuário, endereço e tudo mais</p>
       <p>informações podem ser editadas</p>
     </div>
-  )
-}
+  );
+};
 
 export default User;
