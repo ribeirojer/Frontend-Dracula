@@ -5,78 +5,82 @@ import styled from "styled-components";
 
 type Props = {};
 
+const cardWidthMobile = "100%";
+const cardWidthTablet = "50%";
+const cardWidthDesktop = "25%";
+const cardMargin = "0 1rem";
+
 const WrapperSectionA = styled.section`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  .shop {
-    width: 33%;
-    position: relative;
-    img {
-      width: 100%;
-    }
-    .shop-body {
-      position: absolute;
-      top: 0;
-      width: 75%;
-      padding: 30px;
-      z-index: 10;
-    }
+  position: relative;
+  img {
+    width: 100%;
   }
-  .shop:before {
-    content: "";
+  .shop-body {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 0px;
-    width: 60%;
-    background: #d10024;
-    opacity: 0.9;
-    transform: skewX(-45deg);
+    width: 75%;
+    padding: 30px;
+    z-index: 10;
+  }
+`;
+
+const Section = styled.section`
+  width: ${cardWidthMobile};
+  padding: ${cardMargin};
+
+  img {
+    border-radius: 0.5rem;
+  }
+  @media (min-width: 640px) {
+    width: ${cardWidthTablet};
+  }
+
+  @media (min-width: 1024px) {
+    width: ${cardWidthDesktop};
   }
 `;
 
 const SectionA = (props: Props) => {
+  const data = [
+    {
+      srcImg: shop01,
+      type: "Notebooks",
+    },
+    {
+      srcImg: shop02,
+      type: "Acessórios",
+    },
+    {
+      srcImg: shop03,
+      type: "Câmeras",
+    },
+    {
+      srcImg: shop02,
+      type: "Celulares",
+    },
+  ];
+
   return (
     <WrapperSectionA>
-      <div className="shop">
-        <img src={shop01} alt="" />
-        <div className="shop-body">
-          <h3>
-            Laptop<br></br>Collection
-          </h3>
-          <a href="#" className="cta-btn">
-            Shop now <i className="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div className="shop">
-        <div className="shop-img">
-          <img src={shop02} alt="" />
-        </div>
-        <div className="shop-body">
-          <h3>
-            Accessories<br></br>Collection
-          </h3>
-          <a href="#" className="cta-btn">
-            Shop now <i className="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
-
-      <div className="shop">
-        <div className="shop-img">
-          <img src={shop03} alt="" />
-        </div>
-        <div className="shop-body">
-          <h3>
-            Cameras<br></br>Collection
-          </h3>
-          <a href="#" className="cta-btn">
-            Shop now <i className="fa fa-arrow-circle-right"></i>
-          </a>
-        </div>
-      </div>
+      {data.map((item) => {
+        return (
+          <Section>
+            <img src={item.srcImg} alt="" />
+            <div className="shop-body">
+              <h3>
+                {item.type}
+                <br></br>Collection
+              </h3>
+              <a href="#" className="cta-btn">
+                Shop now <i className="fa fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </Section>
+        );
+      })}
     </WrapperSectionA>
   );
 };

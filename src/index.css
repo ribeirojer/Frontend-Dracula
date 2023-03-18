@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;700&family=Open+Sans:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap");
 
 * {
   padding: 0;
@@ -19,38 +19,34 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --cor-A: #1a2026;
-  --cor-B: #8e5572;
-  --cor-C: #f2f7f2;
-  --cor-D: #88665d;
-  --cor-E: #a86815;
-
-  --bg-color: #04044c;
-  --secondary-bg-color: #494a7d;
-  --primary-color: #fff;
-  --secondary-color: #25cc88;
-  --text-color: #8789af;
-  --border-color: #20235b;
+  --rosaclaro: #ffc3c3;
+  --rosamedio: #ff99cc;
+  --azulescuro: #003366;
+  --azulmedio: #6699cc;
+  --cinzaclaro: #f0f0f0;
+  --cinzamedio: #cccccc;
+  --branco: #ffffff;
+  --preto: #000000;
 }
 body {
-  background-color: var(--cor-C);
-  color: var(--cor-A);
+  background-color: var(--cinzaclaro);
+  color: var(--azulescuro);
 }
 h1 {
-  font-family: "Dancing Script";
+  font-family: "Open Sans";
   font-size: 3rem;
   line-height: 3.6rem;
   font-weight: 700;
 }
 h2 {
-  font-family: "Dancing Script";
+  font-family: "Open Sans";
   font-size: 2rem;
   line-height: 2.4rem;
   font-weight: 700;
 }
 h3 {
   font-size: 28px;
-  font-family: "Dancing Script";
+  font-family: "Open Sans";
   font-weight: 700;
   margin-bottom: 1rem;
 }
