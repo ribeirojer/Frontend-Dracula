@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import SectionCProduct from "./SectionCProduct";
 import product01 from "../assets/product01.png";
 import product02 from "../assets/product02.png";
 import product03 from "../assets/product03.png";
 import product04 from "../assets/product04.png";
 import product05 from "../assets/product05.png";
 import product06 from "../assets/product06.png";
+import CardProduct from "./CardProduct";
 
 type Props = {};
 
@@ -27,7 +27,6 @@ const WrapperSectionC = styled.section`
   .products-slick {
     display: flex;
   }
-
 `;
 
 const SectionC = (props: Props) => {
@@ -121,12 +120,12 @@ const SectionC = (props: Props) => {
       <div className="products-slick" data-nav="#slick-nav-2">
         {data.slice(0, 4).map((item) => {
           return (
-            <SectionCProduct
+            <CardProduct
               imageSrc={item.imgSrc}
               category={item.category}
               productName={item.productName}
               productPrice={item.productPrice}
-            ></SectionCProduct>
+            ></CardProduct>
           );
         })}
       </div>
