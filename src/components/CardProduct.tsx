@@ -73,7 +73,6 @@ const CardContainer = styled.div`
       max-width: 100%;
     }
   }
-  padding: 15px;
   .product-btns {
     display: flex;
     justify-content: space-between;
