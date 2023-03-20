@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import { azulclaro } from "../utils/theme";
 
 type Props = {};
 
@@ -19,32 +20,40 @@ const HeaderWrapper = styled.header`
   flex-direction: column;
   color: #fff;
   font-size: 0.75rem;
-  .container {
+  nav {
     display: flex;
     justify-content: space-between;
     padding: 0 2rem;
     background-color: #1e1f29;
     svg {
-      color: #f00;
+      color: ${azulclaro};
       font-size: 1rem;
+      margin-right: 0.5rem;
     }
     li {
-      margin-left: 1rem;
+      margin-right: 1rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      a {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
     }
   }
+
   .header {
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #15161d;
-    border-bottom: 4px solid #f00;
+    border-bottom: 4px solid ${azulclaro};
     form {
       display: flex;
       align-items: center;
       select {
+        padding: 1rem;
         height: 3rem;
         border-radius: 1.5rem 0 0 1.5rem;
       }
@@ -66,7 +75,7 @@ const HeaderWrapper = styled.header`
         height: 3rem;
         font-weight: bold;
         padding: 0 1rem;
-        background-color: #f00;
+        background-color: ${azulclaro};
         color: #fff;
         cursor: pointer;
       }
@@ -93,7 +102,7 @@ const HeaderWrapper = styled.header`
           right: 0px;
           padding: 0.1rem 0.5rem 0;
           border-radius: 1rem;
-          background-color: #f00;
+          background-color: ${azulclaro};
         }
       }
     }
@@ -110,24 +119,30 @@ const Header = (props: Props) => {
 
   return (
     <HeaderWrapper>
-      <div className="container">
+      <nav>
         <ul>
           <li>
             <Phone></Phone> +55 (12) 98158-0992
           </li>
           <li>
-            <Envelope></Envelope> contato@electro.com
+            <a href="mailto:contato@electro.com">
+              <Envelope></Envelope> contato@electro.com
+            </a>
           </li>
           <li>
-            <MapPin></MapPin> Rua Paulo Malschitzki, 240, Joinville - SC
+            <a href="https://goo.gl/maps/hMDFQ3zoR9mZDF5b8" target={"_blank"}>
+              <MapPin></MapPin> Rua Paulo Malschitzki, 240, Joinville - SC
+            </a>
           </li>
         </ul>
         <ul>
           <li>
-            <UserCircle></UserCircle> Minha Conta
+            <Link to={"/user"}>
+              <UserCircle></UserCircle> Minha Conta
+            </Link>
           </li>
         </ul>
-      </div>
+      </nav>
 
       <div className="header">
         <Link to={"/"}>
