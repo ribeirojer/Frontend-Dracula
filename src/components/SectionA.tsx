@@ -2,12 +2,13 @@ import shop01 from "../assets/shop01.png";
 import shop02 from "../assets/shop03.png";
 import shop03 from "../assets/shop02.png";
 import styled from "styled-components";
+import { azulclaro } from "../utils/theme";
 
 type Props = {};
 
 const cardWidthMobile = "100%";
 const cardWidthTablet = "50%";
-const cardWidthDesktop = "25%";
+const cardWidthDesktop = "33%";
 const cardMargin = "0 1rem";
 
 const WrapperSectionA = styled.section`
@@ -15,8 +16,24 @@ const WrapperSectionA = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
+  padding: 2rem;
   img {
     width: 100%;
+  }
+  .card {
+    background-color: #fff;
+    width: ${cardWidthMobile};
+    padding: ${cardMargin};
+    border: 1px solid ${azulclaro};
+    border-radius: 1rem;
+
+    @media (min-width: 640px) {
+      width: ${cardWidthTablet};
+    }
+
+    @media (min-width: 1024px) {
+      width: ${cardWidthDesktop};
+    }
   }
   .shop-body {
     position: absolute;
@@ -24,22 +41,6 @@ const WrapperSectionA = styled.section`
     width: 75%;
     padding: 30px;
     z-index: 10;
-  }
-`;
-
-const Section = styled.section`
-  width: ${cardWidthMobile};
-  padding: ${cardMargin};
-
-  img {
-    border-radius: 0.5rem;
-  }
-  @media (min-width: 640px) {
-    width: ${cardWidthTablet};
-  }
-
-  @media (min-width: 1024px) {
-    width: ${cardWidthDesktop};
   }
 `;
 
@@ -57,17 +58,13 @@ const SectionA = (props: Props) => {
       srcImg: shop03,
       type: "Câmeras",
     },
-    {
-      srcImg: shop02,
-      type: "Celulares",
-    },
   ];
 
   return (
     <WrapperSectionA>
       {data.map((item) => {
         return (
-          <Section>
+          <div className="card">
             <img src={item.srcImg} alt="" />
             <div className="shop-body">
               <h3>
@@ -78,7 +75,7 @@ const SectionA = (props: Props) => {
                 Shop now <i className="fa fa-arrow-circle-right"></i>
               </a>
             </div>
-          </Section>
+          </div>
         );
       })}
     </WrapperSectionA>

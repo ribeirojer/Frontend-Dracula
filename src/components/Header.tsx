@@ -38,7 +38,6 @@ const HeaderWrapper = styled.header`
         color: #fff;
         display: flex;
         align-items: center;
-        text-decoration: none;
       }
     }
   }
