@@ -6,11 +6,6 @@ import { azulclaro } from "../utils/theme";
 
 type Props = {};
 
-const cardWidthMobile = "100%";
-const cardWidthTablet = "50%";
-const cardWidthDesktop = "33%";
-const cardMargin = "0 1rem";
-
 const WrapperSectionA = styled.section`
   display: flex;
   flex-wrap: wrap;
@@ -22,17 +17,17 @@ const WrapperSectionA = styled.section`
   }
   .card {
     background-color: #fff;
-    width: ${cardWidthMobile};
-    padding: ${cardMargin};
+    width: 100%;
+    padding: 0 1rem;
     border: 1px solid ${azulclaro};
     border-radius: 1rem;
 
     @media (min-width: 640px) {
-      width: ${cardWidthTablet};
+      width: 50%;
     }
 
     @media (min-width: 1024px) {
-      width: ${cardWidthDesktop};
+      width: 33%;
     }
   }
   .shop-body {
@@ -62,7 +57,7 @@ const SectionA = (props: Props) => {
 
   return (
     <WrapperSectionA>
-      {data.map((item) => {
+      {/*data.map((item) => {
         return (
           <div className="card">
             <img src={item.srcImg} alt="" />
@@ -77,7 +72,7 @@ const SectionA = (props: Props) => {
             </div>
           </div>
         );
-      })}
+      })*/}
     </WrapperSectionA>
   );
 };

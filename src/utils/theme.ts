@@ -11,4 +11,11 @@ const cinzaclaro = "#f0f0f0";
 const cinzamedio = "#cccccc";
 const branco = "#ffffff";
 const preto = "#000000";
-export { azulclaro, cinzaclaro, cardMargin, cardWidthDesktop, cardWidthMobile, cardWidthTablet };
+export {
+  azulclaro,
+  cinzaclaro,
+  cardMargin,
+  cardWidthDesktop,
+  cardWidthMobile,
+  cardWidthTablet,
+};
