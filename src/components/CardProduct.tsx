@@ -1,10 +1,5 @@
 import styled from "styled-components";
-import {
-  cardMargin,
-  cardWidthDesktop,
-  cardWidthMobile,
-  cardWidthTablet,
-} from "../utils/theme";
+import theme from "../utils/theme";
 
 type Props = {
   imageSrc: string;
@@ -22,18 +17,18 @@ const CardContainer = styled.div`
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: ${cardWidthMobile};
-  padding: ${cardMargin};
+  width: ${theme.cardWidthMobile};
+  padding: ${theme.cardMargin};
 
   img {
     border-radius: 0.5rem;
   }
   @media (min-width: 640px) {
-    width: ${cardWidthTablet};
+    width: ${theme.cardWidthTablet};
   }
 
   @media (min-width: 1024px) {
-    width: ${cardWidthDesktop};
+    width: ${theme.cardWidthDesktop};
   }
 
   button {

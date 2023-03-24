@@ -1,3 +1,4 @@
+import { Box, Button, Input, Paragraph, Select } from "dracula-ui";
 import {
   Envelope,
   Heart,
@@ -11,33 +12,34 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-import { azulclaro } from "../utils/theme";
+import theme from "../utils/theme";
 
 type Props = {};
 
 const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
-  color: #fff;
-  font-size: 0.75rem;
   nav {
     display: flex;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: ${theme.paddingContainer};
     background-color: #1e1f29;
     svg {
-      color: ${azulclaro};
+      color: ${theme.draculaPurple};
       font-size: 1rem;
       margin-right: 0.5rem;
     }
-    li {
-      margin-right: 1rem;
+    ul {
       display: flex;
-      align-items: center;
-      a {
-        color: #fff;
+      li {
+        margin-right: 1rem;
         display: flex;
         align-items: center;
+        a {
+          color: #fff;
+          display: flex;
+          align-items: center;
+        }
       }
     }
   }
@@ -47,38 +49,8 @@ const HeaderWrapper = styled.header`
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #15161d;
-    border-bottom: 4px solid ${azulclaro};
-    form {
-      display: flex;
-      align-items: center;
-      select {
-        padding: 1rem;
-        height: 3rem;
-        border-radius: 1.5rem 0 0 1.5rem;
-      }
-      div {
-        position: relative;
-        input {
-          height: 3rem;
-          z-index: 2;
-        }
-        svg {
-          position: absolute;
-          top: 1px;
-          left: 1px;
-          z-index: 10;
-        }
-      }
-      button {
-        border-radius: 0 1.5rem 1.5rem 0;
-        height: 3rem;
-        font-weight: bold;
-        padding: 0 1rem;
-        background-color: ${azulclaro};
-        color: #fff;
-        cursor: pointer;
-      }
-    }
+    border-bottom: 4px solid ${theme.azulclaro};
+
     .header-ctn {
       display: flex;
       align-items: center;
@@ -101,10 +73,67 @@ const HeaderWrapper = styled.header`
           right: 0px;
           padding: 0.1rem 0.5rem 0;
           border-radius: 1rem;
-          background-color: ${azulclaro};
+          background-color: ${theme.azulclaro};
         }
       }
     }
+  }
+`;
+
+const Form = styled.form`
+  display: flex;
+  align-items: center;
+
+  select {
+    height: 40px;
+    padding: 0 15px;
+    border: none;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #999;
+    font-size: 16px;
+    width: 200px;
+    margin-right: 10px;
+  }
+
+  div {
+    position: relative;
+  }
+
+  input {
+    height: 40px;
+    padding: 0 15px;
+    border: none;
+    background-color: #fff;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+    width: 250px;
+    color: #999;
+  }
+
+  button.search-btn {
+    background-color: ${theme.azulclaro};
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 0 5px 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  button.search-btn:hover {
+    background-color: #fff;
+    color: ${theme.azulclaro};
+  }
+
+  svg {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    fill: #000;
+    width: 16px;
+    height: 16px;
   }
 `;
 
@@ -121,23 +150,29 @@ const Header = (props: Props) => {
       <nav>
         <ul>
           <li>
-            <Phone></Phone> +55 (12) 98158-0992
+            <Phone></Phone>
+            <Paragraph size="sm">+55 (12) 98158-0992</Paragraph>
           </li>
           <li>
             <a href="mailto:contato@electro.com">
-              <Envelope></Envelope> contato@electro.com
+              <Envelope></Envelope>
+              <Paragraph size="sm">contato@electro.com</Paragraph>
             </a>
           </li>
           <li>
             <a href="https://goo.gl/maps/hMDFQ3zoR9mZDF5b8" target={"_blank"}>
-              <MapPin></MapPin> Rua Paulo Malschitzki, 240, Joinville - SC
+              <MapPin></MapPin>
+              <Paragraph size="sm">
+                Rua Paulo Malschitzki, 240, Joinville - SC
+              </Paragraph>
             </a>
           </li>
         </ul>
         <ul>
           <li>
             <Link to={"/user"}>
-              <UserCircle></UserCircle> Minha Conta
+              <UserCircle></UserCircle>
+              <Paragraph size="sm">Minha Conta</Paragraph>
             </Link>
           </li>
         </ul>
@@ -148,19 +183,25 @@ const Header = (props: Props) => {
           <img src={logo} alt="" />
         </Link>
 
-        <form>
-          <select>
-            <option value="0">Todas Categorias</option>
-            <option value="1">Category 01</option>
-            <option value="1">Category 02</option>
-          </select>
+        <div className="form-header">
+          <Select defaultValue="default" size="medium" color="white">
+            <option value="default" disabled={true}>
+              Select option
+            </option>
+            <option>Blade</option>
+            <option>Buffy</option>
+            <option>Lincoln</option>
+            <option>Morbius</option>
+            <option>Van Helsing</option>
+          </Select>
           <div>
             <MagnifyingGlass></MagnifyingGlass>
-            <input placeholder="Search here" />
+            <Input color="purple" placeholder="purple" m="xs" />
           </div>
-          <button className="search-btn">Busca</button>
-        </form>
-
+          <Button color="purpleCyan" m="sm">
+            Pesquisar
+          </Button>
+        </div>
         <div className="header-ctn">
           <button>
             <Heart></Heart>

@@ -2,7 +2,7 @@ import shop01 from "../assets/shop01.png";
 import shop02 from "../assets/shop03.png";
 import shop03 from "../assets/shop02.png";
 import styled from "styled-components";
-import { azulclaro } from "../utils/theme";
+import theme from "../utils/theme";
 
 type Props = {};
 
@@ -19,7 +19,7 @@ const WrapperSectionA = styled.section`
     background-color: #fff;
     width: 100%;
     padding: 0 1rem;
-    border: 1px solid ${azulclaro};
+    border: 1px solid ${theme.azulclaro};
     border-radius: 1rem;
 
     @media (min-width: 640px) {
@@ -57,10 +57,10 @@ const SectionA = (props: Props) => {
 
   return (
     <WrapperSectionA>
-      {/*data.map((item) => {
+      {data.map((item) => {
         return (
           <div className="card">
-            <img src={item.srcImg} alt="" />
+            {/*<img src={item.srcImg} alt="" />
             <div className="shop-body">
               <h3>
                 {item.type}
@@ -69,10 +69,10 @@ const SectionA = (props: Props) => {
               <a href="#" className="cta-btn">
                 Shop now <i className="fa fa-arrow-circle-right"></i>
               </a>
-            </div>
+            </div>*/}
           </div>
         );
-      })*/}
+      })}
     </WrapperSectionA>
   );
 };

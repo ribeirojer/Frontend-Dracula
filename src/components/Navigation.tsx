@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { cinzaclaro } from "../utils/theme";
+import theme from "../utils/theme";
 
 type Props = {};
 
@@ -8,7 +8,7 @@ const WrapperNavigation = styled.section`
   display: flex;
   flex-direction: column;
   background: #fff;
-  border-bottom: 2px solid ${cinzaclaro};
+  border-bottom: 2px solid ${theme.cinzaclaro};
   .navbar-nav {
     margin-left: 2rem;
     li {
