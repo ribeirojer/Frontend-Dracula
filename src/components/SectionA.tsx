@@ -2,8 +2,7 @@ import shop01 from "../assets/shop01.png";
 import shop02 from "../assets/shop03.png";
 import shop03 from "../assets/shop02.png";
 import styled from "styled-components";
-import theme from "../utils/theme";
-import { Box, Button, Paragraph } from "dracula-ui";
+import { Box, Button, Heading } from "dracula-ui";
 
 type Props = {};
 
@@ -12,13 +11,23 @@ const WrapperSectionA = styled.section`
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  position: relative;
-  padding: 2rem;
-  img {
-    width: 100%;
-  }
+  padding: 3rem 2rem;
+
   .card {
     width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h2 {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+    }
+    button {
+      background-color:#282A36;
+    }
   }
 `;
 
@@ -42,9 +51,11 @@ const SectionA = (props: Props) => {
     <WrapperSectionA>
       {data.map((item) => {
         return (
-          <Box className="card" rounded="lg" color="purpleCyan" p="md">
+          <Box className="card" rounded="lg" color="purpleCyan" p="sm">
             <img src={item.srcImg} alt="" />
-            <Paragraph color="black">{item.type}</Paragraph>
+            <Heading color="black" size="xl">
+              {item.type}
+            </Heading>
             <Button variant="outline" color="purple" m="sm">
               Outline
             </Button>

@@ -18,7 +18,7 @@ export const data = [
   {
     imgSrc: product02,
     salePercentage: 0,
-    isNew: false,
+    isNew: true,
     category: "Notebook",
     productName: "Asus",
     productPrice: 2000,
@@ -35,12 +35,12 @@ export const data = [
   },
   {
     imgSrc: product04,
-    salePercentage: 0,
+    salePercentage: 33,
     isNew: false,
     category: "Notebook",
     productName: "Asus",
-    productPrice: 2000,
-    oldPrice: 0,
+    productPrice: 1000,
+    oldPrice: 1500,
   },
   {
     imgSrc: product05,
