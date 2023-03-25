@@ -1,4 +1,4 @@
-import { Box, Button, Input, Paragraph, Select } from "dracula-ui";
+import { Button, Input, Paragraph, Select } from "dracula-ui";
 import {
   Envelope,
   Heart,
@@ -22,7 +22,7 @@ const HeaderWrapper = styled.header`
   nav {
     display: flex;
     justify-content: space-between;
-    padding: ${theme.paddingContainer};
+    padding: 1rem ${theme.paddingContainer};
     background-color: #1e1f29;
     svg {
       color: ${theme.draculaPurple};
@@ -32,11 +32,10 @@ const HeaderWrapper = styled.header`
     ul {
       display: flex;
       li {
-        margin-right: 1rem;
+        margin-right: 1.5rem;
         display: flex;
         align-items: center;
         a {
-          color: #fff;
           display: flex;
           align-items: center;
         }
@@ -49,8 +48,20 @@ const HeaderWrapper = styled.header`
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #15161d;
-    border-bottom: 4px solid ${theme.azulclaro};
-
+    border-bottom: 4px solid ${theme.draculaPurple};
+    .form-header {
+      display: flex;
+      align-items: center;
+      .form-input {
+        position: relative;
+        svg {
+          position: absolute;
+          right: 6px;
+          top: 16px;
+          font-size: 24px;
+        }
+      }
+    }
     .header-ctn {
       display: flex;
       align-items: center;
@@ -63,6 +74,7 @@ const HeaderWrapper = styled.header`
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
         svg {
           font-size: 2rem;
         }
@@ -73,67 +85,10 @@ const HeaderWrapper = styled.header`
           right: 0px;
           padding: 0.1rem 0.5rem 0;
           border-radius: 1rem;
-          background-color: ${theme.azulclaro};
+          background-color: ${theme.draculaPurple};
         }
       }
     }
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-
-  select {
-    height: 40px;
-    padding: 0 15px;
-    border: none;
-    background-color: #fff;
-    border-radius: 5px;
-    color: #999;
-    font-size: 16px;
-    width: 200px;
-    margin-right: 10px;
-  }
-
-  div {
-    position: relative;
-  }
-
-  input {
-    height: 40px;
-    padding: 0 15px;
-    border: none;
-    background-color: #fff;
-    border-radius: 5px 0 0 5px;
-    font-size: 16px;
-    width: 250px;
-    color: #999;
-  }
-
-  button.search-btn {
-    background-color: ${theme.azulclaro};
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 0 5px 5px 0;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  button.search-btn:hover {
-    background-color: #fff;
-    color: ${theme.azulclaro};
-  }
-
-  svg {
-    position: absolute;
-    top: 12px;
-    left: 10px;
-    fill: #000;
-    width: 16px;
-    height: 16px;
   }
 `;
 
@@ -150,18 +105,18 @@ const Header = (props: Props) => {
       <nav>
         <ul>
           <li>
-            <Phone></Phone>
+            <Phone weight="fill"></Phone>
             <Paragraph size="sm">+55 (12) 98158-0992</Paragraph>
           </li>
           <li>
             <a href="mailto:contato@electro.com">
-              <Envelope></Envelope>
+              <Envelope weight="fill"></Envelope>
               <Paragraph size="sm">contato@electro.com</Paragraph>
             </a>
           </li>
           <li>
             <a href="https://goo.gl/maps/hMDFQ3zoR9mZDF5b8" target={"_blank"}>
-              <MapPin></MapPin>
+              <MapPin weight="fill"></MapPin>
               <Paragraph size="sm">
                 Rua Paulo Malschitzki, 240, Joinville - SC
               </Paragraph>
@@ -171,7 +126,7 @@ const Header = (props: Props) => {
         <ul>
           <li>
             <Link to={"/user"}>
-              <UserCircle></UserCircle>
+              <UserCircle weight="fill"></UserCircle>
               <Paragraph size="sm">Minha Conta</Paragraph>
             </Link>
           </li>
@@ -184,17 +139,16 @@ const Header = (props: Props) => {
         </Link>
 
         <div className="form-header">
-          <Select defaultValue="default" size="medium" color="white">
+          <Select defaultValue="default" size="medium" color="purple">
             <option value="default" disabled={true}>
-              Select option
+              Categorias
             </option>
-            <option>Blade</option>
-            <option>Buffy</option>
-            <option>Lincoln</option>
-            <option>Morbius</option>
-            <option>Van Helsing</option>
+            <option>Laptops</option>
+            <option>Smartphones</option>
+            <option>Câmeras</option>
+            <option>Acessórios</option>
           </Select>
-          <div>
+          <div className="form-input">
             <MagnifyingGlass></MagnifyingGlass>
             <Input color="purple" placeholder="purple" m="xs" />
           </div>
@@ -205,16 +159,20 @@ const Header = (props: Props) => {
         <div className="header-ctn">
           <button>
             <Heart></Heart>
-            <span>
+            <Paragraph size="sm">
               Lista de<br></br> Desejos
-            </span>
-            <div className="qty">{wishQty}</div>
+            </Paragraph>
+            <div className="qty">
+              <Paragraph size="sm">{wishQty}</Paragraph>
+            </div>
           </button>
 
           <button>
             <ShoppingCart></ShoppingCart>
-            <span>Carrinho</span>
-            <div className="qty">{cartQty}</div>
+            <Paragraph size="sm">Carrinho</Paragraph>
+            <div className="qty">
+              <Paragraph>{cartQty}</Paragraph>
+            </div>
           </button>
 
           <button style={{ display: "none" }}>menu</button>

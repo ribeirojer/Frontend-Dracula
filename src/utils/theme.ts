@@ -2,7 +2,7 @@ export default {
   cardWidthMobile: "100%",
   cardWidthTablet: "50%",
   cardWidthDesktop: "25%",
-  paddingContainer: "0 2rem",
+  paddingContainer: "2rem",
   cardMargin: "0 1rem",
   rosaclaro: "#ffc3c3",
   rosamedio: "#ff99cc",

@@ -3,12 +3,14 @@ import shop02 from "../assets/shop03.png";
 import shop03 from "../assets/shop02.png";
 import styled from "styled-components";
 import theme from "../utils/theme";
+import { Box, Button, Paragraph } from "dracula-ui";
 
 type Props = {};
 
 const WrapperSectionA = styled.section`
   display: flex;
   flex-wrap: wrap;
+  gap: 2rem;
   justify-content: center;
   position: relative;
   padding: 2rem;
@@ -16,26 +18,7 @@ const WrapperSectionA = styled.section`
     width: 100%;
   }
   .card {
-    background-color: #fff;
-    width: 100%;
-    padding: 0 1rem;
-    border: 1px solid ${theme.azulclaro};
-    border-radius: 1rem;
-
-    @media (min-width: 640px) {
-      width: 50%;
-    }
-
-    @media (min-width: 1024px) {
-      width: 33%;
-    }
-  }
-  .shop-body {
-    position: absolute;
-    top: 0;
-    width: 75%;
-    padding: 30px;
-    z-index: 10;
+    width: 30%;
   }
 `;
 
@@ -59,18 +42,13 @@ const SectionA = (props: Props) => {
     <WrapperSectionA>
       {data.map((item) => {
         return (
-          <div className="card">
-            {/*<img src={item.srcImg} alt="" />
-            <div className="shop-body">
-              <h3>
-                {item.type}
-                <br></br>Collection
-              </h3>
-              <a href="#" className="cta-btn">
-                Shop now <i className="fa fa-arrow-circle-right"></i>
-              </a>
-            </div>*/}
-          </div>
+          <Box className="card" rounded="lg" color="purpleCyan" p="md">
+            <img src={item.srcImg} alt="" />
+            <Paragraph color="black">{item.type}</Paragraph>
+            <Button variant="outline" color="purple" m="sm">
+              Outline
+            </Button>
+          </Box>
         );
       })}
     </WrapperSectionA>

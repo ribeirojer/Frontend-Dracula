@@ -1,49 +1,66 @@
+import { Anchor } from "dracula-ui";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import theme from "../utils/theme";
 
 type Props = {};
 
 const WrapperNavigation = styled.section`
   display: flex;
-  flex-direction: column;
-  background: #fff;
-  border-bottom: 2px solid ${theme.cinzaclaro};
-  .navbar-nav {
-    margin-left: 2rem;
-    li {
-      margin-right: 1rem;
-      font-weight: 500;
-    }
+  background: #1e1f29;
+  box-shadow: 0px 0px 8px #ffffff33;
+  padding: 1rem 2rem;
+  li {
+    list-style-type: none;
+    margin-right: 1rem;
+    font-weight: 500;
   }
 `;
 
 const Navigation = (props: Props) => {
+  const data = [
+    {
+      text: "Início",
+      link: "/",
+    },
+    {
+      text: "Promoções",
+      link: "/hotdeals",
+    },
+    {
+      text: "Categorias",
+      link: "/categories",
+    },
+    {
+      text: "Laptops",
+      link: "/categories/laptops",
+    },
+    {
+      text: "Smartphones",
+      link: "/categories/smartphones",
+    },
+    {
+      text: "Câmeras",
+      link: "/categories/cameras",
+    },
+    {
+      text: "Acessórios",
+      link: "/categories/acessorios",
+    },
+  ];
+
   return (
     <WrapperNavigation>
-      <ul className="navbar-nav">
-        <li className="active">
-          <Link to={"/"}>Início</Link>
-        </li>
-        <li>
-          <Link to={"/hotdeals"}>Promoções</Link>
-        </li>
-        <li>
-          <Link to={"/categories"}>Categorias</Link>
-        </li>
-        <li>
-          <Link to={"/categories/laptops"}>Laptops</Link>
-        </li>
-        <li>
-          <Link to={"/categories/smartphones"}>Smartphones</Link>
-        </li>
-        <li>
-          <Link to={"/categories/cameras"}>Câmeras</Link>
-        </li>
-        <li>
-          <Link to={"/categories/acessorios"}>Acessórios</Link>
-        </li>
-      </ul>
+      {data.map((item) => {
+        return (
+          <li className="active">
+            <Link to={item.link}>
+              <Anchor weight="semibold" mb="sm">
+                {item.text}
+              </Anchor>
+            </Link>
+          </li>
+        );
+      })}
     </WrapperNavigation>
   );
 };
