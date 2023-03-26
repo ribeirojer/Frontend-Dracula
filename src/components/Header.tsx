@@ -25,7 +25,7 @@ const HeaderWrapper = styled.header`
     padding: 1rem ${theme.paddingContainer};
     background-color: #1e1f29;
     svg {
-      color: ${theme.draculaPurple};
+      color: ${theme.dracula.purple};
       font-size: 1rem;
       margin-right: 0.5rem;
     }
@@ -48,7 +48,7 @@ const HeaderWrapper = styled.header`
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #15161d;
-    border-bottom: 4px solid ${theme.draculaPurple};
+    border-bottom: 4px solid ${theme.dracula.purple};
     .form-header {
       display: flex;
       align-items: center;
@@ -85,7 +85,7 @@ const HeaderWrapper = styled.header`
           right: 0px;
           padding: 0.1rem 0.5rem 0;
           border-radius: 1rem;
-          background-color: ${theme.draculaPurple};
+          background-color: ${theme.dracula.purple};
         }
       }
     }

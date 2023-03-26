@@ -7,9 +7,9 @@ import image3 from "../assets/17.jpg";
 import image4 from "../assets/25.jpg";
 import image5 from "../assets/29.jpg";
 import image6 from "../assets/30.jpg";
-import Button from "./Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Button } from "dracula-ui";
 
 const Wrapper = styled.div`
   display: flex;
@@ -106,7 +106,7 @@ const Products = (props: Props) => {
         )}
       </Wrapper>
       <Link to={"/produtos"}>
-        <Button cor="#a86815" texto="Ver Mais" />
+        <Button color="green">Ver Mais</Button>
       </Link>
     </ProductsSection>
   );

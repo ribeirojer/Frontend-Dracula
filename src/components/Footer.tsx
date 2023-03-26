@@ -1,160 +1,187 @@
-import { MapPin } from "phosphor-react";
+import { Envelope, MapPin, Phone } from "phosphor-react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import {
+  FacebookLogo,
+  InstagramLogo,
+  PinterestLogo,
+  TwitterLogo,
+} from "phosphor-react";
+import logo from "../assets/logo.png";
+import { Anchor, Heading, List, Paragraph } from "dracula-ui";
 type Props = {};
 
 const Wrapper = styled.footer`
-  color: #fff;
   display: flex;
   flex-direction: column;
-  .row {
-    background-color: #15161d;
+  background-color: #15161d;
+  .footer {
+    display: flex;
+    align-items: center;
     div {
       width: 25%;
       ul {
+        margin-top: 1.5rem;
         display: flex;
+        gap: 0.5rem;
         flex-direction: column;
       }
     }
-    display: flex;
+  }
+  p {
+    background-color: #15161d;
   }
 `;
 
 const Footer = (props: Props) => {
+  const today = new Date();
+  const year = today.getFullYear();
+  /*
+  <ul className="newsletter-follow">
+  <li>
+    <a href="https://www.facebook.com/" target="_blank">
+      <FacebookLogo></FacebookLogo>
+    </a>
+  </li>
+  <li>
+    <a href="https://twitter.com/" target="_blank">
+      <TwitterLogo></TwitterLogo>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.instagram.com/" target="_blank">
+      <InstagramLogo></InstagramLogo>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.pinterest.com/" target="_blank">
+      <PinterestLogo></PinterestLogo>
+    </a>
+  </li>
+</ul>*/
   return (
     <Wrapper>
-      <div className="row">
+      <div className="footer">
         <div>
-          <h3 className="footer-title">Sobre a Empresa</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut.
-          </p>
-          <ul className="footer-links">
-            <li>
-              <Link to={"/"}>
+          <Link to={"/"}>
+            <img src={logo} alt="" />
+          </Link>
+          <Heading size="sm">
+            Transforme seu lar em um castelo das trevas com os eletrônicos do
+            e-commerce Drácula.
+          </Heading>
+          <List color="white">
+            <li className="drac-text drac-text-white">
+              <Anchor href="" target={"_blank"}>
                 <MapPin></MapPin> Rua Paulo Malschitzki, 240, Joinville - SC
-              </Link>
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-phone"></i>+55 (12) 98158-0992
-              </Link>
+            <li className="drac-text drac-text-white">
+              <Anchor href="" target={"_blank"}>
+                <Phone></Phone> +55 (12) 98158-0992
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-envelope-o"></i>contato@electro.com
-              </Link>
+            <li className="drac-text drac-text-white">
+              <Anchor href="" target={"_blank"}>
+                <Envelope></Envelope> contato@dracula.com
+              </Anchor>
             </li>
-          </ul>
+          </List>
         </div>
-
         <div>
-          <h3 className="footer-title">Categorias</h3>
-          <ul className="footer-links">
-            <li>
-              <Link to={"/"}>Promoção</Link>
+          <Heading>Categorias</Heading>
+          <List>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Promoção
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Laptops</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Laptops
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Smartphones</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Smartphones
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Câmeras</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Câmeras
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Acessórios</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Acessórios
+              </Anchor>
             </li>
-          </ul>
+          </List>
         </div>
-
         <div>
-          <h3 className="footer-title">Informações</h3>
-          <ul className="footer-links">
-            <li>
-              <Link to={"/"}>Sobre a empresa</Link>
+          <Heading>Informações</Heading>
+          <List>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Sobre a empresa
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Entre em contato</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Entre em contato
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Política de Privacidade</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Política de Privacidade
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Ordens e Retornos</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Ordens e Retornos
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Termos e Condições</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Termos e Condições
+              </Anchor>
             </li>
-          </ul>
+          </List>
         </div>
-
         <div>
-          <h3 className="footer-title">Serviços</h3>
-          <ul className="footer-links">
-            <li>
-              <Link to={"/"}>Minha Conta</Link>
+          <Heading>Serviços</Heading>
+          <List>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Minha Conta
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Ver Carrinho</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Ver Carrinho
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Lista de Desejos</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Lista de Desejos
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Finalizar minha ordem</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Finalizar minha ordem
+              </Anchor>
             </li>
-            <li>
-              <Link to={"/"}>Ajuda</Link>
+            <li className="drac-text drac-text-white">
+              <Anchor size="lg" target={"_blank"}>
+                Ajuda
+              </Anchor>
             </li>
-          </ul>
+          </List>
         </div>
       </div>
-
-      <div className="container">
-        <div className="col-md-12 text-center">
-          <ul className="footer-payments">
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-cc-visa"></i>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-credit-card"></i>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-cc-paypal"></i>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-cc-mastercard"></i>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-cc-discover"></i>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <i className="fa fa-cc-amex"></i>
-              </Link>
-            </li>
-          </ul>
-          <span className="copyright">
-            Copyright &copy;
-            <script>document.write(new Date().getFullYear());</script> Todos os
-            direitos reservados
-          </span>
-        </div>
-      </div>
+      <Paragraph align="center" p="sm">
+        &copy; Dracula E-commerce {year} - Todos os direitos reservados
+      </Paragraph>
     </Wrapper>
   );
 };

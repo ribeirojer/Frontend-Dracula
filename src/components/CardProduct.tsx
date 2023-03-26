@@ -170,7 +170,7 @@ const CardProduct = ({
           </div>
         </div>
         <Button size="lg" color="purpleCyan">
-          + ao Carrinho
+          Comprar
         </Button>
       </CardContainer>
     </Container>

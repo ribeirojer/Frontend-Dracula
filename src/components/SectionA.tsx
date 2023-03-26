@@ -57,7 +57,7 @@ const SectionA = (props: Props) => {
               {item.type}
             </Heading>
             <Button variant="outline" color="purple" m="sm">
-              Outline
+              Ver
             </Button>
           </Box>
         );
