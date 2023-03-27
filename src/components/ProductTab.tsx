@@ -1,6 +1,9 @@
+import axios from "axios";
 import { Button, Divider, Input, Paragraph, Tabs } from "dracula-ui";
 import { useState } from "react";
 import styled from "styled-components";
+import ProductForm from "./ProductForm";
+import Rating from "./Rating";
 import ReviewList from "./ReviewList";
 
 type Props = {};
@@ -11,6 +14,9 @@ const Container = styled.div`
     justify-content: center;
     margin-bottom: 2rem;
     gap: 0 2rem;
+  }
+  form {
+    width: 25%;
   }
 `;
 const ProductTab = (props: Props) => {
@@ -87,119 +93,9 @@ const ProductTab = (props: Props) => {
 
         {isReviewsSelected && (
           <div className="row">
-            <div className="col-md-3">
-              <div id="rating">
-                <div className="rating-avg">
-                  <span>4.5</span>
-                  <div className="rating-stars">
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star-o"></i>
-                  </div>
-                </div>
-                <ul className="rating">
-                  <li>
-                    <div className="rating-stars">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                    </div>
-                    <div className="rating-progress">
-                      <div style={{ width: "80%" }}></div>
-                    </div>
-                    <span className="sum">3</span>
-                  </li>
-                  <li>
-                    <div className="rating-stars">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star-o"></i>
-                    </div>
-                    <div className="rating-progress">
-                      <div style={{ width: "60%" }}></div>
-                    </div>
-                    <span className="sum">2</span>
-                  </li>
-                  <li>
-                    <div className="rating-stars">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                    </div>
-                    <div className="rating-progress">
-                      <div></div>
-                    </div>
-                    <span className="sum">0</span>
-                  </li>
-                  <li>
-                    <div className="rating-stars">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                    </div>
-                    <div className="rating-progress">
-                      <div></div>
-                    </div>
-                    <span className="sum">0</span>
-                  </li>
-                  <li>
-                    <div className="rating-stars">
-                      <i className="fa fa-star"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                      <i className="fa fa-star-o"></i>
-                    </div>
-                    <div className="rating-progress">
-                      <div></div>
-                    </div>
-                    <span className="sum">0</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <Rating ratings={[5, 5,3, 4]}></Rating>
             <ReviewList></ReviewList>
-            <form className="review-form">
-              <Input
-                color="purple"
-                className="input"
-                type="text"
-                placeholder="Your Name"
-              />
-              <Input
-                color="purple"
-                className="input"
-                type="email"
-                placeholder="Your Email"
-              />
-              <textarea className="input" placeholder="Your Review"></textarea>
-              <div className="input-rating">
-                <span>Your Rating: </span>
-                <div className="stars">
-                  <input id="star5" name="rating" value="5" type="radio" />
-                  <label htmlFor="star5"></label>
-                  <input id="star4" name="rating" value="4" type="radio" />
-                  <label htmlFor="star4"></label>
-                  <input id="star3" name="rating" value="3" type="radio" />
-                  <label htmlFor="star3"></label>
-                  <input id="star2" name="rating" value="2" type="radio" />
-                  <label htmlFor="star2"></label>
-                  <input id="star1" name="rating" value="1" type="radio" />
-                  <label htmlFor="star1"></label>
-                </div>
-              </div>
-              <Button className="primary-btn">Submit</Button>
-            </form>
+            <ProductForm></ProductForm>
           </div>
         )}
       </div>

@@ -1,18 +1,13 @@
 import { Heading, Paragraph } from "dracula-ui";
 import { Star } from "phosphor-react";
 import { IReview } from "../interfaces/Review";
+import Stars from "./Stars";
 
 type Props = {
   review: IReview;
 };
 
 const Review = ({ review }: Props) => {
-  const fillStars = (rating: number, index: number) => {
-    if (index < rating) {
-      return "fill";
-    }
-    return "regular";
-  };
 
   const formattedDate = new Intl.DateTimeFormat("pt-BR").format(review.date);
 
@@ -20,13 +15,7 @@ const Review = ({ review }: Props) => {
     <div className="review-heading">
       <Heading>{review.name}</Heading>
       <Paragraph>{formattedDate}</Paragraph>
-      <div className="review-rating">
-        <Star weight={fillStars(review.rating, 0)}></Star>
-        <Star weight={fillStars(review.rating, 1)}></Star>
-        <Star weight={fillStars(review.rating, 2)}></Star>
-        <Star weight={fillStars(review.rating, 3)}></Star>
-        <Star weight={fillStars(review.rating, 4)}></Star>
-      </div>
+      <Stars rating={review.rating}></Stars>
       <Paragraph>{review.comment}</Paragraph>
     </div>
   );

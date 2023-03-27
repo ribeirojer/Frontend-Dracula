@@ -1,8 +1,13 @@
 import { Button } from "dracula-ui";
+import styled from "styled-components";
 import { IReview } from "../interfaces/Review";
 import Review from "./Review";
 
 type Props = {};
+
+const ReviewListContainer = styled.div`
+  width: 50%;
+`;
 
 const ReviewList = (props: Props) => {
   const notebookReviews: IReview[] = [
@@ -30,7 +35,7 @@ const ReviewList = (props: Props) => {
   ];
 
   return (
-    <div id="reviews">
+    <ReviewListContainer id="reviews">
       <ul className="reviews">
         {notebookReviews.map((review, i) => (
           <Review review={review} key={i} />
@@ -43,7 +48,7 @@ const ReviewList = (props: Props) => {
         <Button>4</Button>
         <Button>&gt;</Button>
       </ul>
-    </div>
+    </ReviewListContainer>
   );
 };
 
