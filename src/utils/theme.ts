@@ -1,3 +1,12 @@
+import styled from "styled-components";
+
+export const OldPriceProduct = styled.span`
+  color: #999;
+  font-size: 14px;
+  text-decoration: line-through;
+  margin-left: 10px;
+`;
+
 export default {
   cardWidthMobile: "100%",
   cardWidthTablet: "45%",

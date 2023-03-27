@@ -1,250 +1,200 @@
+import { Checkbox, Heading, Paragraph } from "dracula-ui";
+import { useState } from "react";
 import styled from "styled-components";
+import product01 from "../assets/product01.png";
+import product02 from "../assets/product02.png";
+import product03 from "../assets/product03.png";
+import CardProduct from "../components/CardProduct";
+import { OldPriceProduct } from "../utils/theme";
+import { data } from "../utils/cardsData";
 
 type Props = {};
 
-const Wrapper = styled.section`
-  background-color: var(--cor-B);
+const Wrapper = styled.main`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h2 {
-    margin: 120px 0 1rem 0;
+  #aside {
+    width: 25%;
   }
-  p {
-    margin: 0 0 1rem 0;
+  #store {
+    width: 75%;
   }
-
-  #fade {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+  .product-widget {
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 10;
+    .product-img {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
+    .product-body {
+      width: 50%;
+    }
   }
-
-  .hide {
-    display: none !important;
-  }
-`;
-const Formu = styled.form`
-  width: 100%;
-  div {
+  
+  .products-store {
     display: flex;
     justify-content: center;
-    align-items: center;
-  }
-  #cep {
-    width: 56%;
-  }
-  div input,
-  div select {
-    width: 27%;
-    padding: 8px 16px;
-    margin: 0 16px 1rem;
-    color: var(--cor-B);
-    border-radius: 45px;
-    -webkit-transition: 0.3s;
-    transition: 0.3s;
-    border: 2px solid transparent;
-    font-weight: 700;
-    cursor: text;
+    flex-wrap: wrap;
+    > div {
+      width: 26%;
+    }
   }
 `;
 
 const Shop = (props: Props) => {
-  const breadcrumb = [
-    "Home",
-    "All Categories",
-    "Accessories",
-    "Headphones (227,490 Results)",
+  const [laptopsChecked, setLaptopsChecked] = useState(false);
+  const [smartphonesChecked, setSmartphonesChecked] = useState(false);
+  const [camerasChecked, setCamerasChecked] = useState(false);
+  const [accessoriesChecked, setAccessoriesChecked] = useState(false);
+  const [price, setPrice] = useState(50);
+  const checkboxes = [
+    { id: "brand-1", label: "SAMSUNG", quantity: 578 },
+    { id: "brand-2", label: "LG", quantity: 125 },
+    { id: "brand-3", label: "SONY", quantity: 755 },
+    { id: "brand-4", label: "SAMSUNG", quantity: 578 },
+    { id: "brand-5", label: "LG", quantity: 125 },
+    { id: "brand-6", label: "SONY", quantity: 755 },
   ];
-  
+  const products = [
+    {
+      name: "Product Name 1",
+      category: "Category 1",
+      price: "$980.00",
+      oldPrice: "$990.00",
+      image: product01,
+    },
+    {
+      name: "Product Name 2",
+      category: "Category 2",
+      price: "$980.00",
+      oldPrice: "$990.00",
+      image: product02,
+    },
+    {
+      name: "Product Name 3",
+      category: "Category 3",
+      price: "$980.00",
+      oldPrice: "$990.00",
+      image: product03,
+    },
+  ];
+
   return (
-    <div className="row">
-      <div id="aside" className="col-md-3">
+    <Wrapper>
+      <div id="aside">
         <div className="aside">
-          <h3 className="aside-title">Categories</h3>
+          <Heading>Categorias</Heading>
           <div className="checkbox-filter">
             <div className="input-checkbox">
-              <input type="checkbox" id="category-1" />
+              <Checkbox
+                color="purple"
+                type="checkbox"
+                id="category-1"
+                checked={laptopsChecked}
+                onChange={() => setLaptopsChecked(!laptopsChecked)}
+              />
               <label htmlFor="category-1">
                 <span></span>
                 Laptops
                 <small>(120)</small>
               </label>
             </div>
-
             <div className="input-checkbox">
-              <input type="checkbox" id="category-2" />
+              <Checkbox
+                color="purple"
+                type="checkbox"
+                id="category-2"
+                checked={smartphonesChecked}
+                onChange={() => setSmartphonesChecked(!smartphonesChecked)}
+              />
               <label htmlFor="category-2">
                 <span></span>
                 Smartphones
                 <small>(740)</small>
               </label>
             </div>
-
             <div className="input-checkbox">
-              <input type="checkbox" id="category-3" />
+              <Checkbox
+                color="purple"
+                type="checkbox"
+                id="category-3"
+                checked={camerasChecked}
+                onChange={() => setCamerasChecked(!camerasChecked)}
+              />
               <label htmlFor="category-3">
                 <span></span>
                 Cameras
                 <small>(1450)</small>
               </label>
             </div>
-
             <div className="input-checkbox">
-              <input type="checkbox" id="category-4" />
+              <Checkbox
+                color="purple"
+                type="checkbox"
+                id="category-4"
+                checked={accessoriesChecked}
+                onChange={() => setAccessoriesChecked(!accessoriesChecked)}
+              />
               <label htmlFor="category-4">
                 <span></span>
                 Accessories
                 <small>(578)</small>
               </label>
             </div>
-
-            <div className="input-checkbox">
-              <input type="checkbox" id="category-5" />
-              <label htmlFor="category-5">
-                <span></span>
-                Laptops
-                <small>(120)</small>
-              </label>
-            </div>
-
-            <div className="input-checkbox">
-              <input type="checkbox" id="category-6" />
-              <label htmlFor="category-6">
-                <span></span>
-                Smartphones
-                <small>(740)</small>
-              </label>
-            </div>
           </div>
         </div>
         <div className="aside">
-          <h3 className="aside-title">Price</h3>
-          <div className="price-filter">
-            <div id="price-slider"></div>
-            <div className="input-number price-min">
-              <input id="price-min" type="number" />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
-            </div>
-            <span>-</span>
-            <div className="input-number price-max">
-              <input id="price-max" type="number" />
-              <span className="qty-up">+</span>
-              <span className="qty-down">-</span>
-            </div>
+          <Heading>PREÇO</Heading>
+          <div className="price-slider">
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={price}
+              onChange={(e) => setPrice(parseInt(e.target.value))}
+            />
+            <span className="price-slider-value">${price}</span>
           </div>
         </div>
         <div className="aside">
-          <h3 className="aside-title">Brand</h3>
+          <Heading>Marca</Heading>
           <div className="checkbox-filter">
-            <div className="input-checkbox">
-              <input type="checkbox" id="brand-1" />
-              <label htmlFor="brand-1">
-                <span></span>
-                SAMSUNG
-                <small>(578)</small>
-              </label>
-            </div>
-            <div className="input-checkbox">
-              <input type="checkbox" id="brand-2" />
-              <label htmlFor="brand-2">
-                <span></span>
-                LG
-                <small>(125)</small>
-              </label>
-            </div>
-            <div className="input-checkbox">
-              <input type="checkbox" id="brand-3" />
-              <label htmlFor="brand-3">
-                <span></span>
-                SONY
-                <small>(755)</small>
-              </label>
-            </div>
-            <div className="input-checkbox">
-              <input type="checkbox" id="brand-4" />
-              <label htmlFor="brand-4">
-                <span></span>
-                SAMSUNG
-                <small>(578)</small>
-              </label>
-            </div>
-            <div className="input-checkbox">
-              <input type="checkbox" id="brand-5" />
-              <label htmlFor="brand-5">
-                <span></span>
-                LG
-                <small>(125)</small>
-              </label>
-            </div>
-            <div className="input-checkbox">
-              <input type="checkbox" id="brand-6" />
-              <label htmlFor="brand-6">
-                <span></span>
-                SONY
-                <small>(755)</small>
-              </label>
-            </div>
+            {checkboxes.map((checkbox) => (
+              <div key={checkbox.id} className="input-checkbox">
+                <Checkbox color="purple" type="checkbox" id={checkbox.id} />
+                <label htmlFor={checkbox.id}>
+                  <span></span>
+                  {checkbox.label}
+                  <small>({checkbox.quantity})</small>
+                </label>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="aside">
-          <h3 className="aside-title">Top selling</h3>
-          <div className="product-widget">
-            <div className="product-img">
-              <img src="./img/product01.png" alt="" />
+        <div className="product-list">
+          <Heading>Mais Vendidos</Heading>
+          {products.map((product, index) => (
+            <div key={index} className="product-widget">
+              <div className="product-img">
+                <img src={product.image} alt={product.name} />
+              </div>
+              <div className="product-body">
+                <Heading size="sm">{product.category}</Heading>
+                <Heading size="md" color="purple">
+                  {product.name}
+                </Heading>
+                <Paragraph>
+                  {product.price}{" "}
+                  <OldPriceProduct>{product.oldPrice}</OldPriceProduct>
+                </Paragraph>
+              </div>
             </div>
-            <div className="product-body">
-              <p className="product-category">Category</p>
-              <h3 className="product-name">
-                <a href="#">product name goes here</a>
-              </h3>
-              <h4 className="product-price">
-                $980.00 <del className="product-old-price">$990.00</del>
-              </h4>
-            </div>
-          </div>
-
-          <div className="product-widget">
-            <div className="product-img">
-              <img src="./img/product02.png" alt="" />
-            </div>
-            <div className="product-body">
-              <p className="product-category">Category</p>
-              <h3 className="product-name">
-                <a href="#">product name goes here</a>
-              </h3>
-              <h4 className="product-price">
-                $980.00 <del className="product-old-price">$990.00</del>
-              </h4>
-            </div>
-          </div>
-
-          <div className="product-widget">
-            <div className="product-img">
-              <img src="./img/product03.png" alt="" />
-            </div>
-            <div className="product-body">
-              <p className="product-category">Category</p>
-              <h3 className="product-name">
-                <a href="#">product name goes here</a>
-              </h3>
-              <h4 className="product-price">
-                $980.00 <del className="product-old-price">$990.00</del>
-              </h4>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-      <div id="store" className="col-md-9">
+      <div id="store">
         <div className="store-filter clearfix">
           <div className="store-sort">
             <label>
@@ -274,380 +224,21 @@ const Shop = (props: Props) => {
             </li>
           </ul>
         </div>
-        <div className="row">
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product01.png" alt="" />
-                <div className="product-label">
-                  <span className="sale">-30%</span>
-                  <span className="new">NEW</span>
-                </div>
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating">
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                </div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product02.png" alt="" />
-                <div className="product-label">
-                  <span className="new">NEW</span>
-                </div>
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating">
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star-o"></i>
-                </div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="clearfix visible-sm visible-xs"></div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product03.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating"></div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="clearfix visible-lg visible-md"></div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product04.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating"></div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="clearfix visible-sm visible-xs"></div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product05.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating"></div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product06.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating">
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star-o"></i>
-                </div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="clearfix visible-lg visible-md visible-sm visible-xs"></div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product07.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating">
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                </div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product08.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating"></div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="clearfix visible-sm visible-xs"></div>
-
-          <div className="col-md-4 col-xs-6">
-            <div className="product">
-              <div className="product-img">
-                <img src="./img/product09.png" alt="" />
-              </div>
-              <div className="product-body">
-                <p className="product-category">Category</p>
-                <h3 className="product-name">
-                  <a href="#">product name goes here</a>
-                </h3>
-                <h4 className="product-price">
-                  $980.00 <del className="product-old-price">$990.00</del>
-                </h4>
-                <div className="product-rating"></div>
-                <div className="product-btns">
-                  <button className="add-to-wishlist">
-                    <i className="fa fa-heart-o"></i>
-                    <span className="tooltipp">add to wishlist</span>
-                  </button>
-                  <button className="add-to-compare">
-                    <i className="fa fa-exchange"></i>
-                    <span className="tooltipp">add to compare</span>
-                  </button>
-                  <button className="quick-view">
-                    <i className="fa fa-eye"></i>
-                    <span className="tooltipp">quick view</span>
-                  </button>
-                </div>
-              </div>
-              <div className="add-to-cart">
-                <button className="add-to-cart-btn">
-                  <i className="fa fa-shopping-cart"></i> add to cart
-                </button>
-              </div>
-            </div>
-          </div>
+          
+      <div className="products-store">
+        {data.map((item) => {
+          return (
+            <CardProduct
+              salePercentage={item.salePercentage}
+              isNew={item.isNew}
+              oldPrice={item.oldPrice}
+              imageSrc={item.imgSrc}
+              category={item.category}
+              productName={item.productName}
+              productPrice={item.productPrice}
+            ></CardProduct>
+          );
+        })}
         </div>
 
         <div className="store-filter clearfix">
@@ -671,7 +262,7 @@ const Shop = (props: Props) => {
           </ul>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

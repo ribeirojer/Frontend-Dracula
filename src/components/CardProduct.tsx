@@ -1,7 +1,7 @@
 import { Anchor, Badge, Button, Heading, Paragraph } from "dracula-ui";
 import { Eye, GitDiff, Star } from "phosphor-react";
 import styled from "styled-components";
-import theme from "../utils/theme";
+import theme, { OldPriceProduct } from "../utils/theme";
 
 type Props = {
   imageSrc: string;
@@ -99,12 +99,6 @@ const CardContainer = styled.div`
       height: 2rem;
     }
   }
-  .product-old-price {
-    color: #999;
-    font-size: 14px;
-    text-decoration: line-through;
-    margin-left: 10px;
-  }
   .button-cart {
     font-weight: 700;
   }
@@ -142,9 +136,9 @@ const CardProduct = ({
           </Anchor>
           <Paragraph className="product-price">
             ${productPrice.toFixed(2)}
-            <span className="product-old-price">
+            <OldPriceProduct className="product-old-price">
               {oldPrice ? "$" + oldPrice.toFixed(2) : ""}
-            </span>
+            </OldPriceProduct>
           </Paragraph>
           <div className="product-rating">
             <Star weight="fill"></Star>

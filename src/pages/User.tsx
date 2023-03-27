@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Avatar } from "dracula-ui";
 import { UserCircle } from "phosphor-react";
 import image3 from "../assets/logo.png";
 
@@ -26,7 +27,12 @@ const User = (props: Props) => {
   return (
     <div>
       <img src={image3}></img>
-      <UserCircle></UserCircle>
+      <Avatar
+        src="https://ui.draculatheme.com/static/images/avatar.png"
+        title="Count Dracula"
+        borderVariant="large"
+        mb="sm"
+      />
       <p>exibir informações do usuário, endereço e tudo mais</p>
       <p>informações podem ser editadas</p>
     </div>
