@@ -1,304 +1,408 @@
-import React from "react";
+import { useState } from "react";
+import {
+  Anchor,
+  Button,
+  Checkbox,
+  Heading,
+  Input,
+  Paragraph,
+  Radio,
+} from "dracula-ui";
+import styled from "styled-components";
+import theme from "../utils/theme";
 
 type Props = {};
 
+const WrapperCheckout = styled.main`
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  .col {
+    width: 50%;
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  }
+  .billing-details {
+    input {
+      margin-bottom: 1rem;
+    }
+  }
+
+  li {
+    list-style-type: none;
+    margin-right: 1rem;
+    font-weight: 500;
+  }
+  .line {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .pedido {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    border: 1px solid ${theme.dracula.purple};
+    button {
+      margin-top: 1rem;
+    }
+  }
+  .payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  textarea {
+    display: block;
+    font-size: var(--font-md);
+    min-height: var(--spacing-40);
+    padding: var(--spacing-4);
+    margin-top: 1rem;
+    -webkit-appearance: textfield;
+    background: var(--blackSecondary);
+    border: 0.3rem solid transparent;
+    border-radius: var(--rounded-lg);
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    font-family: Fira Code, monospace;
+    color: var(--purple);
+  }
+`;
+
 const Checkout = (props: Props) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [tel, setTel] = useState("");
+  const [createAccount, setCreateAccount] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
+  const [isShippingAddress, setIsShippingAddress] = useState(false);
+  const [shippingFirstName, setShippingFirstName] = useState("");
+  const [shippingLastName, setShippingLastName] = useState("");
+  const [shippingEmail, setShippingEmail] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [shippingCity, setShippingCity] = useState("");
+  const [shippingCountry, setShippingCountry] = useState("");
+  const [shippingZipCode, setShippingZipCode] = useState("");
+  const [shippingTel, setShippingTel] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [termsAgreed, setTermsAgreed] = useState(false);
+  const [productList, setProductList] = useState([
+    { name: "Nome do produto vai aqui", quantity: 1, price: 980.0 },
+    { name: "Nome do produto vai aqui", quantity: 2, price: 980.0 },
+  ]);
+  const [shippingCost, setShippingCost] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(
+    productList.reduce(
+      (acc, product) => acc + product.quantity * product.price,
+      0
+    ) + shippingCost
+  );
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const data = {
+      firstName,
+      lastName,
+      email,
+      address,
+      city,
+      country,
+      zipCode,
+      tel,
+      createAccount,
+      password,
+      confirmPassword,
+      isShippingAddress,
+      shippingFirstName,
+      shippingLastName,
+      shippingEmail,
+      shippingAddress,
+      shippingCity,
+      shippingCountry,
+      shippingZipCode,
+      shippingTel,
+      additionalInfo,
+      paymentMethod,
+      termsAgreed,
+      productList,
+      shippingCost,
+      totalPrice,
+    };
+    console.log(data);
+    // Aqui você pode enviar os dados para a API ou realizar outras operações com eles
+  };
+
   return (
-    <>
-      <div id="breadcrumb" className="section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h3 className="breadcrumb-header">Checkout</h3>
-              <ul className="breadcrumb-tree">
-                <li>
-                  <a href="#">Home</a>
-                </li>
-                <li className="active">Checkout</li>
-              </ul>
-            </div>
+    <WrapperCheckout>
+      <div className="col">
+        <div className="billing-details">
+          <Heading mb="md">Dados de Entrega</Heading>
+          <Input
+            color="purple"
+            type="text"
+            name="first-name"
+            placeholder="Primeiro nome"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="last-name"
+            placeholder="Último nome"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="address"
+            placeholder="Endereço"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="city"
+            placeholder="Cidade"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="country"
+            placeholder="País"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="zip-code"
+            placeholder="CEP"
+            value={zipCode}
+            onChange={(e) => setZipCode(e.target.value)}
+          />
+          <Input
+            color="purple"
+            type="tel"
+            name="tel"
+            placeholder="Telefone"
+            value={tel}
+            onChange={(e) => setTel(e.target.value)}
+          />
+          <div className="input-checkbox">
+            <Checkbox
+              color="purple"
+              type="checkbox"
+              id="create-account"
+              checked={createAccount}
+              onChange={(e) => setCreateAccount(e.target.checked)}
+            />
+            <label htmlFor="create-account">Criar conta?</label>
+            {createAccount && (
+              <div>
+                <Input
+                  color="purple"
+                  type="password"
+                  name="password"
+                  placeholder="Coloque sua senha"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Input
+                  color="purple"
+                  type="password"
+                  name="confirmpassword"
+                  placeholder="Confirme sua senha"
+                  value={confirmPassword}
+                  onChange={(e) => setconfirmPassword(e.target.value)}
+                />
+              </div>
+            )}
           </div>
         </div>
+        <Checkbox
+          color="purple"
+          type="checkbox"
+          id="shiping-address"
+          checked={isShippingAddress}
+          onChange={(e) => setIsShippingAddress(e.target.checked)}
+        />
+        <label htmlFor="shiping-address">
+          Enviar para um endereço diferente?
+        </label>
+        {shippingAddress && (
+          <div className="billing-details">
+            <Input
+              color="purple"
+              type="text"
+              name="shipping-first-name"
+              placeholder="Primeiro nome"
+              value={shippingFirstName}
+              onChange={(e) => setShippingFirstName(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="text"
+              name="shipping-last-name"
+              placeholder="Último nome"
+              value={shippingLastName}
+              onChange={(e) => setShippingLastName(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="email"
+              name="shipping-email"
+              placeholder="E-mail"
+              value={shippingEmail}
+              onChange={(e) => setShippingEmail(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="text"
+              name="shipping-address"
+              placeholder="Endereço"
+              value={shippingAddress}
+              onChange={(e) => setShippingAddress(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="text"
+              name="shipping-city"
+              placeholder="Cidade"
+              value={shippingCity}
+              onChange={(e) => setShippingCity(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="text"
+              name="shipping-country"
+              placeholder="País"
+              value={shippingCountry}
+              onChange={(e) => setShippingCountry(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="text"
+              name="shipping-zip-code"
+              placeholder="CEP"
+              value={shippingZipCode}
+              onChange={(e) => setShippingZipCode(e.target.value)}
+            />
+            <Input
+              color="purple"
+              type="tel"
+              name="shipping-tel"
+              placeholder="Telefone"
+              value={shippingTel}
+              onChange={(e) => setShippingTel(e.target.value)}
+            />
+          </div>
+        )}
+        <textarea
+          placeholder="Informações adicionais"
+          value={additionalInfo}
+          onChange={(e) => setAdditionalInfo(e.target.value)}
+        ></textarea>
       </div>
-
-      <div className="section">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-7">
-              <div className="billing-details">
-                <div className="section-title">
-                  <h3 className="title">Billing address</h3>
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="first-name"
-                    placeholder="First Name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="last-name"
-                    placeholder="Last Name"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="address"
-                    placeholder="Address"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="city"
-                    placeholder="City"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="country"
-                    placeholder="Country"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="text"
-                    name="zip-code"
-                    placeholder="ZIP Code"
-                  />
-                </div>
-                <div className="form-group">
-                  <input
-                    className="input"
-                    type="tel"
-                    name="tel"
-                    placeholder="Telephone"
-                  />
-                </div>
-                <div className="form-group">
-                  <div className="input-checkbox">
-                    <input type="checkbox" id="create-account" />
-                    <label htmlFor="create-account">
-                      <span></span>
-                      Create Account?
-                    </label>
-                    <div className="caption">
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt.
-                      </p>
-                      <input
-                        className="input"
-                        type="password"
-                        name="password"
-                        placeholder="Enter Your Password"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="shiping-details">
-                <div className="section-title">
-                  <h3 className="title">Shiping address</h3>
-                </div>
-                <div className="input-checkbox">
-                  <input type="checkbox" id="shiping-address" />
-                  <label htmlFor="shiping-address">
-                    <span></span>
-                    Ship to a diffrent address?
-                  </label>
-                  <div className="caption">
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="text"
-                        name="first-name"
-                        placeholder="First Name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="text"
-                        name="last-name"
-                        placeholder="Last Name"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="text"
-                        name="address"
-                        placeholder="Address"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="text"
-                        name="city"
-                        placeholder="City"
-                      />
-                    </div>
-                    /
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="text"
-                        name="country"
-                        placeholder="Country"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="text"
-                        name="zip-code"
-                        placeholder="ZIP Code"
-                      />
-                    </div>
-                    <div className="form-group">
-                      <input
-                        className="input"
-                        type="tel"
-                        name="tel"
-                        placeholder="Telephone"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="order-notes">
-                <textarea
-                  className="input"
-                  placeholder="Order Notes"
-                ></textarea>
-              </div>
+      <div className="col">
+        <div className="pedido">
+          <Heading mb="md">Seu Pedido</Heading>
+          <div className="order-summary">
+            <div className="line">
+              <Heading size="sm">PRODUTO</Heading>
+              <Heading size="sm">TOTAL</Heading>
             </div>
-
-            <div className="col-md-5 order-details">
-              <div className="section-title text-center">
-                <h3 className="title">Your Order</h3>
+            {productList.map((product, index) => (
+              <div className="line" key={index}>
+                <Paragraph>
+                  {product.quantity}x {product.name}
+                </Paragraph>
+                <Paragraph>${product.quantity * product.price}</Paragraph>
               </div>
-              <div className="order-summary">
-                <div className="order-col">
-                  <div>
-                    <strong>PRODUCT</strong>
-                  </div>
-                  <div>
-                    <strong>TOTAL</strong>
-                  </div>
-                </div>
-                <div className="order-products">
-                  <div className="order-col">
-                    <div>1x Product Name Goes Here</div>
-                    <div>$980.00</div>
-                  </div>
-                  <div className="order-col">
-                    <div>2x Product Name Goes Here</div>
-                    <div>$980.00</div>
-                  </div>
-                </div>
-                <div className="order-col">
-                  <div>Shiping</div>
-                  <div>
-                    <strong>FREE</strong>
-                  </div>
-                </div>
-                <div className="order-col">
-                  <div>
-                    <strong>TOTAL</strong>
-                  </div>
-                  <div>
-                    <strong className="order-total">$2940.00</strong>
-                  </div>
-                </div>
-              </div>
-              <div className="payment-method">
-                <div className="input-radio">
-                  <input type="radio" name="payment" id="payment-1" />
-                  <label htmlFor="payment-1">
-                    <span></span>
-                    Direct Bank Transfer
-                  </label>
-                  <div className="caption">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-                <div className="input-radio">
-                  <input type="radio" name="payment" id="payment-2" />
-                  <label htmlFor="payment-2">
-                    <span></span>
-                    Cheque Payment
-                  </label>
-                  <div className="caption">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-                <div className="input-radio">
-                  <input type="radio" name="payment" id="payment-3" />
-                  <label htmlFor="payment-3">
-                    <span></span>
-                    Paypal System
-                  </label>
-                  <div className="caption">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="input-checkbox">
-                <input type="checkbox" id="terms" />
-                <label htmlFor="terms">
-                  <span></span>
-                  I've read and accept the <a href="#">terms & conditions</a>
-                </label>
-              </div>
-              <a href="#" className="primary-btn order-submit">
-                Place order
-              </a>
+            ))}
+            <div className="line">
+              <Paragraph>Expedição</Paragraph>
+              <Heading size="sm">
+                {shippingCost === 0 ? "Grátis" : `$${shippingCost}`}
+              </Heading>
+            </div>
+            <div className="line">
+              <Paragraph>TOTAL</Paragraph>
+              <Heading color="purple">${totalPrice.toFixed(2)}</Heading>
             </div>
           </div>
+          <div className="payment-method">
+            <div className="">
+              <Radio
+                color="purple"
+                checked={paymentMethod === "Transferência bancária direta"}
+                onChange={() =>
+                  setPaymentMethod("Transferência bancária direta")
+                }
+              />
+              <label htmlFor="payment-1">Transferência bancária direta</label>
+            </div>
+            <div className="">
+              <Radio
+                color="purple"
+                checked={paymentMethod === "Pagamento por cheque"}
+                onChange={() => setPaymentMethod("Pagamento por cheque")}
+              />
+              <label htmlFor="payment-1">Pagamento por cheque</label>
+            </div>
+            <div className="">
+              <Radio
+                color="purple"
+                checked={paymentMethod === "Sistema Paypal"}
+                onChange={() => setPaymentMethod("Sistema Paypal")}
+              />
+              <label htmlFor="payment-1">Sistema Paypal</label>
+            </div>
+          </div>
+          <div className="input-checkbox">
+            <Checkbox
+              color="purple"
+              type="checkbox"
+              id="terms"
+              checked={termsAgreed}
+              onChange={() => setTermsAgreed(!termsAgreed)}
+            />
+            <label htmlFor="terms">
+              Eu li e aceito os{" "}
+              <Anchor target={"_blank"}>termos e condições</Anchor>
+            </label>
+          </div>
+          <Button onClick={handleSubmit} color="purple" disabled={!termsAgreed}>
+            Finalizar Pedido
+          </Button>
         </div>
       </div>
-    </>
+    </WrapperCheckout>
   );
 };
 
