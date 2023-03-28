@@ -3,6 +3,7 @@ import shop02 from "../assets/shop03.png";
 import shop03 from "../assets/shop02.png";
 import styled from "styled-components";
 import { Box, Button, Heading } from "dracula-ui";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -32,6 +33,7 @@ const WrapperSectionA = styled.section`
 `;
 
 const SectionA = (props: Props) => {
+  const navigate = useNavigate()
   const data = [
     {
       srcImg: shop01,
@@ -56,7 +58,7 @@ const SectionA = (props: Props) => {
             <Heading color="black" size="xl">
               {item.type}
             </Heading>
-            <Button variant="outline" color="purple" m="sm">
+            <Button onClick={()=>navigate(`/categories/${item.type}`)} variant="outline" color="purple" m="sm">
               Ver
             </Button>
           </Box>

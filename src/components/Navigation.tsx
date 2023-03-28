@@ -24,11 +24,7 @@ const Navigation = (props: Props) => {
     },
     {
       text: "Promoções",
-      link: "/hotdeals",
-    },
-    {
-      text: "Categorias",
-      link: "/categories",
+      link: "/categories/hotdeals",
     },
     {
       text: "Laptops",
