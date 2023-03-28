@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import theme from "../utils/theme";
 
 type Props = {};
 
@@ -12,6 +13,9 @@ const WrapperNavigation = styled.section`
     list-style-type: none;
     margin-right: 1rem;
     font-weight: 500;
+    &:hover a {
+      color: ${theme.dracula.purple};
+    }
   }
 `;
 
@@ -40,6 +44,10 @@ const Navigation = (props: Props) => {
     {
       text: "Acessórios",
       link: "/categories/acessorios",
+    },
+    {
+      text: "Ver Comparação",
+      link: "/compare",
     },
   ];
 

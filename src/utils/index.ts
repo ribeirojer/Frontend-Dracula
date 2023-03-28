@@ -1,3 +1,5 @@
+import { ProductExtract } from "../interfaces/Product";
+
 export function countOccurrences(arr: number[]) {
   const counts: number[] = [];
   const total = arr.length;
@@ -30,21 +32,50 @@ export function fillStars(rating: number, index: number): "fill" | "regular" {
   }
 }
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-};
-
-export const saveProductToLocalStorage = (product: Product) => {
+export const saveProductToWishlist = (product: ProductExtract) => {
   const existingWishlist = localStorage.getItem("wishlist");
 
   if (existingWishlist) {
-    const parsedWishlist: Product[] = JSON.parse(existingWishlist);
+    const parsedWishlist: ProductExtract[] = JSON.parse(existingWishlist);
     parsedWishlist.push(product);
     localStorage.setItem("wishlist", JSON.stringify(parsedWishlist));
   } else {
-    const newWishlist: Product[] = [product];
+    const newWishlist: ProductExtract[] = [product];
     localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+  }
+};
+
+export const saveProductToCompare = (product: ProductExtract) => {
+  const existingCompare = localStorage.getItem("compare");
+
+  if (existingCompare) {
+    const parsedCompare: ProductExtract[] = JSON.parse(existingCompare);
+    parsedCompare.push(product);
+    localStorage.setItem("compare", JSON.stringify(parsedCompare));
+  } else {
+    const newCompare: ProductExtract[] = [product];
+    localStorage.setItem("compare", JSON.stringify(newCompare));
+  }
+};
+
+export const removeProductFromCompare = (productId: number) => {
+  const existingCompare = localStorage.getItem("compare");
+
+  if (existingCompare) {
+    const parsedCompare: ProductExtract[] = JSON.parse(existingCompare);
+    const filteredCompare: ProductExtract[] = parsedCompare.filter(
+      (product) => product.id !== productId
+    );
+    localStorage.setItem("compare", JSON.stringify(filteredCompare));
+  }
+};
+
+export const removeProductFromWishlist = (product: ProductExtract) => {
+  const existingWishlist = localStorage.getItem("wishlist");
+
+  if (existingWishlist) {
+    const parsedWishlist: ProductExtract[] = JSON.parse(existingWishlist);
+    const updatedWishlist = parsedWishlist.filter((p) => p.id !== product.id);
+    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   }
 };

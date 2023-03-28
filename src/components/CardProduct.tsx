@@ -2,7 +2,7 @@ import { Anchor, Badge, Button, Heading, Paragraph } from "dracula-ui";
 import { Eye, GitDiff, Star } from "phosphor-react";
 import styled from "styled-components";
 import { IElectronicProduct } from "../interfaces/Product";
-import { saveProductToLocalStorage } from "../utils";
+import { saveProductToWishlist, saveProductToCompare } from "../utils";
 import theme, { OldPriceProduct } from "../utils/theme";
 
 type Props = {
@@ -103,14 +103,6 @@ const CardContainer = styled.div`
 `;
 
 const CardProduct = ({ product }: Props) => {
-  const handleWishlist = () => {
-    saveProductToLocalStorage({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-    });
-  };
-
   return (
     <Container>
       <CardContainer>
@@ -150,11 +142,30 @@ const CardProduct = ({ product }: Props) => {
             <Star weight="fill"></Star>
           </div>
           <div className="product-btns">
-            <Button variant="outline" color="purple" p="sm">
+            <Button
+              onClick={() => {
+                saveProductToCompare({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                });
+              }}
+              variant="outline"
+              color="purple"
+              p="sm"
+            >
               <GitDiff size={32} weight="fill" />
             </Button>
             <Button
-              onClick={handleWishlist}
+              onClick={() => {
+                saveProductToWishlist({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                });
+              }}
               variant="outline"
               color="purple"
               p="sm"

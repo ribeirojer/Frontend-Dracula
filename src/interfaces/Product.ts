@@ -22,10 +22,17 @@ export interface IElectronicProduct {
     impedance?: string;
     frequencyResponse?: string;
     sensitivity?: string;
-    
+
     resolution?: string;
     sensor?: string;
     isoRange?: string;
     videoResolution?: string;
   };
 }
+
+export type ProductExtract = {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+};
