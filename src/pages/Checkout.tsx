@@ -407,3 +407,42 @@ const Checkout = (props: Props) => {
 };
 
 export default Checkout;
+
+
+/**
+ * import { useState } from 'react';
+
+function AddressForm() {
+  const [cep, setCep] = useState('');
+  const [address, setAddress] = useState({});
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+    const data = await response.json();
+
+    setAddress(data);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        CEP:
+        <input type="text" value={cep} onChange={(e) => setCep(e.target.value)} />
+      </label>
+      <button type="submit">Buscar</button>
+
+      {address.logradouro && (
+        <div>
+          <p>Logradouro: {address.logradouro}</p>
+          <p>Bairro: {address.bairro}</p>
+          <p>Cidade: {address.localidade}</p>
+          <p>Estado: {address.uf}</p>
+        </div>
+      )}
+    </form>
+  );
+}
+
+ */

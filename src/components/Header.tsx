@@ -8,11 +8,11 @@ import {
   ShoppingCart,
   UserCircle,
 } from "phosphor-react";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
 import theme from "../utils/theme";
+import Logo from "./Logo";
 
 type Props = {};
 
@@ -47,6 +47,10 @@ const HeaderWrapper = styled.header`
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem;
+    a {
+      display: flex;
+      color: #fff;
+    }
     background-color: #15161d;
     border-bottom: 4px solid ${theme.dracula.purple};
     .form-header {
@@ -95,21 +99,39 @@ const HeaderWrapper = styled.header`
 const Header = (props: Props) => {
   const [cartQty, setCartQty] = useState(0);
   const [wishQty, setWishQty] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
-  function handleSubmit(q: string): void {
-    navigate("/produtos");
-  }
+
+  const handleSubmit = useCallback(
+    (event: any) => {
+      event.preventDefault();
+      if (!searchValue) return;
+
+      navigate(`/search?q=${searchValue}`, { replace: true });
+      setSearchValue("");
+    },
+    [searchValue]
+  );
+
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    navigate(`/categories/${event.target.value}`);
+  };
 
   return (
     <HeaderWrapper>
       <nav>
         <ul>
           <li>
-            <Phone weight="fill"></Phone>
-            <Paragraph size="sm">+55 (12) 98158-0992</Paragraph>
+            <a
+              href="https://api.whatsapp.com/send?phone=5512981580992&amp;text=Olá,%20Drácula!"
+              target={"_blank"}
+            >
+              <Phone weight="fill"></Phone>
+              <Paragraph size="sm">+55 (12) 98158-0992</Paragraph>
+            </a>
           </li>
           <li>
-            <a href="mailto:contato@electro.com">
+            <a href="mailto:contato@electro.com" target={"_blank"}>
               <Envelope weight="fill"></Envelope>
               <Paragraph size="sm">contato@electro.com</Paragraph>
             </a>
@@ -135,47 +157,50 @@ const Header = (props: Props) => {
 
       <div className="header">
         <Link to={"/"}>
-          <img src={logo} alt="" />
+          <Logo></Logo>
         </Link>
-
-        <div className="form-header">
-          <Select defaultValue="default" size="medium" color="purple">
-            <option value="default" disabled={true}>
+        <form onSubmit={handleSubmit} className="form-header">
+          <Select
+            defaultValue="default"
+            size="medium"
+            color="purple"
+            onChange={handleSelectChange}
+          >
+            <option value="default" disabled>
               Categorias
             </option>
-            <option>Laptops</option>
-            <option>Smartphones</option>
-            <option>Câmeras</option>
-            <option>Acessórios</option>
+            <option value="Laptops">Laptops</option>
+            <option value="Smartphones">Smartphones</option>
+            <option value="Câmeras">Câmeras</option>
+            <option value="Acessórios">Acessórios</option>
           </Select>
           <div className="form-input">
             <MagnifyingGlass></MagnifyingGlass>
-            <Input color="purple" placeholder="purple" m="xs" />
+            <Input
+              color="purple"
+              placeholder="purple"
+              m="xs"
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.target.value)}
+            />
           </div>
-          <Button color="purpleCyan" m="sm">
+          <Button color="purpleCyan" m="sm" onClick={handleSubmit}>
             Pesquisar
           </Button>
-        </div>
+        </form>
         <div className="header-ctn">
-          <button>
+          <button onClick={() => navigate("/wishlist")}>
             <Heart></Heart>
             <Paragraph size="sm">
               Lista de<br></br> Desejos
             </Paragraph>
-            <div className="qty">
-              <Paragraph size="sm">{wishQty}</Paragraph>
-            </div>
+            <div className="qty drac-text">{wishQty}</div>
           </button>
-
-          <button>
+          <button onClick={() => navigate("/checkout")}>
             <ShoppingCart></ShoppingCart>
             <Paragraph size="sm">Carrinho</Paragraph>
-            <div className="qty">
-              <Paragraph>{cartQty}</Paragraph>
-            </div>
+            <div className="qty drac-text">{cartQty}</div>
           </button>
-
-          <button style={{ display: "none" }}>menu</button>
         </div>
       </div>
     </HeaderWrapper>

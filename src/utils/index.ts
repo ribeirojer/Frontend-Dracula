@@ -29,3 +29,22 @@ export function fillStars(rating: number, index: number): "fill" | "regular" {
     return "regular";
   }
 }
+
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+};
+
+export const saveProductToLocalStorage = (product: Product) => {
+  const existingWishlist = localStorage.getItem("wishlist");
+
+  if (existingWishlist) {
+    const parsedWishlist: Product[] = JSON.parse(existingWishlist);
+    parsedWishlist.push(product);
+    localStorage.setItem("wishlist", JSON.stringify(parsedWishlist));
+  } else {
+    const newWishlist: Product[] = [product];
+    localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+  }
+};

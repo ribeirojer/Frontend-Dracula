@@ -9,6 +9,8 @@ import Checkout from "./pages/Checkout";
 import User from "./pages/User";
 import "./index.css";
 import Categories from "./pages/Categories";
+import Search from "./pages/Search";
+import Wishlist from "./pages/WishList";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -19,6 +21,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="/produtos" element={<Produtos />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/user" element={<User />} />
           <Route path="/categories/:category" element={<Categories />} />
         </Route>

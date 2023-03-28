@@ -48,11 +48,9 @@ const Navigation = (props: Props) => {
     <WrapperNavigation>
       {data.map((item) => {
         return (
-          <li className="active">
-            <Link to={item.link}>
-              <Anchor weight="semibold" mb="sm">
-                {item.text}
-              </Anchor>
+          <li key={item.link} className="active">
+            <Link className="drac-text drac-text-white" to={item.link}>
+              {item.text}
             </Link>
           </li>
         );

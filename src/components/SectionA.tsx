@@ -53,7 +53,7 @@ const SectionA = (props: Props) => {
     <WrapperSectionA>
       {data.map((item) => {
         return (
-          <Box className="card" rounded="lg" color="purpleCyan" p="sm">
+          <Box key={item.srcImg} className="card" rounded="lg" color="purpleCyan" p="sm">
             <img src={item.srcImg} alt="" />
             <Heading color="black" size="xl">
               {item.type}

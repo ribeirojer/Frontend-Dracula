@@ -57,11 +57,9 @@ const SectionB = (props: Props) => {
         <ul className="section-nav">
           {dataList.map((item) => {
             return (
-              <li className="active">
-                <Link to={item.link}>
-                  <Anchor weight="semibold" mb="sm">
+              <li key={item.link} className="active">
+                <Link className="drac-text drac-text-white"  to={item.link}>
                     {item.text}
-                  </Anchor>
                 </Link>
               </li>
             );
@@ -73,6 +71,7 @@ const SectionB = (props: Props) => {
         {data.slice(0, 4).map((item) => {
           return (
             <CardProduct
+              key={item.imgSrc}
               salePercentage={item.salePercentage}
               isNew={item.isNew}
               oldPrice={item.oldPrice}
