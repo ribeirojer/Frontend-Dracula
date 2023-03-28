@@ -1,16 +1,12 @@
 import { Anchor, Badge, Button, Heading, Paragraph } from "dracula-ui";
 import { Eye, GitDiff, Star } from "phosphor-react";
 import styled from "styled-components";
+import { IElectronicProduct } from "../interfaces/Product";
+import { saveProductToLocalStorage } from "../utils";
 import theme, { OldPriceProduct } from "../utils/theme";
 
 type Props = {
-  imageSrc: string;
-  salePercentage?: number;
-  isNew?: boolean;
-  category: string;
-  productName: string;
-  productPrice: number;
-  oldPrice?: number;
+  product: IElectronicProduct;
 };
 
 const Container = styled.div`
@@ -35,7 +31,9 @@ const Container = styled.div`
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #282a36;
+  height: 100%;
+  justify-content: space-between;
+  background-color: ${theme.dracula.blackSecondary};
   border-radius: 8px;
   padding: 1rem;
 
@@ -52,7 +50,7 @@ const CardContainer = styled.div`
     right: 0rem;
   }
   .anchor-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
   }
   .product-price {
@@ -104,25 +102,25 @@ const CardContainer = styled.div`
   }
 `;
 
-const CardProduct = ({
-  imageSrc,
-  salePercentage,
-  isNew,
-  category,
-  productName,
-  productPrice,
-  oldPrice,
-}: Props) => {
+const CardProduct = ({ product }: Props) => {
+  const handleWishlist = () => {
+    saveProductToLocalStorage({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+    });
+  };
+
   return (
     <Container>
       <CardContainer>
         <div className="product-img">
-          <img src={imageSrc} alt="" />
+          <img src={product.image} alt="" />
           <div className="product-label">
-            {salePercentage !== 0 && (
-              <Badge color="animated">-{salePercentage}%</Badge>
+            {product.salePercentage !== 0 && (
+              <Badge color="animated">-{product.salePercentage}%</Badge>
             )}
-            {isNew && (
+            {product.isNew && (
               <Badge m="sm" color="purple" variant="outline">
                 NOVO
               </Badge>
@@ -130,14 +128,18 @@ const CardProduct = ({
           </div>
         </div>
         <div className="product-body">
-          <Paragraph className="product-category">{category}</Paragraph>
+          <Paragraph className="product-category">{product.category}</Paragraph>
           <Anchor className="anchor-title" color="purple" hoverColor="pink">
-            {productName}
+            {product.name}
           </Anchor>
           <Paragraph className="product-price">
-            ${productPrice.toFixed(2)}
+            $
+            {(
+              product.price -
+              (product.price * product.salePercentage) / 100
+            ).toFixed(2)}
             <OldPriceProduct className="product-old-price">
-              {oldPrice ? "$" + oldPrice.toFixed(2) : ""}
+              {product.salePercentage ? "$" + product.price.toFixed(2) : ""}
             </OldPriceProduct>
           </Paragraph>
           <div className="product-rating">
@@ -151,15 +153,18 @@ const CardProduct = ({
             <Button variant="outline" color="purple" p="sm">
               <GitDiff size={32} weight="fill" />
             </Button>
-            <Button variant="outline" color="purple" p="sm">
+            <Button
+              onClick={handleWishlist}
+              variant="outline"
+              color="purple"
+              p="sm"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                 <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9l2.6-2.4C267.2 438.6 256 404.6 256 368c0-97.2 78.8-176 176-176c28.3 0 55 6.7 78.7 18.5c.9-6.5 1.3-13 1.3-19.6v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5zM432 512c79.5 0 144-64.5 144-144s-64.5-144-144-144s-144 64.5-144 144s64.5 144 144 144zm16-208v48h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H448v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V384H368c-8.8 0-16-7.2-16-16s7.2-16 16-16h48V304c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
               </svg>
-              {/*<span className="tooltipp">Adicionar a Lista de Desejos</span>*/}
             </Button>
             <Button variant="outline" color="purple" p="sm">
               <Eye size={32} />
-              {/*<span className="tooltipp">Ver Produto</span>*/}
             </Button>
           </div>
         </div>

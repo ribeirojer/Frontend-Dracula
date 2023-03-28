@@ -27,7 +27,7 @@ export default {
     yellow: "#ffff80",
     white: "#f8f8f2",
     black: "#1e1f29",
-    blackSecondary: "#",
+    blackSecondary: "#282a36",
     blackLight: "#",
   },
 };

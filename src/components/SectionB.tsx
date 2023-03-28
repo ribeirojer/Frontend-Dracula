@@ -1,4 +1,4 @@
-import { Anchor, Heading } from "dracula-ui";
+import { Heading } from "dracula-ui";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { data } from "../utils/cardsData";
@@ -25,8 +25,8 @@ const WrapperSectionB = styled.section`
   }
   .products {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
   }
 `;
 
@@ -58,8 +58,8 @@ const SectionB = (props: Props) => {
           {dataList.map((item) => {
             return (
               <li key={item.link} className="active">
-                <Link className="drac-text drac-text-white"  to={item.link}>
-                    {item.text}
+                <Link className="drac-text drac-text-white" to={item.link}>
+                  {item.text}
                 </Link>
               </li>
             );
@@ -71,14 +71,8 @@ const SectionB = (props: Props) => {
         {data.slice(0, 4).map((item) => {
           return (
             <CardProduct
-              key={item.imgSrc}
-              salePercentage={item.salePercentage}
-              isNew={item.isNew}
-              oldPrice={item.oldPrice}
-              imageSrc={item.imgSrc}
-              category={item.category}
-              productName={item.productName}
-              productPrice={item.productPrice}
+              key={item.id}
+              product={item}
             ></CardProduct>
           );
         })}

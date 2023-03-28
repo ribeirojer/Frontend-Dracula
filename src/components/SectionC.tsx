@@ -76,17 +76,11 @@ const SectionC = (props: Props) => {
         </ul>
       </div>
       <div className="products-slick" data-nav="#slick-nav-2">
-        {data.slice(0, 4).map((item) => {
+        {data.slice(4, 8).map((item) => {
           return (
             <CardProduct
-              key={item.imgSrc}
-              salePercentage={item.salePercentage}
-              isNew={item.isNew}
-              oldPrice={item.oldPrice}
-              imageSrc={item.imgSrc}
-              category={item.category}
-              productName={item.productName}
-              productPrice={item.productPrice}
+              key={item.id}
+              product={item}
             ></CardProduct>
           );
         })}

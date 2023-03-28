@@ -4,6 +4,7 @@ import shop03 from "../assets/shop02.png";
 import styled from "styled-components";
 import { Box, Button, Heading } from "dracula-ui";
 import { useNavigate } from "react-router-dom";
+import theme from "../utils/theme";
 
 type Props = {};
 
@@ -29,7 +30,9 @@ const WrapperSectionA = styled.section`
     button {
       background-color:#282A36;
     }
-  }
+    &:hover{
+      box-shadow: 0px 0px 2rem ${theme.dracula.cyan};
+  }}
 `;
 
 const SectionA = (props: Props) => {
