@@ -1,7 +1,7 @@
 import { Heading } from "dracula-ui";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { data } from "../utils/cardsData";
+import { data, dataList } from "../utils/cardsData";
 import CardProduct from "./CardProduct";
 
 type Props = {};
@@ -31,24 +31,6 @@ const WrapperSectionB = styled.section`
 `;
 
 const SectionB = (props: Props) => {
-  const dataList = [
-    {
-      text: "Laptops",
-      link: "/categories/laptops",
-    },
-    {
-      text: "Smartphones",
-      link: "/categories/smartphones",
-    },
-    {
-      text: "Câmeras",
-      link: "/categories/cameras",
-    },
-    {
-      text: "Acessórios",
-      link: "/categories/acessorios",
-    },
-  ];
 
   return (
     <WrapperSectionB>

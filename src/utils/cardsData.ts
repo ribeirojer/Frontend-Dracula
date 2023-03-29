@@ -302,3 +302,22 @@ export const data: IElectronicProduct[] = [
     },
   },
 ];
+
+export const dataList = [
+  {
+    text: "Laptops",
+    link: "/shop?c=laptops",
+  },
+  {
+    text: "Smartphones",
+    link: "/shop?c=smartphones",
+  },
+  {
+    text: "Câmeras",
+    link: "/shop?c=cameras",
+  },
+  {
+    text: "Acessórios",
+    link: "/shop?c=acessorios",
+  },
+];

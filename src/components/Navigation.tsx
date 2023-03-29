@@ -27,27 +27,35 @@ const Navigation = (props: Props) => {
     },
     {
       text: "Promoções",
-      link: "/categories/hotdeals",
+      link: "/shop?c=hotdeals",
     },
     {
       text: "Laptops",
-      link: "/categories/laptops",
+      link: "/shop?c=laptops",
     },
     {
       text: "Smartphones",
-      link: "/categories/smartphones",
+      link: "/shop?c=smartphones",
     },
     {
       text: "Câmeras",
-      link: "/categories/cameras",
+      link: "/shop?c=cameras",
     },
     {
       text: "Acessórios",
-      link: "/categories/acessorios",
+      link: "/shop?c=acessorios",
     },
     {
       text: "Ver Comparação",
       link: "/compare",
+    },
+    {
+      text: "produtos",
+      link: "/produtos",
+    },
+    {
+      text: "shop",
+      link: "/shop",
     },
   ];
 

@@ -107,14 +107,14 @@ const Header = (props: Props) => {
       event.preventDefault();
       if (!searchValue) return;
 
-      navigate(`/search?q=${searchValue}`, { replace: true });
+      navigate(`/shop?q=${searchValue}`, { replace: true });
       setSearchValue("");
     },
     [searchValue]
   );
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    navigate(`/categories/${event.target.value}`);
+    navigate(`/shop?c=${event.target.value}`);
   };
 
   return (
@@ -178,7 +178,7 @@ const Header = (props: Props) => {
             <MagnifyingGlass></MagnifyingGlass>
             <Input
               color="purple"
-              placeholder="purple"
+              placeholder="Busca pelo nome"
               m="xs"
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}

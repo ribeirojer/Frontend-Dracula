@@ -61,7 +61,7 @@ const SectionA = (props: Props) => {
             <Heading color="black" size="xl">
               {item.type}
             </Heading>
-            <Button onClick={()=>navigate(`/categories/${item.type}`)} variant="outline" color="purple" m="sm">
+            <Button onClick={()=>navigate(`/shop?c=${item.type}`)} variant="outline" color="purple" m="sm">
               Ver
             </Button>
           </Box>

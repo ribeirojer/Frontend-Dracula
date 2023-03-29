@@ -16,7 +16,7 @@ import product01 from "../assets/product01.png";
 import product03 from "../assets/product03.png";
 import product06 from "../assets/product06.png";
 import product08 from "../assets/product08.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Envelope,
   FacebookLogo,
@@ -27,6 +27,8 @@ import {
 } from "phosphor-react";
 import theme from "../utils/theme";
 import ProductTab from "../components/ProductTab";
+import { useParams, useSearchParams } from "react-router-dom";
+
 type Props = {};
 
 const WrapperProdutos = styled.section`
@@ -118,6 +120,20 @@ const Produtos = (props: Props) => {
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState("X");
   const [color, setColor] = useState("Red");
+  const [movies, setMovies] = useState([]);
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("id");
+
+  const getSearchedMovies = async (url: string) => {
+    const res = await fetch(url);
+    const data = await res.json();
+    setMovies(data.results);
+  };
+
+  useEffect(() => {
+    const searchWithQueryURL = `$&query=${query}`;
+    getSearchedMovies(searchWithQueryURL);
+  }, [query]);
 
   return (
     <WrapperProdutos>
@@ -261,17 +277,7 @@ const Produtos = (props: Props) => {
       <Heading>Produtos Relacionados</Heading>
       <div className="products">
         {data.slice(0, 4).map((item) => {
-          return (
-            <CardProduct
-              salePercentage={item.salePercentage}
-              isNew={item.isNew}
-              oldPrice={item.oldPrice}
-              imageSrc={item.imgSrc}
-              category={item.category}
-              productName={item.productName}
-              productPrice={item.productPrice}
-            ></CardProduct>
-          );
+          return <CardProduct key={item.id} product={item}></CardProduct>;
         })}
       </div>
       {/*<Newsletter></Newsletter>*/}

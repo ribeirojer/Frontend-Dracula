@@ -1,5 +1,5 @@
-import { Checkbox, Heading, Paragraph } from "dracula-ui";
-import { useState } from "react";
+import { Checkbox, Heading, Paragraph, Select } from "dracula-ui";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import product01 from "../assets/product01.png";
 import product02 from "../assets/product02.png";
@@ -7,6 +7,7 @@ import product03 from "../assets/product03.png";
 import CardProduct from "../components/CardProduct";
 import { OldPriceProduct } from "../utils/theme";
 import { data } from "../utils/cardsData";
+import { useSearchParams } from "react-router-dom";
 
 type Props = {};
 
@@ -32,13 +33,25 @@ const Wrapper = styled.main`
       width: 50%;
     }
   }
-  
+
   .products-store {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     > div {
       width: 26%;
+    }
+  }
+  .store-sort {
+    margin: 2rem 0 1rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    label {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
     }
   }
 `;
@@ -81,6 +94,10 @@ const Shop = (props: Props) => {
     },
   ];
 
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("c");
+  const query = searchParams.get("q");
+
   return (
     <Wrapper>
       <div id="aside">
@@ -95,10 +112,8 @@ const Shop = (props: Props) => {
                 checked={laptopsChecked}
                 onChange={() => setLaptopsChecked(!laptopsChecked)}
               />
-              <label htmlFor="category-1">
-                <span></span>
+              <label className="drac-text" htmlFor="category-1">
                 Laptops
-                <small>(120)</small>
               </label>
             </div>
             <div className="input-checkbox">
@@ -109,10 +124,8 @@ const Shop = (props: Props) => {
                 checked={smartphonesChecked}
                 onChange={() => setSmartphonesChecked(!smartphonesChecked)}
               />
-              <label htmlFor="category-2">
-                <span></span>
+              <label className="drac-text" htmlFor="category-2">
                 Smartphones
-                <small>(740)</small>
               </label>
             </div>
             <div className="input-checkbox">
@@ -123,10 +136,8 @@ const Shop = (props: Props) => {
                 checked={camerasChecked}
                 onChange={() => setCamerasChecked(!camerasChecked)}
               />
-              <label htmlFor="category-3">
-                <span></span>
-                Cameras
-                <small>(1450)</small>
+              <label className="drac-text" htmlFor="category-3">
+                Câmeras
               </label>
             </div>
             <div className="input-checkbox">
@@ -137,10 +148,8 @@ const Shop = (props: Props) => {
                 checked={accessoriesChecked}
                 onChange={() => setAccessoriesChecked(!accessoriesChecked)}
               />
-              <label htmlFor="category-4">
-                <span></span>
-                Accessories
-                <small>(578)</small>
+              <label className="drac-text" htmlFor="category-4">
+                Acessórios
               </label>
             </div>
           </div>
@@ -165,9 +174,7 @@ const Shop = (props: Props) => {
               <div key={checkbox.id} className="input-checkbox">
                 <Checkbox color="purple" type="checkbox" id={checkbox.id} />
                 <label htmlFor={checkbox.id}>
-                  <span></span>
-                  {checkbox.label}
-                  <small>({checkbox.quantity})</small>
+                  {checkbox.label}({checkbox.quantity})
                 </label>
               </div>
             ))}
@@ -195,50 +202,33 @@ const Shop = (props: Props) => {
         </div>
       </div>
       <div id="store">
-        <div className="store-filter clearfix">
-          <div className="store-sort">
-            <label>
-              Sort By:
-              <select className="input-select">
-                <option value="0">Popular</option>
-                <option value="1">Position</option>
-              </select>
-            </label>
-
-            <label>
-              Show:
-              <select className="input-select">
-                <option value="0">20</option>
-                <option value="1">50</option>
-              </select>
-            </label>
-          </div>
-          <ul className="store-grid">
-            <li className="active">
-              <i className="fa fa-th"></i>
-            </li>
-            <li>
-              <a href="#">
-                <i className="fa fa-th-list"></i>
-              </a>
-            </li>
-          </ul>
+        <div className="store-sort">
+          {query && (
+            <div className="drac-text">
+              Você pesquisou por:{" "}
+              <span className="drac-text-purple">{query}</span>
+            </div>
+          )}
+          <label className="drac-text">
+            Ordenar por:
+            <Select className="input-select">
+              <option value="0">Popular</option>
+              <option value="1">Preço</option>
+            </Select>
+          </label>
+          <label className="drac-text">
+            Mostrar:
+            <Select className="input-select">
+              <option value="0">6</option>
+              <option value="1">12</option>
+            </Select>
+          </label>
         </div>
-          
-      <div className="products-store">
-        {data.map((item) => {
-          return (
-            <CardProduct
-              salePercentage={item.salePercentage}
-              isNew={item.isNew}
-              oldPrice={item.oldPrice}
-              imageSrc={item.imgSrc}
-              category={item.category}
-              productName={item.productName}
-              productPrice={item.productPrice}
-            ></CardProduct>
-          );
-        })}
+
+        <div className="products-store">
+          {data.map((item) => {
+            return <CardProduct key={item.id} product={item}></CardProduct>;
+          })}
         </div>
 
         <div className="store-filter clearfix">
