@@ -1,39 +1,54 @@
-import { Checkbox, Heading, Paragraph, Select } from "dracula-ui";
+import { Checkbox, Heading, Input, Paragraph, Select } from "dracula-ui";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import product01 from "../assets/product01.png";
-import product02 from "../assets/product02.png";
-import product03 from "../assets/product03.png";
 import CardProduct from "../components/CardProduct";
 import { OldPriceProduct } from "../utils/theme";
 import { data } from "../utils/cardsData";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 type Props = {};
 
 const Wrapper = styled.main`
   display: flex;
   #aside {
+    padding: 2rem 0 0 2rem;
     width: 25%;
+    .aside {
+      margin-bottom: 1rem;
+      h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .price-slider {
+        display: flex;
+        margin-bottom: -1rem;
+        justify-content: space-between;
+      }
+    }
   }
   #store {
     width: 75%;
   }
-  .product-widget {
-    padding: 0.5rem 1rem;
+  .product-list {
+    margin-top: 2rem;
     display: flex;
     align-items: center;
-    .product-img {
-      width: 50%;
-      img {
-        width: 100%;
+    flex-direction: column;
+    .product-widget {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .product-img {
+        width: 40%;
+        img {
+          width: 100%;
+        }
+      }
+      .product-body {
+        width: 60%;
       }
     }
-    .product-body {
-      width: 50%;
-    }
   }
-
   .products-store {
     display: flex;
     justify-content: center;
@@ -62,41 +77,17 @@ const Shop = (props: Props) => {
   const [camerasChecked, setCamerasChecked] = useState(false);
   const [accessoriesChecked, setAccessoriesChecked] = useState(false);
   const [price, setPrice] = useState(50);
-  const checkboxes = [
-    { id: "brand-1", label: "SAMSUNG", quantity: 578 },
-    { id: "brand-2", label: "LG", quantity: 125 },
-    { id: "brand-3", label: "SONY", quantity: 755 },
-    { id: "brand-4", label: "SAMSUNG", quantity: 578 },
-    { id: "brand-5", label: "LG", quantity: 125 },
-    { id: "brand-6", label: "SONY", quantity: 755 },
-  ];
-  const products = [
-    {
-      name: "Product Name 1",
-      category: "Category 1",
-      price: "$980.00",
-      oldPrice: "$990.00",
-      image: product01,
-    },
-    {
-      name: "Product Name 2",
-      category: "Category 2",
-      price: "$980.00",
-      oldPrice: "$990.00",
-      image: product02,
-    },
-    {
-      name: "Product Name 3",
-      category: "Category 3",
-      price: "$980.00",
-      oldPrice: "$990.00",
-      image: product03,
-    },
-  ];
-
   const [searchParams] = useSearchParams();
   const category = searchParams.get("c");
   const query = searchParams.get("q");
+  const checkboxes = ["SAMSUNG", "LG", "SONY"];
+
+  useEffect(() => {
+    category === "Laptops" && setLaptopsChecked(true);
+    category === "Smartphones" && setSmartphonesChecked(true);
+    category === "Câmeras" && setCamerasChecked(true);
+    category === "Acessórios" && setAccessoriesChecked(true);
+  }, [category]);
 
   return (
     <Wrapper>
@@ -155,43 +146,44 @@ const Shop = (props: Props) => {
           </div>
         </div>
         <div className="aside">
-          <Heading>PREÇO</Heading>
           <div className="price-slider">
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={price}
-              onChange={(e) => setPrice(parseInt(e.target.value))}
-            />
-            <span className="price-slider-value">${price}</span>
+            <Heading>Preço</Heading>
+            <Heading color="purple">R${price}</Heading>
           </div>
+          <Input
+            type="range"
+            step={50}
+            min={0}
+            max={5000}
+            value={price}
+            onChange={(e) => setPrice(parseInt(e.target.value))}
+          />
         </div>
         <div className="aside">
           <Heading>Marca</Heading>
           <div className="checkbox-filter">
             {checkboxes.map((checkbox) => (
-              <div key={checkbox.id} className="input-checkbox">
-                <Checkbox color="purple" type="checkbox" id={checkbox.id} />
-                <label htmlFor={checkbox.id}>
-                  {checkbox.label}({checkbox.quantity})
+              <div key={checkbox} className="input-checkbox">
+                <Checkbox color="purple" type="checkbox" id={checkbox} />
+                <label className="drac-text" htmlFor={checkbox}>
+                  {checkbox}
                 </label>
               </div>
             ))}
           </div>
         </div>
         <div className="product-list">
-          <Heading>Mais Vendidos</Heading>
-          {products.map((product, index) => (
-            <div key={index} className="product-widget">
+          <Heading className="text-center">Mais Vendidos</Heading>
+          {data.slice(0, 3).map((product) => (
+            <div key={product.id} className="product-widget">
               <div className="product-img">
                 <img src={product.image} alt={product.name} />
               </div>
               <div className="product-body">
-                <Heading size="sm">{product.category}</Heading>
-                <Heading size="md" color="purple">
+                <Heading size="xs">{product.category}</Heading>
+                <Link className="drac-text drac-text-purple drac-text-bold" to={`/produto?produtoId=${product.id}`}>
                   {product.name}
-                </Heading>
+                </Link>
                 <Paragraph>
                   {product.price}{" "}
                   <OldPriceProduct>{product.oldPrice}</OldPriceProduct>

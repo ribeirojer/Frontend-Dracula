@@ -31,7 +31,7 @@ export const data: IElectronicProduct[] = [
   },
   {
     id: 2,
-    name: "Fone de ouvido gamer",
+    name: "Fone Gamer",
     brand: "HyperX",
     price: 299.99,
     description: "Fone de ouvido gamer com microfone destacável",
