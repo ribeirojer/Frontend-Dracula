@@ -1,3 +1,5 @@
+import { IReview } from "./Review";
+
 export interface IElectronicProduct {
   id: number;
   name: string;
@@ -7,9 +9,11 @@ export interface IElectronicProduct {
   description: string;
   image: string;
   stock: number;
+  rating: number;
   salePercentage: number;
   isNew: boolean;
   category: string;
+  comments?: IReview[];
   features: {
     screen?: string;
     processor?: string;

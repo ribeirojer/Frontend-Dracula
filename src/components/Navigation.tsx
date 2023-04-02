@@ -50,8 +50,8 @@ const Navigation = (props: Props) => {
       link: "/compare",
     },
     {
-      text: "produtos",
-      link: "/produtos",
+      text: "produto",
+      link: "/produto",
     },
     {
       text: "shop",

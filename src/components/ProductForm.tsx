@@ -3,7 +3,24 @@ import { Button, Input } from "dracula-ui";
 import React, { useState } from "react";
 
 type Props = {};
-
+/*
+textarea {
+  display: block;
+  font-size: var(--font-md);
+  min-height: var(--spacing-40);
+  padding: var(--spacing-4);
+  margin-top: 1rem;
+  -webkit-appearance: textfield;
+  background: var(--blackSecondary);
+  border: 0.3rem solid transparent;
+  border-radius: var(--rounded-lg);
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  font-family: Fira Code, monospace;
+  color: var(--purple);
+}*/
 const ProductForm = (props: Props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,6 +54,7 @@ const ProductForm = (props: Props) => {
       <Input
         color="purple"
         className="input"
+        id="name-input"
         type="text"
         placeholder="Your Name"
         value={name}

@@ -32,6 +32,19 @@ export function fillStars(rating: number, index: number): "fill" | "regular" {
   }
 }
 
+export const saveProductToCart = (id: number) => {
+  const existingCart = localStorage.getItem("Cart");
+
+  if (existingCart) {
+    const parsedCart: number[] = JSON.parse(existingCart);
+    parsedCart.push(id);
+    localStorage.setItem("Cart", JSON.stringify(parsedCart));
+  } else {
+    const newCart: number[] = [id];
+    localStorage.setItem("Cart", JSON.stringify(newCart));
+  }
+};
+
 export const saveProductToWishlist = (product: ProductExtract) => {
   const existingWishlist = localStorage.getItem("wishlist");
 

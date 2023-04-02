@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Anchor,
   Button,
@@ -111,6 +111,10 @@ const Checkout = (props: Props) => {
     ) + shippingCost
   );
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = {

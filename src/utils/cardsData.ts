@@ -14,6 +14,7 @@ export const data: IElectronicProduct[] = [
     id: 1,
     name: "Dell XPS 13",
     brand: "Dell",
+    rating: 4,
     price: 1199.99,
     description: "A powerful and lightweight laptop for work and play",
     image: product01, //"https://example.com/dell-xps-13.jpg",
@@ -28,11 +29,42 @@ export const data: IElectronicProduct[] = [
       storage: "512 GB SSD",
       os: "Windows 10",
     },
+    comments: [
+      {
+        comment:
+          "Adoro o Dell XPS 13, é tão leve e perfeito para viagens. As especificações são incríveis e definitivamente vale o preço!",
+        date: new Date("2023-03-22T10:00:00Z"),
+        name: "Sarah",
+        rating: 5,
+      },
+      {
+        comment:
+          "Tenho usado o Dell XPS 13 para trabalho e tem sido uma ótima experiência. O processador é super rápido e a tela é cristalina.",
+        date: new Date("2023-03-23T16:30:00Z"),
+        name: "João",
+        rating: 4,
+      },
+      {
+        comment:
+          "Comprei recentemente o Dell XPS 13 e estou impressionado com a qualidade. É rápido, elegante e os recursos são exatamente o que eu estava procurando.",
+        date: new Date("2023-03-25T11:45:00Z"),
+        name: "Emily",
+        rating: 5,
+      },
+      {
+        comment:
+          "O Dell XPS 13 é um ótimo laptop, mas é um pouco caro. No entanto, as especificações valem a pena e é definitivamente um dispositivo de primeira linha.",
+        date: new Date("2023-03-27T13:15:00Z"),
+        name: "Marcos",
+        rating: 4,
+      },
+    ],
   },
   {
     id: 2,
     name: "Fone Gamer",
     brand: "HyperX",
+    rating: 4,
     price: 299.99,
     description: "Fone de ouvido gamer com microfone destacável",
     image: product02, //"https://example.com/hyperx-headset.jpg",
@@ -52,6 +84,7 @@ export const data: IElectronicProduct[] = [
     id: 3,
     name: "Notebook Dell Inspiron 15",
     brand: "Dell",
+    rating: 4,
     price: 3899.99,
     description: "Notebook de alta performance, ideal para trabalho e lazer.",
     image: product03, //"https://images.com/dell-inspiron-15.jpg",
@@ -59,6 +92,29 @@ export const data: IElectronicProduct[] = [
     salePercentage: 15,
     isNew: true,
     category: "Laptops",
+    comments: [
+      {
+        name: "Alice",
+        date: new Date("2022-03-10"),
+        rating: 4,
+        comment:
+          "O notebook é rápido e muito leve, mas a bateria poderia durar mais tempo.",
+      },
+      {
+        name: "Bob",
+        date: new Date("2022-02-15"),
+        rating: 5,
+        comment:
+          "Melhor notebook que já comprei! Tela incrível, teclado confortável e ótimo desempenho.",
+      },
+      {
+        name: "Carol",
+        date: new Date("2022-01-20"),
+        rating: 3,
+        comment:
+          "O notebook é bom, mas não é tão poderoso quanto eu esperava. Ainda assim, recomendo para uso básico.",
+      },
+    ],
     features: {
       screen: "15.6 inches Full HD",
       processor: "Intel Core i7-10750H",
@@ -71,6 +127,7 @@ export const data: IElectronicProduct[] = [
     id: 4,
     name: "Samsung Galaxy Tab S7+",
     brand: "Samsung",
+    rating: 4,
     price: 6999,
     description:
       "Tablet com tela AMOLED de 12.4 polegadas, processador Snapdragon 865+ e 8GB de RAM.",
@@ -91,6 +148,7 @@ export const data: IElectronicProduct[] = [
     id: 5,
     name: "Sony WH-1000XM4",
     brand: "Sony",
+    rating: 4,
     price: 1199.99,
     description:
       "Fone de ouvido com tecnologia de cancelamento de ruído para proporcionar a melhor experiência sonora possível. O design elegante e ergonômico garante o máximo conforto durante o uso prolongado. O microfone integrado permite atender chamadas e controlar a reprodução de música diretamente no fone. Conectividade Bluetooth para facilitar a conexão com outros dispositivos.",
@@ -111,6 +169,7 @@ export const data: IElectronicProduct[] = [
     id: 6,
     name: "MSI GL75 Leopard",
     brand: "MSI",
+    rating: 4,
     price: 1599.99,
     description: "A high-performance gaming laptop for serious gamers",
     image: product06, //"https://example.com/msi-gaming-laptop.jpg",
@@ -130,6 +189,7 @@ export const data: IElectronicProduct[] = [
     id: 7,
     name: "Samsung Galaxy S21",
     brand: "Samsung",
+    rating: 4,
     price: 499.99,
     description: "A powerful smartphone with a beautiful AMOLED display",
     image: product07, //"https://example.com/samsung-galaxy-s21.jpg",
@@ -149,6 +209,7 @@ export const data: IElectronicProduct[] = [
     id: 8,
     name: "Notebook Asus Zenbook",
     brand: "Asus",
+    rating: 4,
     price: 2499.99,
     description:
       "Um notebook elegante e potente, perfeito para trabalhar e estudar",
@@ -169,6 +230,7 @@ export const data: IElectronicProduct[] = [
     id: 9,
     name: "Câmera DSLR Canon EOS Rebel T7",
     brand: "Canon",
+    rating: 4,
     price: 2199.99,
     description: "Câmera profissional para fotógrafos exigentes",
     image: product09, //"https://example.com/camera1.jpg",
@@ -188,6 +250,7 @@ export const data: IElectronicProduct[] = [
     id: 10,
     name: "Câmera Mirrorless Sony Alpha a7 III",
     brand: "Sony",
+    rating: 4,
     price: 7999.99,
     description: "Câmera profissional para fotógrafos exigentes",
     image: product09, //"https://example.com/camera2.jpg",
@@ -207,6 +270,7 @@ export const data: IElectronicProduct[] = [
     id: 11,
     name: "Sony Alpha a7 III",
     brand: "Sony",
+    rating: 4,
     price: 1999.99,
     description:
       "A full-frame mirrorless camera for professional photographers",
@@ -227,6 +291,7 @@ export const data: IElectronicProduct[] = [
     id: 13,
     name: "Câmera Fotográfica Lenovo",
     brand: "Lenovo",
+    rating: 4,
     price: 899.99,
     description:
       "Uma câmera compacta e versátil para fotógrafos amadores e profissionais",
@@ -247,6 +312,7 @@ export const data: IElectronicProduct[] = [
     id: 14,
     name: "Lenovo ThinkPad X1 Carbon",
     brand: "Lenovo",
+    rating: 4,
     price: 1499.99,
     description: "A high-performance business laptop with a durable design",
     image: "https://example.com/lenovo-thinkpad-x1-carbon.jpg",
@@ -266,6 +332,7 @@ export const data: IElectronicProduct[] = [
     id: 15,
     name: "Apple iPad Pro",
     brand: "Apple",
+    rating: 4,
     price: 8999,
     description:
       "Tablet com tela Liquid Retina XDR de 11 polegadas, chip M1 e 8GB de RAM.",
@@ -286,6 +353,7 @@ export const data: IElectronicProduct[] = [
     id: 16,
     name: "Fone de ouvido Bluetooth",
     brand: "Sony",
+    rating: 4,
     price: 399.99,
     description: "Fone de ouvido Bluetooth com microfone integrado",
     image: "https://example.com/sony-headphones.jpg",

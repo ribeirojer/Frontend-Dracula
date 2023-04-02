@@ -83,6 +83,10 @@ const Shop = (props: Props) => {
   const checkboxes = ["SAMSUNG", "LG", "SONY"];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  useEffect(() => {
     category === "Laptops" && setLaptopsChecked(true);
     category === "Smartphones" && setSmartphonesChecked(true);
     category === "Câmeras" && setCamerasChecked(true);

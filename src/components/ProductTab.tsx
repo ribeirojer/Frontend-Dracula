@@ -5,8 +5,11 @@ import styled from "styled-components";
 import ProductForm from "./ProductForm";
 import Rating from "./Rating";
 import ReviewList from "./ReviewList";
+import { IElectronicProduct } from "../interfaces/Product";
 
-type Props = {};
+type Props = {
+  itemToShow: IElectronicProduct;
+};
 
 const Container = styled.div`
   .tab-select {
@@ -19,10 +22,11 @@ const Container = styled.div`
     width: 25%;
   }
 `;
-const ProductTab = (props: Props) => {
+const ProductTab = ({ itemToShow }: Props) => {
   const [isDescriptionSelected, setIsDescriptionSelected] = useState(true);
   const [isDetailsSelected, setIsDetailsSelected] = useState(false);
   const [isReviewsSelected, setIsReviewsSelected] = useState(false);
+  const ratings = itemToShow.comments?.map(comment => comment.rating);
 
   return (
     <Container id="product-tab">
@@ -62,39 +66,22 @@ const ProductTab = (props: Props) => {
             setIsReviewsSelected(true);
           }}
         >
-          Comentários (10)
+          Comentários ({itemToShow.comments?.length})
         </li>
       </Tabs>
 
       <div className="tab-content">
         {isDescriptionSelected && (
-          <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Paragraph>
+          <Paragraph>{itemToShow.description}</Paragraph>
         )}
-
         {isDetailsSelected && (
           <Paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Paragraph>
+            {JSON.stringify(itemToShow.features)}</Paragraph>
         )}
-
         {isReviewsSelected && (
           <div className="row">
-            <Rating ratings={[5, 5,3, 4]}></Rating>
-            <ReviewList></ReviewList>
+            <Rating ratings={ratings || []}></Rating>
+            <ReviewList notebookReviews={itemToShow.comments || []}></ReviewList>
             <ProductForm></ProductForm>
           </div>
         )}
