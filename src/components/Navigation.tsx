@@ -31,31 +31,23 @@ const Navigation = (props: Props) => {
     },
     {
       text: "Laptops",
-      link: "/shop?c=laptops",
+      link: "/shop?c=Laptops",
     },
     {
       text: "Smartphones",
-      link: "/shop?c=smartphones",
+      link: "/shop?c=Smartphones",
     },
     {
       text: "Câmeras",
-      link: "/shop?c=cameras",
+      link: "/shop?c=Câmeras",
     },
     {
       text: "Acessórios",
-      link: "/shop?c=acessorios",
+      link: "/shop?c=Acessórios",
     },
     {
       text: "Ver Comparação",
       link: "/compare",
-    },
-    {
-      text: "produto",
-      link: "/produto",
-    },
-    {
-      text: "shop",
-      link: "/shop",
     },
   ];
 

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Button, Heading, Paragraph } from "dracula-ui";
 import { useEffect, useState } from "react";
-import { ProductExtract } from "../interfaces/Product";
-import { removeProductFromWishlist } from "../utils";
+import { CartExtract, ProductExtract } from "../interfaces/Product";
+import { removeProductFromWishlist, saveProductToCart } from "../utils";
 
 const Container = styled.div`
   display: flex;
@@ -35,7 +35,18 @@ const Container = styled.div`
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
+  const [isProductSaveToCart, setIsProductSaveToCart] = useState(false);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const existingCart = localStorage.getItem("Cart");
+    if (existingCart) {
+      const parsedCart: CartExtract[] = JSON.parse(existingCart);
+      //parsedCart.find((item) => item.id === wishlist[0].id) &&
+        //setIsProductSaveToCart(true);
+    }
+  }, []);
+  
   useEffect(() => {
     const wishlistData = localStorage.getItem("wishlist");
     if (wishlistData) {
@@ -58,7 +69,7 @@ function Wishlist() {
                 <Heading>{product.name}</Heading>
                 <Paragraph>{product.price}</Paragraph>
               </div>
-              <Button color="animated" onClick={() => removeProductFromWishlist(product)}>
+              <Button color="animated" onClick={() => saveProductToCart({id: product.id, quantity: 1})}>
                 Adicionar ao Carrinho
               </Button>
               <Button color="purple" variant="outline" onClick={() => removeProductFromWishlist(product)}>

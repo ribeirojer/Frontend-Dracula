@@ -5,6 +5,7 @@ import CardProduct from "../components/CardProduct";
 import { OldPriceProduct } from "../utils/theme";
 import { data } from "../utils/cardsData";
 import { Link, useSearchParams } from "react-router-dom";
+import Pagination from "../components/Pagination";
 
 type Props = {};
 
@@ -78,14 +79,26 @@ const Shop = (props: Props) => {
   const [accessoriesChecked, setAccessoriesChecked] = useState(false);
   const [price, setPrice] = useState(50);
   const [searchParams] = useSearchParams();
+  const [products, setProducts] = useState(data); // array com todos os produtos
+  const [currentPage, setCurrentPage] = useState(1); // página atual
+  const [productsPerPage, setProductsPerPage] = useState(6);
+  const [sortBy, setSortBy] = useState("0");
   const category = searchParams.get("c");
   const query = searchParams.get("q");
   const checkboxes = ["SAMSUNG", "LG", "SONY"];
+  const lastIndex = currentPage * productsPerPage;
+  const firstIndex = lastIndex - productsPerPage;
+  const totalPages = Math.ceil(products.length / productsPerPage);
+  const currentProducts = products.slice(firstIndex, lastIndex);
+
+  const handleChangePage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   useEffect(() => {
     category === "Laptops" && setLaptopsChecked(true);
     category === "Smartphones" && setSmartphonesChecked(true);
@@ -185,7 +198,10 @@ const Shop = (props: Props) => {
               </div>
               <div className="product-body">
                 <Heading size="xs">{product.category}</Heading>
-                <Link className="drac-text drac-text-purple drac-text-bold" to={`/produto?produtoId=${product.id}`}>
+                <Link
+                  className="drac-text drac-text-purple drac-text-bold"
+                  to={`/produto?produtoId=${product.id}`}
+                >
                   {product.name}
                 </Link>
                 <Paragraph>
@@ -207,46 +223,39 @@ const Shop = (props: Props) => {
           )}
           <label className="drac-text">
             Ordenar por:
-            <Select className="input-select">
+            <Select
+              className="input-select"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
               <option value="0">Popular</option>
               <option value="1">Preço</option>
             </Select>
           </label>
           <label className="drac-text">
             Mostrar:
-            <Select className="input-select">
-              <option value="0">6</option>
-              <option value="1">12</option>
+            <Select
+              className="input-select"
+              value={productsPerPage}
+              onChange={(e) => setProductsPerPage(parseInt(e.target.value))}
+            >
+              <option value={6}>6</option>
+              <option value={12}>12</option>
             </Select>
           </label>
         </div>
 
         <div className="products-store">
-          {data.map((item) => {
+          {currentProducts.map((item) => {
             return <CardProduct key={item.id} product={item}></CardProduct>;
           })}
         </div>
 
-        <div className="store-filter clearfix">
-          <span className="store-qty">Showing 20-100 products</span>
-          <ul className="store-pagination">
-            <li className="active">1</li>
-            <li>
-              <a href="#">2</a>
-            </li>
-            <li>
-              <a href="#">3</a>
-            </li>
-            <li>
-              <a href="#">4</a>
-            </li>
-            <li>
-              <a href="#">
-                <i className="fa fa-angle-right"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handleChangePage}
+        ></Pagination>
       </div>
     </Wrapper>
   );
