@@ -1,4 +1,4 @@
-import { ProductExtract } from "../interfaces/Product";
+import { CartExtract, ProductExtract } from "../interfaces/Product";
 
 export function countOccurrences(arr: number[]) {
   const counts: number[] = [];
@@ -32,15 +32,15 @@ export function fillStars(rating: number, index: number): "fill" | "regular" {
   }
 }
 
-export const saveProductToCart = (id: number) => {
+export const saveProductToCart = (item: CartExtract) => {
   const existingCart = localStorage.getItem("Cart");
 
   if (existingCart) {
-    const parsedCart: number[] = JSON.parse(existingCart);
-    parsedCart.push(id);
+    const parsedCart: CartExtract[] = JSON.parse(existingCart);
+    parsedCart.push(item);
     localStorage.setItem("Cart", JSON.stringify(parsedCart));
   } else {
-    const newCart: number[] = [id];
+    const newCart: CartExtract[] = [item];
     localStorage.setItem("Cart", JSON.stringify(newCart));
   }
 };

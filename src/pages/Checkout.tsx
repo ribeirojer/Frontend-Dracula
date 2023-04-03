@@ -10,6 +10,10 @@ import {
 } from "dracula-ui";
 import styled from "styled-components";
 import theme from "../utils/theme";
+import { CartExtract } from "../interfaces/Product";
+import { data } from "../utils/cardsData";
+import InputCheckout from "../components/InputCheckout";
+import { IAddress } from "../interfaces/User";
 
 type Props = {};
 
@@ -26,10 +30,21 @@ const WrapperCheckout = styled.main`
   }
   .billing-details {
     input {
-      margin-bottom: 1rem;
+      margin-top: 4px;
+    }
+    p {
+      margin-top: 2px;
     }
   }
-
+  .input-checkbox {
+    input {
+      margin-top: unset;
+    }
+    margin: 1rem 0;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
   li {
     list-style-type: none;
     margin-right: 1rem;
@@ -76,72 +91,84 @@ const WrapperCheckout = styled.main`
 `;
 
 const Checkout = (props: Props) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [tel, setTel] = useState("");
+  const [dados, setDados] = useState(data);
+  const [paymentInfo, setPaymentInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    zipCode: "",
+    address: "",
+    city: "",
+    state: "",
+    tel: "",
+  });
+  const [shippingInfo, setShippingInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    zipCode: "",
+    address: "",
+    city: "",
+    state: "",
+    tel: "",
+  });
+  const [errorPaymentInfo, setErrorPaymentInfo] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    zipCode: false,
+    address: false,
+    city: false,
+    state: false,
+    tel: false,
+  });
   const [createAccount, setCreateAccount] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isShippingAddress, setIsShippingAddress] = useState(false);
-  const [shippingFirstName, setShippingFirstName] = useState("");
-  const [shippingLastName, setShippingLastName] = useState("");
-  const [shippingEmail, setShippingEmail] = useState("");
-  const [shippingAddress, setShippingAddress] = useState("");
-  const [shippingCity, setShippingCity] = useState("");
-  const [shippingCountry, setShippingCountry] = useState("");
-  const [shippingZipCode, setShippingZipCode] = useState("");
-  const [shippingTel, setShippingTel] = useState("");
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
-  const [productList, setProductList] = useState([
-    { name: "Nome do produto vai aqui", quantity: 1, price: 980.0 },
-    { name: "Nome do produto vai aqui", quantity: 2, price: 980.0 },
-  ]);
+  const [productsOnCart, setProductsOnCart] = useState<CartExtract[]>([]);
   const [shippingCost, setShippingCost] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(
-    productList.reduce(
-      (acc, product) => acc + product.quantity * product.price,
-      0
-    ) + shippingCost
-  );
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  async function handleSubmitCep(event: any) {
+    event.preventDefault();
+    const response = await fetch(
+      `https://viacep.com.br/ws/${event.target.value}/json/`
+    );
+    const data: IAddress = await response.json();
+    setPaymentInfo({
+      ...paymentInfo,
+      zipCode: data.cep.split("-").join(""),
+      address: data.logradouro,
+      city: data.localidade,
+      state: data.uf,
+    });
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const existingCart = localStorage.getItem("Cart");
+    if (existingCart) {
+      const parsedCart: CartExtract[] = JSON.parse(existingCart);
+      setProductsOnCart(parsedCart);
+    }
   }, []);
-  
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = {
-      firstName,
-      lastName,
-      email,
-      address,
-      city,
-      country,
-      zipCode,
-      tel,
+      ...paymentInfo,
       createAccount,
       password,
       confirmPassword,
       isShippingAddress,
-      shippingFirstName,
-      shippingLastName,
-      shippingEmail,
-      shippingAddress,
-      shippingCity,
-      shippingCountry,
-      shippingZipCode,
-      shippingTel,
+      ...shippingInfo,
       additionalInfo,
       paymentMethod,
       termsAgreed,
-      productList,
       shippingCost,
       totalPrice,
     };
@@ -149,188 +176,273 @@ const Checkout = (props: Props) => {
     // Aqui você pode enviar os dados para a API ou realizar outras operações com eles
   };
 
+  const sumPrice =
+    productsOnCart.reduce(
+      (acc, product) => acc + product.quantity * data[product.id - 1].price,
+      0
+    ) + shippingCost;
+
   return (
     <WrapperCheckout>
       <div className="col">
         <div className="billing-details">
-          <Heading mb="md">Dados de Entrega</Heading>
-          <Input
+          <Heading mb="md">Dados de Pagamento</Heading>
+          <InputCheckout
+            id="first-name"
+            label="Primeiro nome"
             color="purple"
             type="text"
-            name="first-name"
             placeholder="Primeiro nome"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={paymentInfo.firstName}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, firstName: e.target.value })
+            }
+            error={errorPaymentInfo.firstName}
           />
-          <Input
+          <InputCheckout
+            id="last-name"
             color="purple"
             type="text"
-            name="last-name"
+            label="Último nome"
+            error={errorPaymentInfo.lastName}
             placeholder="Último nome"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={paymentInfo.lastName}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, lastName: e.target.value })
+            }
           />
-          <Input
+          <InputCheckout
+            id="email"
             color="purple"
             type="email"
-            name="email"
+            error={errorPaymentInfo.email}
+            label="E-mail"
             placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={paymentInfo.email}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, email: e.target.value })
+            }
           />
-          <Input
+          <InputCheckout
+            id="zip-code"
             color="purple"
             type="text"
-            name="address"
-            placeholder="Endereço"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="city"
-            placeholder="Cidade"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="country"
-            placeholder="País"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="zip-code"
+            label="CEP"
+            error={errorPaymentInfo.zipCode}
             placeholder="CEP"
-            value={zipCode}
-            onChange={(e) => setZipCode(e.target.value)}
+            value={paymentInfo.zipCode}
+            onChange={(e: any) => {
+              const newZipCode = e.target.value;
+              setPaymentInfo({ ...paymentInfo, zipCode: newZipCode });
+              if (newZipCode.length === 8) {
+                handleSubmitCep(e);
+              }
+            }}
           />
-          <Input
+          <InputCheckout
+            id="address"
+            color="purple"
+            type="text"
+            error={errorPaymentInfo.address}
+            label="Endereço"
+            placeholder="Endereço"
+            value={paymentInfo.address}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, address: e.target.value })
+            }
+          />
+          <InputCheckout
+            id="city"
+            color="purple"
+            type="text"
+            error={errorPaymentInfo.city}
+            label="Cidade"
+            placeholder="Cidade"
+            value={paymentInfo.city}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, city: e.target.value })
+            }
+          />
+          <InputCheckout
+            id="state"
+            color="purple"
+            type="text"
+            error={errorPaymentInfo.state}
+            label="País"
+            placeholder="País"
+            value={paymentInfo.state}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, state: e.target.value })
+            }
+          />
+          <InputCheckout
+            id="tel"
             color="purple"
             type="tel"
-            name="tel"
+            error={errorPaymentInfo.tel}
+            label="Telefone"
             placeholder="Telefone"
-            value={tel}
-            onChange={(e) => setTel(e.target.value)}
+            value={paymentInfo.tel}
+            onChange={(e: any) =>
+              setPaymentInfo({ ...paymentInfo, tel: e.target.value })
+            }
           />
-          <div className="input-checkbox">
-            <Checkbox
-              color="purple"
-              type="checkbox"
-              id="create-account"
-              checked={createAccount}
-              onChange={(e) => setCreateAccount(e.target.checked)}
-            />
-            <label htmlFor="create-account">Criar conta?</label>
-            {createAccount && (
-              <div>
-                <Input
-                  color="purple"
-                  type="password"
-                  name="password"
-                  placeholder="Coloque sua senha"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <Input
-                  color="purple"
-                  type="password"
-                  name="confirmpassword"
-                  placeholder="Confirme sua senha"
-                  value={confirmPassword}
-                  onChange={(e) => setconfirmPassword(e.target.value)}
-                />
-              </div>
-            )}
-          </div>
         </div>
-        <Checkbox
-          color="purple"
-          type="checkbox"
-          id="shiping-address"
-          checked={isShippingAddress}
-          onChange={(e) => setIsShippingAddress(e.target.checked)}
-        />
-        <label htmlFor="shiping-address">
-          Enviar para um endereço diferente?
-        </label>
-        {shippingAddress && (
+        <div className="input-checkbox">
+          <Checkbox
+            id="create-account"
+            color="purple"
+            type="checkbox"
+            checked={createAccount}
+            onChange={(e: any) => setCreateAccount(e.target.checked)}
+          />
+          <label htmlFor="create-account" className="drac-text">
+            Criar conta?
+          </label>
+        </div>
+        {createAccount && (
           <div className="billing-details">
-            <Input
+            <InputCheckout
+              id="password"
+              label="Senha"
+              error={false}
+              color="purple"
+              type="password"
+              placeholder="Digite sua senha"
+              value={password}
+              onChange={(e: any) => setPassword(e.target.value)}
+            />
+            <InputCheckout
+              id="confirmpassword"
+              color="purple"
+              error={false}
+              label="Confirme a senha"
+              type="password"
+              placeholder="Confirme sua senha"
+              value={confirmPassword}
+              onChange={(e: any) => setconfirmPassword(e.target.value)}
+            />
+          </div>
+        )}
+        <div className="input-checkbox">
+          <Checkbox
+            id="shiping-address"
+            color="purple"
+            type="checkbox"
+            checked={isShippingAddress}
+            onChange={(e: any) => setIsShippingAddress(e.target.checked)}
+          />
+          <label htmlFor="shiping-address" className="drac-text">
+            Enviar para um endereço diferente?
+          </label>
+        </div>
+        {isShippingAddress && (
+          <div className="billing-details">
+            <InputCheckout
+              id="shipping-first-name"
+              error={false}
+              label="Primeiro nome"
               color="purple"
               type="text"
-              name="shipping-first-name"
               placeholder="Primeiro nome"
-              value={shippingFirstName}
-              onChange={(e) => setShippingFirstName(e.target.value)}
+              value={shippingInfo.firstName}
+              onChange={(e: any) =>
+                setShippingInfo({
+                  ...shippingInfo,
+                  firstName: e.target.value,
+                })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-last-name"
+              error={false}
+              label="Último nome"
               color="purple"
               type="text"
-              name="shipping-last-name"
               placeholder="Último nome"
-              value={shippingLastName}
-              onChange={(e) => setShippingLastName(e.target.value)}
+              value={shippingInfo.lastName}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, lastName: e.target.value })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-email"
+              error={false}
+              label="E-mail"
               color="purple"
               type="email"
-              name="shipping-email"
               placeholder="E-mail"
-              value={shippingEmail}
-              onChange={(e) => setShippingEmail(e.target.value)}
+              value={shippingInfo.email}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, email: e.target.value })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-address"
+              error={false}
+              label="Endereço"
               color="purple"
               type="text"
-              name="shipping-address"
               placeholder="Endereço"
-              value={shippingAddress}
-              onChange={(e) => setShippingAddress(e.target.value)}
+              value={shippingInfo.address}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, address: e.target.value })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-city"
+              error={false}
+              label="Cidade"
               color="purple"
               type="text"
-              name="shipping-city"
               placeholder="Cidade"
-              value={shippingCity}
-              onChange={(e) => setShippingCity(e.target.value)}
+              value={shippingInfo.city}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, city: e.target.value })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-state"
+              error={false}
+              label="Estado"
               color="purple"
               type="text"
-              name="shipping-country"
               placeholder="País"
-              value={shippingCountry}
-              onChange={(e) => setShippingCountry(e.target.value)}
+              value={shippingInfo.state}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, state: e.target.value })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-zip-code"
+              error={false}
+              label="CEP"
               color="purple"
               type="text"
-              name="shipping-zip-code"
               placeholder="CEP"
-              value={shippingZipCode}
-              onChange={(e) => setShippingZipCode(e.target.value)}
+              value={shippingInfo.zipCode}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, zipCode: e.target.value })
+              }
             />
-            <Input
+            <InputCheckout
+              id="shipping-tel"
+              error={false}
+              label="Telefone"
               color="purple"
               type="tel"
-              name="shipping-tel"
               placeholder="Telefone"
-              value={shippingTel}
-              onChange={(e) => setShippingTel(e.target.value)}
+              value={shippingInfo.tel}
+              onChange={(e: any) =>
+                setShippingInfo({ ...shippingInfo, tel: e.target.value })
+              }
             />
           </div>
         )}
         <textarea
           placeholder="Informações adicionais"
           value={additionalInfo}
-          onChange={(e) => setAdditionalInfo(e.target.value)}
+          onChange={(e: any) => setAdditionalInfo(e.target.value)}
         ></textarea>
       </div>
       <div className="col">
@@ -341,12 +453,19 @@ const Checkout = (props: Props) => {
               <Heading size="sm">PRODUTO</Heading>
               <Heading size="sm">TOTAL</Heading>
             </div>
-            {productList.map((product, index) => (
+            {productsOnCart.map((product, index) => (
               <div className="line" key={index}>
                 <Paragraph>
-                  {product.quantity}x {product.name}
+                  {product.quantity}x {dados[product.id - 1].name}
                 </Paragraph>
-                <Paragraph>${product.quantity * product.price}</Paragraph>
+                <Paragraph>
+                  {(
+                    product.quantity * dados[product.id - 1].price
+                  ).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </Paragraph>
               </div>
             ))}
             <div className="line">
@@ -357,12 +476,18 @@ const Checkout = (props: Props) => {
             </div>
             <div className="line">
               <Paragraph>TOTAL</Paragraph>
-              <Heading color="purple">${totalPrice.toFixed(2)}</Heading>
+              <Heading color="purple">
+                {sumPrice.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </Heading>
             </div>
           </div>
           <div className="payment-method">
-            <div className="">
+            <div className="drac-text">
               <Radio
+                id="payment-1"
                 color="purple"
                 checked={paymentMethod === "Transferência bancária direta"}
                 onChange={() =>
@@ -371,24 +496,26 @@ const Checkout = (props: Props) => {
               />
               <label htmlFor="payment-1">Transferência bancária direta</label>
             </div>
-            <div className="">
+            <div className="drac-text">
               <Radio
+                id="payment-2"
                 color="purple"
                 checked={paymentMethod === "Pagamento por cheque"}
                 onChange={() => setPaymentMethod("Pagamento por cheque")}
               />
-              <label htmlFor="payment-1">Pagamento por cheque</label>
+              <label htmlFor="payment-2">Pagamento por cheque</label>
             </div>
-            <div className="">
+            <div className="drac-text">
               <Radio
+                id="payment-3"
                 color="purple"
                 checked={paymentMethod === "Sistema Paypal"}
                 onChange={() => setPaymentMethod("Sistema Paypal")}
               />
-              <label htmlFor="payment-1">Sistema Paypal</label>
+              <label htmlFor="payment-3">Sistema Paypal</label>
             </div>
           </div>
-          <div className="input-checkbox">
+          <div className="inputchInputCheckout-checkbox drac-text">
             <Checkbox
               color="purple"
               type="checkbox"
@@ -411,42 +538,3 @@ const Checkout = (props: Props) => {
 };
 
 export default Checkout;
-
-
-/**
- * import { useState } from 'react';
-
-function AddressForm() {
-  const [cep, setCep] = useState('');
-  const [address, setAddress] = useState({});
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const data = await response.json();
-
-    setAddress(data);
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        CEP:
-        <input type="text" value={cep} onChange={(e) => setCep(e.target.value)} />
-      </label>
-      <button type="submit">Buscar</button>
-
-      {address.logradouro && (
-        <div>
-          <p>Logradouro: {address.logradouro}</p>
-          <p>Bairro: {address.bairro}</p>
-          <p>Cidade: {address.localidade}</p>
-          <p>Estado: {address.uf}</p>
-        </div>
-      )}
-    </form>
-  );
-}
-
- */

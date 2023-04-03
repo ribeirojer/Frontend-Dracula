@@ -40,3 +40,8 @@ export type ProductExtract = {
   price: number;
   image: string;
 };
+
+export interface CartExtract {
+  id: number;
+  quantity: number;
+}

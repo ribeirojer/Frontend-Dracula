@@ -25,6 +25,7 @@ import ProductTab from "../components/ProductTab";
 import { useParams, useSearchParams } from "react-router-dom";
 import { saveProductToCart, saveProductToWishlist } from "../utils";
 import { saveProductToCompare } from "../utils";
+import { CartExtract } from "../interfaces/Product";
 
 type Props = {};
 
@@ -135,8 +136,8 @@ const Produtos = (props: Props) => {
     window.scrollTo(0, 0);
     const existingCart = localStorage.getItem("Cart");
     if (existingCart) {
-      const parsedCart: number[] = JSON.parse(existingCart);
-      !!parsedCart.find((item) => item === itemToShow.id) &&
+      const parsedCart: CartExtract[] = JSON.parse(existingCart);
+      !!parsedCart.find((item) => item.id === itemToShow.id) &&
         setIsProductSaveToCart(true);
     }
   }, []);
@@ -151,7 +152,7 @@ const Produtos = (props: Props) => {
   }, [isProductSaveToCart]);
 
   function handleAddToCart(id: number) {
-    saveProductToCart(id);
+    saveProductToCart({id, quantity});
     setIsProductSaveToCart(true);
   }
 
