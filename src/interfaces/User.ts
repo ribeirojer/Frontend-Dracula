@@ -58,3 +58,10 @@ export interface IAddress {
   siafi: string;
   uf: string;
 }
+export interface IAddress2 {
+  cep: string;
+  state: string;
+  city: string;
+  neighborhood: string;
+  street: string;
+}

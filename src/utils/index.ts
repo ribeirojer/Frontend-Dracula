@@ -92,12 +92,14 @@ export const removeProductFromWishlist = (product: ProductExtract) => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   }
 };
+
 export function maskPhone(value: string) {
   value = value.replace(/\D/g, ""); // Remove tudo o que não é dígito
   value = value.replace(/^(\d{2})(\d)/g, "($1) $2"); // Coloca parênteses em volta dos dois primeiros dígitos
   value = value.replace(/(\d)(\d{4})$/, "$1-$2"); // Coloca hífen entre o quarto e o quinto dígitos
   return value;
 }
+
 interface CheckoutData {
   firstName: string;
   lastName: string;
@@ -110,37 +112,100 @@ interface CheckoutData {
   city: string;
   state: string;
   tel: string;
+  paymentMethod: string,
+  termsAgreed: boolean,
+  createAccount: boolean,
+  password: string,
+  confirmPassword: string,
 }
 
-export function validateCheckoutData(data: CheckoutData): boolean {
-  // Verifica se todos os campos obrigatórios foram preenchidos
-  if (
-    !data.firstName ||
-    !data.lastName ||
-    !data.email ||
-    !data.zipCode ||
-    !data.logradouro ||
-    !data.city ||
-    !data.state ||
-    !data.numberAddress ||
-    !data.complemento ||
-    !data.bairro ||
-    !data.tel
-  ) {
-    return false;
+export function validateCheckoutData(data: CheckoutData): any {
+  const errors = {
+    firstName: false,
+    lastName: false,
+    email: false,
+    emailRegex: false,
+    zipCode: false,
+    zipRegex: false,
+    logradouro: false,
+    numberAddress: false,
+    complemento: false,
+    bairro: false,
+    city: false,
+    state: false,
+    tel: false,
+    paymentMethod: false,
+    termsAgreed: false,
+    createAccount: false,
+    password: false,
+    confirmPassword: false,
+  };
+
+  if (!data.firstName) {
+    errors.firstName = true;
+  }
+  if (!data.lastName) {
+    errors.lastName = true;
+  }
+  if (!data.email) {
+    errors.email = true;
+  }
+  if (!data.zipCode) {
+    errors.zipCode = true;
+  }
+  if (!data.logradouro) {
+    errors.logradouro = true;
+  }
+  if (!data.city) {
+    errors.city = true;
+  }
+  if (!data.state) {
+    errors.state = true;
+  }
+  if (!data.numberAddress) {
+    errors.numberAddress = true;
+  }
+  if (!data.bairro) {
+    errors.bairro = true;
+  }
+  if (!data.tel) {
+    errors.tel = true;
+  }
+  if (!data.paymentMethod) {
+    errors.paymentMethod = true;
+  }
+  if (!data.termsAgreed) {
+    errors.termsAgreed = true;
+  }
+  if (data.createAccount) {
+    if (!data.password) {
+      errors.password = true;
+    }
+    if (!data.confirmPassword) {
+      errors.confirmPassword = true;
+    }
   }
 
   // Valida o formato do email
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(data.email)) {
-    return false;
+    errors.emailRegex = true;
   }
 
   // Valida o formato do CEP
   const zipRegex = /^\d{5}-?\d{3}$/;
   if (!zipRegex.test(data.zipCode)) {
-    return false;
+    errors.zipRegex = true;
   }
 
-  return true;
+  return errors;
+}
+
+export function hasTrueFields(obj: any) {
+  for (let key in obj) {
+    if (obj[key] === true) {
+      return true;
+    }
+  }
+  return false;
 }

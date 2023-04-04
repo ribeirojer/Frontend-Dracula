@@ -10,6 +10,7 @@ import User from "./pages/User";
 import "./index.css";
 import Wishlist from "./pages/WishList";
 import Compare from "./pages/Compare";
+import Success from "./pages/Success";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -21,7 +22,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="/shop" element={<Shop />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/compare" element={<Compare />} />{" "}
+          <Route path="/compare" element={<Compare />} />
+          <Route path="/success" element={<Success />} />
           <Route path="/user" element={<User />} />
         </Route>
       </Routes>
