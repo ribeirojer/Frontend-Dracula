@@ -92,3 +92,55 @@ export const removeProductFromWishlist = (product: ProductExtract) => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   }
 };
+export function maskPhone(value: string) {
+  value = value.replace(/\D/g, ""); // Remove tudo o que não é dígito
+  value = value.replace(/^(\d{2})(\d)/g, "($1) $2"); // Coloca parênteses em volta dos dois primeiros dígitos
+  value = value.replace(/(\d)(\d{4})$/, "$1-$2"); // Coloca hífen entre o quarto e o quinto dígitos
+  return value;
+}
+interface CheckoutData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  zipCode: string;
+  logradouro: string;
+  numberAddress: string;
+  complemento: string;
+  bairro: string;
+  city: string;
+  state: string;
+  tel: string;
+}
+
+export function validateCheckoutData(data: CheckoutData): boolean {
+  // Verifica se todos os campos obrigatórios foram preenchidos
+  if (
+    !data.firstName ||
+    !data.lastName ||
+    !data.email ||
+    !data.zipCode ||
+    !data.logradouro ||
+    !data.city ||
+    !data.state ||
+    !data.numberAddress ||
+    !data.complemento ||
+    !data.bairro ||
+    !data.tel
+  ) {
+    return false;
+  }
+
+  // Valida o formato do email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(data.email)) {
+    return false;
+  }
+
+  // Valida o formato do CEP
+  const zipRegex = /^\d{5}-?\d{3}$/;
+  if (!zipRegex.test(data.zipCode)) {
+    return false;
+  }
+
+  return true;
+}

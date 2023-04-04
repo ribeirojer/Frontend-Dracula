@@ -1,5 +1,4 @@
 import { Input } from "dracula-ui";
-import React from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -21,9 +20,11 @@ type Props = {
   placeholder: string;
   error: boolean;
 };
+
 const IputCheckoutWrapper = styled.div`
   padding-top: 1rem;
 `;
+
 const InputCheckout = ({
   label,
   value,

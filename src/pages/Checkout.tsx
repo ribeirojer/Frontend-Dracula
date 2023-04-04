@@ -14,6 +14,8 @@ import { CartExtract } from "../interfaces/Product";
 import { data } from "../utils/cardsData";
 import InputCheckout from "../components/InputCheckout";
 import { IAddress } from "../interfaces/User";
+import { validateCheckoutData } from "../utils";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -88,6 +90,20 @@ const WrapperCheckout = styled.main`
     font-family: Fira Code, monospace;
     color: var(--purple);
   }
+  .first-address-inputs {
+    display: flex;
+    gap: 1rem;
+    div:nth-child(2) {
+      width: 35%;
+    }
+  }
+  .second-address-inputs {
+    display: flex;
+    gap: 1rem;
+    div {
+      width: 50%;
+    }
+  }
 `;
 
 const Checkout = (props: Props) => {
@@ -97,7 +113,10 @@ const Checkout = (props: Props) => {
     lastName: "",
     email: "",
     zipCode: "",
-    address: "",
+    logradouro: "",
+    numberAddress: "",
+    complemento: "",
+    bairro: "",
     city: "",
     state: "",
     tel: "",
@@ -107,7 +126,10 @@ const Checkout = (props: Props) => {
     lastName: "",
     email: "",
     zipCode: "",
-    address: "",
+    logradouro: "",
+    numberAddress: "",
+    complemento: "",
+    bairro: "",
     city: "",
     state: "",
     tel: "",
@@ -117,7 +139,10 @@ const Checkout = (props: Props) => {
     lastName: false,
     email: false,
     zipCode: false,
-    address: false,
+    logradouro: false,
+    numberAddress: false,
+    complemento: false,
+    bairro: false,
     city: false,
     state: false,
     tel: false,
@@ -132,17 +157,20 @@ const Checkout = (props: Props) => {
   const [productsOnCart, setProductsOnCart] = useState<CartExtract[]>([]);
   const [shippingCost, setShippingCost] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
+  const navigate = useNavigate()
+  
   async function handleSubmitCep(event: any) {
     event.preventDefault();
     const response = await fetch(
       `https://viacep.com.br/ws/${event.target.value}/json/`
     );
     const data: IAddress = await response.json();
+    console.log(data);
     setPaymentInfo({
       ...paymentInfo,
       zipCode: data.cep.split("-").join(""),
-      address: data.logradouro,
+      logradouro: data.logradouro,
+      bairro: data.bairro,
       city: data.localidade,
       state: data.uf,
     });
@@ -160,18 +188,20 @@ const Checkout = (props: Props) => {
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = {
-      ...paymentInfo,
+      paymentInfo,
       createAccount,
       password,
       confirmPassword,
       isShippingAddress,
-      ...shippingInfo,
+      shippingInfo,
       additionalInfo,
       paymentMethod,
       termsAgreed,
       shippingCost,
       totalPrice,
     };
+    const isValid = validateCheckoutData(data.paymentInfo);
+    isValid && navigate('/sucesso');
     console.log(data);
     // Aqui você pode enviar os dados para a API ou realizar outras operações com eles
   };
@@ -239,46 +269,91 @@ const Checkout = (props: Props) => {
               }
             }}
           />
-          <InputCheckout
-            id="address"
-            color="purple"
-            type="text"
-            error={errorPaymentInfo.address}
-            label="Endereço"
-            placeholder="Endereço"
-            value={paymentInfo.address}
-            onChange={(e: any) =>
-              setPaymentInfo({ ...paymentInfo, address: e.target.value })
-            }
-          />
-          <InputCheckout
-            id="city"
-            color="purple"
-            type="text"
-            error={errorPaymentInfo.city}
-            label="Cidade"
-            placeholder="Cidade"
-            value={paymentInfo.city}
-            onChange={(e: any) =>
-              setPaymentInfo({ ...paymentInfo, city: e.target.value })
-            }
-          />
-          <InputCheckout
-            id="state"
-            color="purple"
-            type="text"
-            error={errorPaymentInfo.state}
-            label="País"
-            placeholder="País"
-            value={paymentInfo.state}
-            onChange={(e: any) =>
-              setPaymentInfo({ ...paymentInfo, state: e.target.value })
-            }
-          />
+          <div className="first-address-inputs">
+            <InputCheckout
+              id="logradouro"
+              color="purple"
+              type="text"
+              error={errorPaymentInfo.logradouro}
+              label="Endereço"
+              placeholder="Endereço"
+              value={paymentInfo.logradouro}
+              onChange={(e: any) =>
+                setPaymentInfo({ ...paymentInfo, logradouro: e.target.value })
+              }
+            />
+            <InputCheckout
+              id="address-number"
+              color="purple"
+              type="number"
+              error={errorPaymentInfo.numberAddress}
+              label="Número"
+              placeholder="Número"
+              value={paymentInfo.numberAddress}
+              onChange={(e: any) =>
+                setPaymentInfo({
+                  ...paymentInfo,
+                  numberAddress: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className="second-address-inputs">
+            <InputCheckout
+              id="bairro"
+              color="purple"
+              type="text"
+              error={errorPaymentInfo.bairro}
+              label="Bairro"
+              placeholder="Bairro"
+              value={paymentInfo.bairro}
+              onChange={(e: any) =>
+                setPaymentInfo({ ...paymentInfo, bairro: e.target.value })
+              }
+            />
+            <InputCheckout
+              id="city"
+              color="purple"
+              type="text"
+              error={errorPaymentInfo.city}
+              label="Cidade"
+              placeholder="Cidade"
+              value={paymentInfo.city}
+              onChange={(e: any) =>
+                setPaymentInfo({ ...paymentInfo, city: e.target.value })
+              }
+            />
+          </div>
+          <div className="second-address-inputs">
+            <InputCheckout
+              id="complement"
+              color="purple"
+              type="text"
+              error={errorPaymentInfo.complemento}
+              label="Complemento"
+              placeholder="Complemento"
+              value={paymentInfo.complemento}
+              onChange={(e: any) =>
+                setPaymentInfo({ ...paymentInfo, complemento: e.target.value })
+              }
+            />
+            <InputCheckout
+              id="state"
+              color="purple"
+              type="text"
+              error={errorPaymentInfo.state}
+              label="Estado"
+              placeholder="Estado"
+              value={paymentInfo.state}
+              onChange={(e: any) =>
+                setPaymentInfo({ ...paymentInfo, state: e.target.value })
+              }
+            />
+          </div>
           <InputCheckout
             id="tel"
             color="purple"
-            type="tel"
+            type="text"
             error={errorPaymentInfo.tel}
             label="Telefone"
             placeholder="Telefone"
@@ -384,9 +459,9 @@ const Checkout = (props: Props) => {
               color="purple"
               type="text"
               placeholder="Endereço"
-              value={shippingInfo.address}
+              value={shippingInfo.logradouro}
               onChange={(e: any) =>
-                setShippingInfo({ ...shippingInfo, address: e.target.value })
+                setShippingInfo({ ...shippingInfo, logradouro: e.target.value })
               }
             />
             <InputCheckout
