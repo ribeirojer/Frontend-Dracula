@@ -1,7 +1,11 @@
-import axios from "axios";
+import { AuthService } from "../services/AuthService";
 import { Avatar, Button, Checkbox, Heading, Input } from "dracula-ui";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../App";
+import { FacebookLogo, GoogleLogo } from "phosphor-react";
+import InputCheckout from "../components/InputCheckout";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -20,149 +24,260 @@ const Wrapper = styled.main`
     justify-content: flex-start;
     gap: 0.5rem;
   }
+  .login-page {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      button {
+        margin-top: 1rem;
+      }
+    }
+  }
+  .social-icons {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    div {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      button {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+    }
+  }
 `;
 
 const User = (props: Props) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const { user } = useContext(UserContext);
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    zipCode: "",
+    logradouro: "",
+    numberAddress: "",
+    complemento: "",
+    bairro: "",
+    city: "",
+    state: "",
+    tel: "",
+  });
   const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [zipCode, setZipCode] = useState("");
-  const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setconfirmNewPassword] = useState("");
-  const [createAccount, setCreateAccount] = useState(false);
-  const [posts, setPosts] = useState([]);
+  const [editPassword, setEditPassword] = useState(false);
+  const navigate = useNavigate();
 
-  axios
-    .post("/api/auth/login", {
-      username: "usuario",
-      password: "senha",
-    })
-    .then((response) => {
-      const token = response.data.token;
-      // salva o token em algum lugar, como em um cookie ou armazenamento local
-    })
-    .catch((error) => {
+  useEffect(() => {}, []);
+
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+
+    try {
+      const response = await AuthService.login({
+        email,
+        password,
+      });
+
+      const token = response.accessToken;
+      localStorage.setItem("token", token);
+      navigate("/");
+    } catch (error) {
       console.log(error);
-    });
+    }
+  };
 
   return (
     <Wrapper>
-      <Avatar
-        src="https://ui.draculatheme.com/static/images/avatar.png"
-        title="Count Dracula"
-        borderVariant="large"
-        mb="sm"
-      />
-      <Heading mb="md">Suas Informações</Heading>
-      <Input
-        color="purple"
-        type="text"
-        name="first-name"
-        placeholder="Primeiro nome"
-        value={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="text"
-        name="last-name"
-        placeholder="Último nome"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="email"
-        name="email"
-        placeholder="E-mail"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="text"
-        name="zip-code"
-        placeholder="CEP"
-        value={zipCode}
-        onChange={(e) => setZipCode(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="text"
-        name="address"
-        placeholder="Endereço"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="text"
-        name="city"
-        placeholder="Cidade"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="text"
-        name="country"
-        placeholder="País"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-      />
-      <Input
-        color="purple"
-        type="tel"
-        name="tel"
-        placeholder="Telefone"
-        value={tel}
-        onChange={(e) => setTel(e.target.value)}
-      />
-      <div className="input-checkbox">
-        <Checkbox
-          color="purple"
-          type="checkbox"
-          id="edit-password"
-          checked={createAccount}
-          onChange={(e) => setCreateAccount(e.target.checked)}
-        />
-        <label htmlFor="edit-password" className="drac-text">Alterar Senha?</label>
-      </div>
+      {user ? (
+        <main>
+          <Avatar
+            src="https://ui.draculatheme.com/static/images/avatar.png"
+            title="Count Dracula"
+            borderVariant="large"
+            mb="sm"
+          />
+          <Heading mb="md">Suas Informações</Heading>
+          <Input
+            color="purple"
+            type="text"
+            name="first-name"
+            placeholder="Primeiro nome"
+            value={userInfo.firstName}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, firstName: e.target.value })
+            }
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="last-name"
+            placeholder="Último nome"
+            value={userInfo.lastName}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, lastName: e.target.value })
+            }
+          />
+          <Input
+            color="purple"
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            value={userInfo.email}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, email: e.target.value })
+            }
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="zip-code"
+            placeholder="CEP"
+            value={userInfo.zipCode}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, zipCode: e.target.value })
+            }
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="address"
+            placeholder="Endereço"
+            value={userInfo.logradouro}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, logradouro: e.target.value })
+            }
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="city"
+            placeholder="Cidade"
+            value={userInfo.city}
+            onChange={(e) => setUserInfo({ ...userInfo, city: e.target.value })}
+          />
+          <Input
+            color="purple"
+            type="text"
+            name="country"
+            placeholder="País"
+            value={userInfo.state}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, state: e.target.value })
+            }
+          />
+          <Input
+            color="purple"
+            type="tel"
+            name="tel"
+            placeholder="Telefone"
+            value={userInfo.tel}
+            onChange={(e) =>
+              setUserInfo({ ...userInfo, firstName: e.target.value })
+            }
+          />
+          <div className="input-checkbox">
+            <Checkbox
+              color="purple"
+              type="checkbox"
+              id="edit-password"
+              checked={editPassword}
+              onChange={(e) => setEditPassword(e.target.checked)}
+            />
+            <label htmlFor="edit-password" className="drac-text">
+              Alterar Senha?
+            </label>
+          </div>
 
-      {createAccount && (
-        <>
-          <Input
-            color="purple"
-            type="password"
-            name="password"
-            placeholder="Digite sua senha atual"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Input
-            color="purple"
-            type="password"
-            name="new-password"
-            placeholder="Digite a nova senha"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <Input
-            color="purple"
-            type="password"
-            name="confirm-new-password"
-            placeholder="Digite novamente sua nova senha"
-            value={confirmNewPassword}
-            onChange={(e) => setconfirmNewPassword(e.target.value)}
-          />
-        </>
+          {editPassword && (
+            <>
+              <Input
+                color="purple"
+                type="password"
+                name="password"
+                placeholder="Digite sua senha atual"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Input
+                color="purple"
+                type="password"
+                name="new-password"
+                placeholder="Digite a nova senha"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <Input
+                color="purple"
+                type="password"
+                name="confirm-new-password"
+                placeholder="Digite novamente sua nova senha"
+                value={confirmNewPassword}
+                onChange={(e) => setconfirmNewPassword(e.target.value)}
+              />
+            </>
+          )}
+          <Button type={"submit"}>Salvar</Button>
+        </main>
+      ) : (
+        <div className="login-page">
+          <Heading>Login</Heading>
+          <form onSubmit={handleSubmit}>
+            <InputCheckout
+              id="email"
+              color="purple"
+              error={false}
+              type="email"
+              label="E-mail"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e: any) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <InputCheckout
+              id="password"
+              color="purple"
+              error={false}
+              label="Senha"
+              placeholder="Digite sua senha"
+              type="password"
+              value={password}
+              onChange={(e: any) => {
+                setPassword(e.target.value);
+              }}
+            />
+            <Button type="submit">Login</Button>
+          </form>
+          <div className="social-icons">
+            <Heading size="md">Ou entre com</Heading>
+            <div>
+              <Button color="purpleCyan">
+                <FacebookLogo size={24} />
+                Facebook
+              </Button>
+              <Button color="yellowPink">
+                <GoogleLogo size={24} />
+                Google
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
-      <Button type={"submit"}>Salvar</Button>
     </Wrapper>
   );
 };

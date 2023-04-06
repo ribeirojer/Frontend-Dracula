@@ -8,11 +8,12 @@ import {
   ShoppingCart,
   UserCircle,
 } from "phosphor-react";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import theme from "../utils/theme";
 import Logo from "./Logo";
+import { UserContext } from "../App";
 
 type Props = {};
 
@@ -97,8 +98,7 @@ const HeaderWrapper = styled.header`
 `;
 
 const Header = (props: Props) => {
-  const [cartQty, setCartQty] = useState(0);
-  const [wishQty, setWishQty] = useState(0);
+  const { cartItems, wishlist, user } = useContext(UserContext);
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
@@ -148,8 +148,10 @@ const Header = (props: Props) => {
         <ul>
           <li>
             <Link to={"/user"}>
+              <Paragraph size="sm" mr="xs">
+                {user ? user.name : "Minha Conta"}
+              </Paragraph>
               <UserCircle weight="fill"></UserCircle>
-              <Paragraph size="sm">Minha Conta</Paragraph>
             </Link>
           </li>
         </ul>
@@ -194,12 +196,16 @@ const Header = (props: Props) => {
             <Paragraph size="sm">
               Lista de<br></br> Desejos
             </Paragraph>
-            <div className="qty drac-text">{wishQty}</div>
+            <div className="qty drac-text">
+              {wishlist.length ? wishlist.length : 0}
+            </div>
           </button>
           <button onClick={() => navigate("/checkout")}>
             <ShoppingCart></ShoppingCart>
             <Paragraph size="sm">Carrinho</Paragraph>
-            <div className="qty drac-text">{cartQty}</div>
+            <div className="qty drac-text">
+              {cartItems.length ? cartItems.length : 0}
+            </div>
           </button>
         </div>
       </div>
