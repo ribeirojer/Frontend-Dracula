@@ -200,7 +200,7 @@ const Header = (props: Props) => {
               {wishlist.length ? wishlist.length : 0}
             </div>
           </button>
-          <button onClick={() => navigate("/checkout")}>
+          <button onClick={() => navigate("/cart")}>
             <ShoppingCart></ShoppingCart>
             <Paragraph size="sm">Carrinho</Paragraph>
             <div className="qty drac-text">

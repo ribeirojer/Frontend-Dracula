@@ -77,6 +77,7 @@ const Shop = (props: Props) => {
   const [smartphonesChecked, setSmartphonesChecked] = useState(false);
   const [camerasChecked, setCamerasChecked] = useState(false);
   const [accessoriesChecked, setAccessoriesChecked] = useState(false);
+  const [hotdealsChecked, setHotdealsChecked] = useState(false);
   const [price, setPrice] = useState(50);
   const [searchParams] = useSearchParams();
   const [products, setProducts] = useState(data); // array com todos os produtos
@@ -100,10 +101,12 @@ const Shop = (props: Props) => {
   }, []);
 
   useEffect(() => {
-    category === "Laptops" && setLaptopsChecked(true);
+    (category === "Laptops" || category === "Notebooks") &&
+      setLaptopsChecked(true);
     category === "Smartphones" && setSmartphonesChecked(true);
     category === "Câmeras" && setCamerasChecked(true);
     category === "Acessórios" && setAccessoriesChecked(true);
+    category === "hotdeals" && setHotdealsChecked(true);
   }, [category]);
 
   return (
@@ -158,6 +161,18 @@ const Shop = (props: Props) => {
               />
               <label className="drac-text" htmlFor="category-4">
                 Acessórios
+              </label>
+            </div>
+            <div className="input-checkbox">
+              <Checkbox
+                color="purple"
+                type="checkbox"
+                id="category-5"
+                checked={hotdealsChecked}
+                onChange={() => setHotdealsChecked(!hotdealsChecked)}
+              />
+              <label className="drac-text" htmlFor="category-5">
+                Promoções
               </label>
             </div>
           </div>

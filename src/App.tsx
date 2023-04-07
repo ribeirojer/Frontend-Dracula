@@ -6,6 +6,8 @@ import whats from "../src/assets/WhatsApp.png";
 import styled from "styled-components";
 import { createContext, useState } from "react";
 import { CartExtract, ProductExtract } from "./interfaces/Product";
+import { IUser } from "./interfaces/User";
+import { removeProductFromWishlist, saveProductToWishlist } from "./utils";
 
 const WrapperWhatsapp = styled.a`
   position: fixed;
@@ -47,7 +49,7 @@ const WrapperWhatsapp = styled.a`
 export const UserContext = createContext<any>({});
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUser>();
   const [cartItems, setCartItems] = useState<CartExtract[]>([]);
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
 
@@ -60,11 +62,13 @@ function App() {
   };
 
   const addToWishlist = (item: ProductExtract) => {
+    saveProductToWishlist(item);
     setWishlist([...wishlist, item]);
   };
 
-  const removeFromWishlist = (itemId: number) => {
-    setWishlist(wishlist.filter((item) => item.id !== itemId));
+  const removeFromWishlist = (product: ProductExtract) => {
+    removeProductFromWishlist(product);
+    setWishlist(wishlist.filter((item) => item.id !== product.id));
   };
 
   return (

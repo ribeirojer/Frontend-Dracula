@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Button, Heading, Paragraph } from "dracula-ui";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartExtract, ProductExtract } from "../interfaces/Product";
-import { removeProductFromWishlist, saveProductToCart } from "../utils";
+import { UserContext } from "../App";
 
 const Container = styled.div`
   display: flex;
@@ -35,25 +35,25 @@ const Container = styled.div`
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
-  const [isProductSaveToCart, setIsProductSaveToCart] = useState(false);
+  const [isProductSaveToCart, setIsProductSaveToCart] = useState<boolean>();
+  const { removeFromWishlist, addToCart } = useContext(UserContext);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const existingCart = localStorage.getItem("Cart");
-    if (existingCart) {
-      const parsedCart: CartExtract[] = JSON.parse(existingCart);
-      //parsedCart.find((item) => item.id === wishlist[0].id) &&
-        //setIsProductSaveToCart(true);
-    }
-  }, []);
-  
-  useEffect(() => {
     const wishlistData = localStorage.getItem("wishlist");
+    const existingCart = localStorage.getItem("Cart");
     if (wishlistData) {
-      const parsedWishlist = JSON.parse(wishlistData);
+      const parsedWishlist: ProductExtract[] = JSON.parse(wishlistData);
       setWishlist(parsedWishlist);
     }
-  }, [wishlist]);
+    if (existingCart) {
+      const parsedCart: CartExtract[] = JSON.parse(existingCart);
+      // const productIsInCart = parsedCart.some(
+      //   (item) => item.id === wishlist[0].id
+      // );
+      // setIsProductSaveToCart(productIsInCart);
+    }
+  }, []);
 
   return (
     <Container>
@@ -69,10 +69,22 @@ function Wishlist() {
                 <Heading>{product.name}</Heading>
                 <Paragraph>{product.price}</Paragraph>
               </div>
-              <Button color="animated" onClick={() => saveProductToCart({id: product.id, quantity: 1})}>
+              <Button
+                color="animated"
+                onClick={() => addToCart({ id: product.id, quantity: 1 })}
+              >
                 Adicionar ao Carrinho
               </Button>
-              <Button color="purple" variant="outline" onClick={() => removeProductFromWishlist(product)}>
+              <Button
+                color="purple"
+                variant="outline"
+                onClick={() => {
+                  setWishlist(
+                    wishlist.filter((item) => item.id !== product.id)
+                  );
+                  removeFromWishlist(product);
+                }}
+              >
                 Não desejo mais
               </Button>
             </li>

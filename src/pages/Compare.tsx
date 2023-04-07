@@ -39,12 +39,13 @@ const Compare = (props: Props) => {
   const [compare, setCompare] = useState<ProductExtract[]>([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const CompareData = localStorage.getItem("compare");
     if (CompareData) {
-      const parsedCompare = JSON.parse(CompareData);
+      const parsedCompare: ProductExtract[] = JSON.parse(CompareData);
       setCompare(parsedCompare);
     }
-  }, [compare]);
+  }, []);
 
   return (
     <Container>
@@ -64,7 +65,10 @@ const Compare = (props: Props) => {
               <Button
                 color="purple"
                 variant="outline"
-                onClick={() => removeProductFromCompare(product.id)}
+                onClick={() => {
+                  setCompare(compare.filter((item) => item.id !== product.id));
+                  removeProductFromCompare(product.id);
+                }}
               >
                 Remover da Comparação
               </Button>

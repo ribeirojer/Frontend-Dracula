@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { IElectronicProduct } from "../interfaces/Product";
 import { saveProductToWishlist, saveProductToCompare } from "../utils";
 import theme, { OldPriceProduct } from "../utils/theme";
+import Stars from "./Stars";
+import { useContext } from "react";
+import { UserContext } from "../App";
 
 type Props = {
   product: IElectronicProduct;
@@ -66,8 +69,7 @@ const CardContainer = styled.div`
       margin-left: 10px;
     }
   }
-
-  .product-rating {
+  .review-rating {
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
@@ -104,6 +106,8 @@ const CardContainer = styled.div`
 `;
 
 const CardProduct = ({ product }: Props) => {
+  const { addToCart, addToWishlist } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   return (
@@ -128,22 +132,24 @@ const CardProduct = ({ product }: Props) => {
             {product.name}
           </Anchor>
           <Paragraph className="product-price">
-            $
             {(
               product.price -
               (product.price * product.salePercentage) / 100
-            ).toFixed(2)}
+            ).toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            })}
             <OldPriceProduct className="product-old-price">
-              {product.salePercentage ? "$" + product.price.toFixed(2) : ""}
+              {product.salePercentage
+                ? "" +
+                  product.price.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                : ""}
             </OldPriceProduct>
           </Paragraph>
-          <div className="product-rating">
-            <Star weight="fill"></Star>
-            <Star weight="fill"></Star>
-            <Star weight="fill"></Star>
-            <Star weight="fill"></Star>
-            <Star weight="fill"></Star>
-          </div>
+          <Stars rating={5} size={32}></Stars>
           <div className="product-btns">
             <Button
               onClick={() => {
@@ -162,7 +168,7 @@ const CardProduct = ({ product }: Props) => {
             </Button>
             <Button
               onClick={() => {
-                saveProductToWishlist({
+                addToWishlist({
                   id: product.id,
                   name: product.name,
                   price: product.price,
@@ -187,7 +193,14 @@ const CardProduct = ({ product }: Props) => {
             </Button>
           </div>
         </div>
-        <Button size="lg" color="purpleCyan">
+        <Button
+          onClick={() => {
+            addToCart({ id: product.id, quantity: 1 });
+            navigate(`/cart`);
+          }}
+          size="lg"
+          color="purpleCyan"
+        >
           Comprar
         </Button>
       </CardContainer>

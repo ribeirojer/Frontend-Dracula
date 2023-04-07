@@ -8,12 +8,11 @@ interface Credentials {
 interface AuthResponse {
   accessToken: string;
 }
-const urlApi = process.env.DB_HOST;
 
 export class AuthService {
   static async login(credentials: Credentials): Promise<AuthResponse> {
     const response = await axios.post<AuthResponse>(
-      urlApi + "/api/auth/login",
+      "http://localhost:3000/api/auth/login",
       credentials
     );
     const authData = response.data;
@@ -42,11 +41,14 @@ export class AuthService {
     }
 
     try {
-      const response = await axios.get(urlApi + "/api/auth/check-token", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        "http://localhost:3000/api/auth/check-token",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.data.success) {
         return true;
