@@ -3,6 +3,7 @@ import { Button, Heading, Paragraph } from "dracula-ui";
 import { useContext, useEffect, useState } from "react";
 import { CartExtract, ProductExtract } from "../interfaces/Product";
 import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -35,23 +36,15 @@ const Container = styled.div`
 
 function Wishlist() {
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
-  const [isProductSaveToCart, setIsProductSaveToCart] = useState<boolean>();
-  const { removeFromWishlist, addToCart } = useContext(UserContext);
+  const { removeFromWishlist, addToCart, cartItems } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
     const wishlistData = localStorage.getItem("wishlist");
-    const existingCart = localStorage.getItem("Cart");
     if (wishlistData) {
       const parsedWishlist: ProductExtract[] = JSON.parse(wishlistData);
       setWishlist(parsedWishlist);
-    }
-    if (existingCart) {
-      const parsedCart: CartExtract[] = JSON.parse(existingCart);
-      // const productIsInCart = parsedCart.some(
-      //   (item) => item.id === wishlist[0].id
-      // );
-      // setIsProductSaveToCart(productIsInCart);
     }
   }, []);
 
@@ -67,13 +60,26 @@ function Wishlist() {
               <img src={product.image} alt={product.name} />
               <div>
                 <Heading>{product.name}</Heading>
-                <Paragraph>{product.price}</Paragraph>
+                <Heading color="cyanGreen">
+                  {product.price.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </Heading>
               </div>
               <Button
                 color="animated"
-                onClick={() => addToCart({ id: product.id, quantity: 1 })}
+                onClick={() =>
+                  !!cartItems.find(
+                    (item: CartExtract) => item.id === product.id
+                  )
+                    ? navigate("/checkout")
+                    : addToCart({ id: product.id, quatity: 1 })
+                }
               >
-                Adicionar ao Carrinho
+                {!!cartItems.find((item: CartExtract) => item.id === product.id)
+                  ? "Finalizar compra"
+                  : "Adicionar ao carrinho"}
               </Button>
               <Button
                 color="purple"

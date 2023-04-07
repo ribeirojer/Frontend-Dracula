@@ -5,7 +5,6 @@ import {
   Heading,
   Input,
   Paragraph,
-  Select,
 } from "dracula-ui";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -22,7 +21,7 @@ import {
 import Stars from "../components/Stars";
 import theme from "../utils/theme";
 import ProductTab from "../components/ProductTab";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { saveProductToCart, saveProductToWishlist } from "../utils";
 import { saveProductToCompare } from "../utils";
 import { CartExtract } from "../interfaces/Product";

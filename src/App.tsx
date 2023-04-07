@@ -54,7 +54,18 @@ function App() {
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
 
   const addToCart = (item: CartExtract) => {
-    setCartItems([...cartItems, item]);
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+    if (existingItem) {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, item]);
+    }
   };
 
   const removeFromCart = (itemId: number) => {
@@ -62,8 +73,13 @@ function App() {
   };
 
   const addToWishlist = (item: ProductExtract) => {
-    saveProductToWishlist(item);
-    setWishlist([...wishlist, item]);
+    const existingItem = wishlist.find(
+      (wishlistItem) => wishlistItem.id === item.id
+    );
+    if (!existingItem) {
+      saveProductToWishlist(item);
+      setWishlist([...wishlist, item]);
+    }
   };
 
   const removeFromWishlist = (product: ProductExtract) => {
@@ -82,6 +98,7 @@ function App() {
         wishlist,
         addToWishlist,
         removeFromWishlist,
+        setCartItems,
       }}
     >
       <Header />

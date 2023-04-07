@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import { Button, Heading, Paragraph } from "dracula-ui";
-import { useEffect, useState } from "react";
-import { ProductExtract } from "../interfaces/Product";
+import { useContext, useEffect, useState } from "react";
+import { CartExtract, ProductExtract } from "../interfaces/Product";
 import { removeProductFromCompare } from "../utils";
+import { UserContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -37,6 +39,8 @@ type Props = {};
 
 const Compare = (props: Props) => {
   const [compare, setCompare] = useState<ProductExtract[]>([]);
+  const { addToCart, cartItems } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,9 +63,27 @@ const Compare = (props: Props) => {
               <img src={product.image} alt={product.name} />
               <div>
                 <Heading>{product.name}</Heading>
-                <Paragraph>{product.price}</Paragraph>
+                <Heading color="cyanGreen">
+                  {product.price.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </Heading>
               </div>
-              <Button color="animated">Adicionar ao Carrinho</Button>
+              <Button
+                onClick={() =>
+                  !!cartItems.find(
+                    (item: CartExtract) => item.id === product.id
+                  )
+                    ? navigate("/checkout")
+                    : addToCart({ id: product.id, quatity: 1 })
+                }
+                color="animated"
+              >
+                {!!cartItems.find((item: CartExtract) => item.id === product.id)
+                  ? "Finalizar compra"
+                  : "Adicionar ao carrinho"}
+              </Button>
               <Button
                 color="purple"
                 variant="outline"
