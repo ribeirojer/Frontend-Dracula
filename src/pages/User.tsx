@@ -82,7 +82,9 @@ const User = (props: Props) => {
   const [editPassword, setEditPassword] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();

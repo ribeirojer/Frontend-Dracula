@@ -3,6 +3,7 @@ import styled from "styled-components";
 import theme from "../utils/theme";
 import background from "../assets/rrrainbow.svg";
 import { Anchor, Button, Checkbox, Heading, Input, Radio } from "dracula-ui";
+import axios from "axios";
 
 type Props = {};
 
@@ -32,10 +33,16 @@ const Container = styled.section`
     }
     form {
       display: flex;
-      gap: 1.5rem;
-      button {
+      flex-direction: column;
+      div {
+        gap: 1.5rem;
         display: flex;
+      }
+      button {
         min-width: 9rem;
+      }
+      span {
+        margin: 0.5rem 0 0 0.5rem;
       }
     }
     .term {
@@ -49,11 +56,38 @@ const Container = styled.section`
 const Newsletter = (props: Props) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [checked, setChecked] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(email);
-    setEmail("");
+    if (!email) {
+      setError("Campo de email vazio.");
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      setError("Formato de email inválido.");
+      return;
+    }
+    if (!checked) {
+      setError("Você precisa concordar em receber os e-mails.");
+      return;
+    }
+
+    axios
+      .post(
+        "/api/newsletter",
+        { email },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((response) => {
+        setEmail("");
+        setError("");
+        setChecked(false);
+        alert("Inscrição realizada com sucesso!");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
   return (
@@ -61,27 +95,36 @@ const Newsletter = (props: Props) => {
       <div className="newsletter">
         <Heading size="xl">Inscreva-se na NEWSLETTER</Heading>
         <form onSubmit={handleSubmit}>
-          <Input
-            type="email"
-            color="green"
-            size={"lg"}
-            placeholder="Digite seu melhor email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <Button size="lg" width="9rem">
-            Inscrever
-          </Button>
+          <div>
+            <Input
+              type="email"
+              color="green"
+              size={"lg"}
+              placeholder="Digite seu melhor email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <Button size="lg" width="9rem">
+              Inscrever
+            </Button>
+          </div>
+          {error && <span className="drac-text drac-text-red">{error}</span>}
         </form>
         <div className="term">
-          <Checkbox id="green" color="green" name="green" />
+          <Checkbox
+            id="green"
+            color="green"
+            name="green"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+          />
           <label htmlFor="green" className="drac-text drac-text-white">
             Concordo em receber e-mails da
             <Anchor href="#" hoverColor="green" target={"_blank"}>
-              {" "}Dracula E-commerce
+              {" "}
+              Dracula E-commerce
             </Anchor>
           </label>
-          {error && <span>{error}</span>}
         </div>
       </div>
     </Container>

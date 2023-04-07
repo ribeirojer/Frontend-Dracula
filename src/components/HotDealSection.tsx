@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import background from "../assets/rrrainbow.svg";
 import theme from "../utils/theme";
+import { useNavigate } from "react-router-dom";
 
 type Props = {};
 
@@ -55,50 +56,37 @@ const WrapperHotDealSection = styled.section`
 `;
 
 const HotDealSection = (props: Props) => {
-  const today = new Date();
-  const daysUntilSunday = 7 - today.getDay();
-  const [days, setDays] = useState<number>(daysUntilSunday);
-  const [hours, setHours] = useState<number>(Math.floor(daysUntilSunday * 24));
-  const [mins, setMins] = useState<number>(
-    Math.floor((daysUntilSunday * 24 - hours) * 60)
-  );
-  const [secs, setSecs] = useState<number>(
-    Math.floor(((daysUntilSunday * 24 - hours) * 60 - mins) * 60)
-  );
+  const [timeRemaining, setTimeRemaining] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      // Diminui 1 segundo do tempo restante a cada intervalo
-      setSecs((prevSecs) => {
-        if (prevSecs === 0) {
-          // Quando chegar a 0 segundos, reinicia para 60 e diminui 1 minuto
-          setMins((prevMins) => {
-            if (prevMins === 0) {
-              // Quando chegar a 0 minutos, reinicia para 34 e diminui 1 hora
-              setHours((prevHours) => {
-                if (prevHours === 0) {
-                  // Quando chegar a 0 hours, reinicia para 10 e diminui 1 dia
-                  setDays((prevDays) => {
-                    if (prevDays === 0) {
-                      // Quando chegar a 0 dias, para o intervalo e zera o tempo
-                      clearInterval(intervalId);
-                    }
-                    return prevDays - 1;
-                  });
-                  return 10;
-                }
-                return prevHours - 1;
-              });
-              return 34;
-            }
-            return prevMins - 1;
-          });
-          return 60;
-        }
-        return prevSecs - 1;
-      });
+      const now = new Date();
+      const daysUntilSunday = 7 - now.getDay();
+      const endOfWeek = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + daysUntilSunday,
+        23,
+        59,
+        59,
+        999
+      );
+      const timeDiff = endOfWeek.getTime() - now.getTime();
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeDiff / 1000 / 60) % 60);
+      const seconds = Math.floor((timeDiff / 1000) % 60);
+
+      setTimeRemaining({ days, hours, minutes, seconds });
     }, 1000);
-    // Limpa o intervalo quando o componente for desmontado
+
     return () => clearInterval(intervalId);
   }, []);
 
@@ -108,32 +96,34 @@ const HotDealSection = (props: Props) => {
         <ul className="hot-deal-countdown">
           <li>
             <Badge color="cyan" variant="subtle">
-              {days.toString()}
+              {timeRemaining.days.toString()}
               <span> Dias</span>
             </Badge>
           </li>
           <li>
             <Badge color="cyan" variant="subtle">
-              {hours.toString()}
+              {timeRemaining.hours.toString()}
               <span> horas</span>
             </Badge>
           </li>
           <li>
             <Badge color="cyan" variant="subtle">
-              {mins.toString()}
+              {timeRemaining.minutes.toString()}
               <span> Minutos</span>
             </Badge>
           </li>
           <li>
             <Badge color="cyan" variant="subtle">
-              {secs.toString()}
+              {timeRemaining.seconds.toString()}
               <span> Segundos</span>
             </Badge>
           </li>
         </ul>
         <Heading>Promoção só essa semana!</Heading>
         <Paragraph size="lg">Nova Coleção em até 50% OFF</Paragraph>
-        <Button size="lg">Comprar Agora</Button>
+        <Button onClick={() => navigate("/shop?c=hotdeals")} size="lg">
+          Comprar Agora
+        </Button>
       </div>
     </WrapperHotDealSection>
   );

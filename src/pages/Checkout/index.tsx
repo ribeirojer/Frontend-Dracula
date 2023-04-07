@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Anchor,
   Button,
@@ -15,11 +15,14 @@ import { hasTrueFields, validateCheckoutData } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { WrapperCheckout } from "./Checkout";
 import InputsCheckout from "./InputsCheckout";
+import { UserContext } from "../../App";
 
 type Props = {};
 
 const Checkout = (props: Props) => {
   const [dados, setDados] = useState(data);
+  const { cartItems } = useContext(UserContext);
+
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
     lastName: "",
@@ -84,7 +87,6 @@ const Checkout = (props: Props) => {
   const [additionalInfo, setAdditionalInfo] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
-  const [productsOnCart, setProductsOnCart] = useState<CartExtract[]>([]);
   const [shippingCost, setShippingCost] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
@@ -107,11 +109,6 @@ const Checkout = (props: Props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const existingCart = localStorage.getItem("Cart");
-    if (existingCart) {
-      const parsedCart: CartExtract[] = JSON.parse(existingCart);
-      setProductsOnCart(parsedCart);
-    }
   }, []);
 
   const handleSubmit = (event: any) => {
@@ -147,8 +144,10 @@ const Checkout = (props: Props) => {
   };
 
   const sumPrice =
-    productsOnCart.reduce(
-      (acc, product) => acc + product.quantity * data[product.id - 1].price,
+    cartItems.length &&
+    cartItems.reduce(
+      (acc: number, product: CartExtract) =>
+        acc + product.quantity * data[product.id - 1].price,
       0
     ) + shippingCost;
 
@@ -235,10 +234,10 @@ const Checkout = (props: Props) => {
           <div className="order-summary">
             <div className="line">
               <Heading size="sm">PRODUTO</Heading>
-              <Heading size="sm">TOTAL</Heading>
+              <Heading size="sm">SUBTOTAL</Heading>
             </div>
-            {productsOnCart.map((product, index) => (
-              <div className="line" key={index}>
+            {cartItems.map((product: CartExtract) => (
+              <div className="line" key={product.id}>
                 <Paragraph>
                   {product.quantity}x {dados[product.id - 1].name}
                 </Paragraph>
@@ -259,7 +258,7 @@ const Checkout = (props: Props) => {
               </Heading>
             </div>
             <div className="line">
-              <Paragraph>TOTAL</Paragraph>
+              <Heading color="purple">TOTAL</Heading>
               <Heading color="purple">
                 {sumPrice.toLocaleString("pt-BR", {
                   style: "currency",

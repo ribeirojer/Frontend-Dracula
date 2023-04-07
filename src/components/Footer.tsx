@@ -7,8 +7,9 @@ import {
   PinterestLogo,
   TwitterLogo,
 } from "phosphor-react";
-import logo from "../assets/logo.png";
 import { Anchor, Heading, List, Paragraph } from "dracula-ui";
+import Logo from "./Logo";
+import { dataList } from "../utils/cardsData";
 type Props = {};
 
 const Wrapper = styled.footer`
@@ -25,6 +26,11 @@ const Wrapper = styled.footer`
         display: flex;
         gap: 0.5rem;
         flex-direction: column;
+        li {
+          a {
+            font-size: 1rem;
+          }
+        }
       }
     }
   }
@@ -63,26 +69,30 @@ const Footer = (props: Props) => {
     <Wrapper>
       <div className="footer">
         <div>
-          <Link to={"/"}>
-            <img src={logo} alt="" />
-          </Link>
+          <Logo></Logo>
           <Heading size="sm">
             Transforme seu lar em um castelo das trevas com os eletrônicos do
             e-commerce Drácula.
           </Heading>
           <List color="white">
             <li className="drac-text drac-text-white">
-              <Anchor href="" target={"_blank"}>
+              <Anchor
+                href="https://goo.gl/maps/hMDFQ3zoR9mZDF5b8"
+                target={"_blank"}
+              >
                 <MapPin></MapPin> Rua Paulo Malschitzki, 240, Joinville - SC
               </Anchor>
             </li>
             <li className="drac-text drac-text-white">
-              <Anchor href="" target={"_blank"}>
+              <Anchor
+                href="https://api.whatsapp.com/send?phone=5512981580992&amp;text=Olá,%20Drácula!"
+                target={"_blank"}
+              >
                 <Phone></Phone> +55 (12) 98158-0992
               </Anchor>
             </li>
             <li className="drac-text drac-text-white">
-              <Anchor href="" target={"_blank"}>
+              <Anchor href="mailto:contato@dracula.com" target={"_blank"}>
                 <Envelope></Envelope> contato@dracula.com
               </Anchor>
             </li>
@@ -91,58 +101,53 @@ const Footer = (props: Props) => {
         <div>
           <Heading>Categorias</Heading>
           <List>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+            <li>
+              <Link
+                className="drac-text drac-text-white drac-text-purple--hover"
+                to={"shop?c=hotdeals"}
+              >
                 Promoção
-              </Anchor>
+              </Link>
             </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
-                Laptops
-              </Anchor>
-            </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
-                Smartphones
-              </Anchor>
-            </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
-                Câmeras
-              </Anchor>
-            </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
-                Acessórios
-              </Anchor>
-            </li>
+            {dataList.map((item) => {
+              return (
+                <li key={item.link} className="active">
+                  <Link
+                    className="drac-text drac-text-white drac-text-purple--hover"
+                    to={item.link}
+                  >
+                    {item.text}
+                  </Link>
+                </li>
+              );
+            })}
           </List>
         </div>
         <div>
           <Heading>Informações</Heading>
           <List>
             <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+              <Anchor href="#" size="lg" target={"_blank"}>
                 Sobre a empresa
               </Anchor>
             </li>
             <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+              <Anchor href="#" size="lg" target={"_blank"}>
                 Entre em contato
               </Anchor>
             </li>
             <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+              <Anchor href="#" size="lg" target={"_blank"}>
                 Política de Privacidade
               </Anchor>
             </li>
             <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+              <Anchor href="#" size="lg" target={"_blank"}>
                 Ordens e Retornos
               </Anchor>
             </li>
             <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+              <Anchor href="#" size="lg" target={"_blank"}>
                 Termos e Condições
               </Anchor>
             </li>
@@ -151,30 +156,45 @@ const Footer = (props: Props) => {
         <div>
           <Heading>Serviços</Heading>
           <List>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+            <li>
+              <Link
+                className="drac-text drac-text-white drac-text-purple--hover"
+                to={"/user"}
+              >
                 Minha Conta
-              </Anchor>
+              </Link>
             </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+            <li>
+              <Link
+                className="drac-text drac-text-white drac-text-purple--hover"
+                to={"/cart"}
+              >
                 Ver Carrinho
-              </Anchor>
+              </Link>
             </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+            <li>
+              <Link
+                className="drac-text drac-text-white drac-text-purple--hover"
+                to={"/wishlist"}
+              >
                 Lista de Desejos
-              </Anchor>
+              </Link>
             </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+            <li>
+              <Link
+                className="drac-text drac-text-white drac-text-purple--hover"
+                to={"/checkout"}
+              >
                 Finalizar minha ordem
-              </Anchor>
+              </Link>
             </li>
-            <li className="drac-text drac-text-white">
-              <Anchor size="lg" target={"_blank"}>
+            <li>
+              <Link
+                className="drac-text drac-text-white drac-text-purple--hover"
+                to={"/"}
+              >
                 Ajuda
-              </Anchor>
+              </Link>
             </li>
           </List>
         </div>

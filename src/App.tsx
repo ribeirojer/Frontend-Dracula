@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import "dracula-ui/styles/dracula-ui.css";
 import whats from "../src/assets/WhatsApp.png";
 import styled from "styled-components";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { CartExtract, ProductExtract } from "./interfaces/Product";
 import { IUser } from "./interfaces/User";
 import { removeProductFromWishlist, saveProductToWishlist } from "./utils";
@@ -53,6 +53,14 @@ function App() {
   const [cartItems, setCartItems] = useState<CartExtract[]>([]);
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
 
+  useEffect(() => {
+    const existingCart = localStorage.getItem("Cart");
+    if (existingCart) {
+      const parsedCart: CartExtract[] = JSON.parse(existingCart);
+      setCartItems(parsedCart);
+    }
+  }, []);
+  
   const addToCart = (item: CartExtract) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {

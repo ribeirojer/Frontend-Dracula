@@ -131,9 +131,9 @@ const Header = (props: Props) => {
             </a>
           </li>
           <li>
-            <a href="mailto:contato@electro.com" target={"_blank"}>
+            <a href="mailto:contato@dracula.com" target={"_blank"}>
               <Envelope weight="fill"></Envelope>
-              <Paragraph size="sm">contato@electro.com</Paragraph>
+              <Paragraph size="sm">contato@dracula.com</Paragraph>
             </a>
           </li>
           <li>
@@ -151,7 +151,7 @@ const Header = (props: Props) => {
               <Paragraph size="sm" mr="xs">
                 {user ? user.name : "Minha Conta"}
               </Paragraph>
-              <UserCircle weight="fill"></UserCircle>
+              <UserCircle size={24} weight="fill"></UserCircle>
             </Link>
           </li>
         </ul>

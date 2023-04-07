@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "../App";
 import { CartExtract } from "../interfaces/Product";
 import { Badge, Button, Heading } from "dracula-ui";
@@ -12,11 +12,13 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 2rem;
   ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     li {
       display: flex;
@@ -40,6 +42,10 @@ const Main = styled.main`
 const Cart = (props: Props) => {
   const { cartItems, removeFromCart, setCartItems } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const updateCartItemQuantity = (itemId: number, newQuantity: number) => {
     setCartItems(
@@ -74,7 +80,11 @@ const Cart = (props: Props) => {
                 +
               </Button>
             </div>
-            <Button variant="ghost" color="red" onClick={() => removeFromCart(item.id)}>
+            <Button
+              variant="ghost"
+              color="red"
+              onClick={() => removeFromCart(item.id)}
+            >
               Remover
             </Button>
           </li>
