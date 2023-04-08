@@ -45,3 +45,22 @@ export interface CartExtract {
   id: number;
   quantity: number;
 }
+
+export interface CheckoutData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  zipCode: string;
+  logradouro: string;
+  numberAddress: string;
+  complemento: string;
+  bairro: string;
+  city: string;
+  state: string;
+  tel: string;
+  paymentMethod: string;
+  termsAgreed: boolean;
+  createAccount: boolean;
+  password: string;
+  confirmPassword: string;
+}

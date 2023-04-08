@@ -37,17 +37,12 @@ const Container = styled.div`
 type Props = {};
 
 const Compare = (props: Props) => {
-  const [compare, setCompare] = useState<ProductExtract[]>([]);
-  const { addToCart, cartItems, removeFromCompare } = useContext(UserContext);
+  const { addToCart, cartItems, compare, removeFromCompare } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const CompareData = localStorage.getItem("compare");
-    if (CompareData) {
-      const parsedCompare: ProductExtract[] = JSON.parse(CompareData);
-      setCompare(parsedCompare);
-    }
   }, []);
 
   return (
@@ -57,7 +52,7 @@ const Compare = (props: Props) => {
         <Paragraph>Selecione dois produtos para compará-los</Paragraph>
       ) : (
         <ul>
-          {compare.map((product) => (
+          {compare.map((product: ProductExtract) => (
             <li key={product.id}>
               <img src={product.image} alt={product.name} />
               <div>

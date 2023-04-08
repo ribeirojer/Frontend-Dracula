@@ -1,3 +1,5 @@
+import { CheckoutData } from "../interfaces/Product";
+
 export function countOccurrences(arr: number[]) {
   const counts: number[] = [];
   const total = arr.length;
@@ -35,25 +37,6 @@ export function maskPhone(value: string) {
   value = value.replace(/^(\d{2})(\d)/g, "($1) $2"); // Coloca parênteses em volta dos dois primeiros dígitos
   value = value.replace(/(\d)(\d{4})$/, "$1-$2"); // Coloca hífen entre o quarto e o quinto dígitos
   return value;
-}
-
-interface CheckoutData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  zipCode: string;
-  logradouro: string;
-  numberAddress: string;
-  complemento: string;
-  bairro: string;
-  city: string;
-  state: string;
-  tel: string;
-  paymentMethod: string;
-  termsAgreed: boolean;
-  createAccount: boolean;
-  password: string;
-  confirmPassword: string;
 }
 
 export function validateCheckoutData(data: CheckoutData): any {
@@ -145,4 +128,11 @@ export function hasTrueFields(obj: any) {
     }
   }
   return false;
+}
+
+export function formatCurrency(value: number): string {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
 }

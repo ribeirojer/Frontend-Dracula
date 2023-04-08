@@ -6,6 +6,7 @@ import { OldPriceProduct } from "../utils/theme";
 import { data } from "../utils/cardsData";
 import { Link, useSearchParams } from "react-router-dom";
 import Pagination from "../components/Pagination";
+import { formatCurrency } from "../utils";
 
 type Props = {};
 
@@ -220,8 +221,12 @@ const Shop = (props: Props) => {
                   {product.name}
                 </Link>
                 <Paragraph>
-                  {product.price}{" "}
-                  <OldPriceProduct>{product.oldPrice}</OldPriceProduct>
+                  {formatCurrency(product.price)}{" "}
+                  {product.oldPrice && (
+                    <OldPriceProduct>
+                      {formatCurrency(product.oldPrice)}
+                    </OldPriceProduct>
+                  )}
                 </Paragraph>
               </div>
             </div>
