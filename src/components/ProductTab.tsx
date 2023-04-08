@@ -1,5 +1,5 @@
 import { Button, Divider, Paragraph, Tabs } from "dracula-ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import ProductForm from "./ProductForm";
 import Rating from "./Rating";
@@ -8,7 +8,6 @@ import { IElectronicProduct } from "../interfaces/Product";
 
 type Props = {
   itemToShow: IElectronicProduct;
-  isShowInput: boolean;
 };
 
 const Container = styled.div`
@@ -21,23 +20,23 @@ const Container = styled.div`
     padding-bottom: 1rem;
     gap: 0 2rem;
   }
-
+  .tab-content {
+    > p {
+      text-align: center;
+      margin: 0 auto;
+      width: 80%;
+    }
+  }
   form {
     width: 25%;
   }
 `;
 
-const ProductTab = ({ itemToShow, isShowInput }: Props) => {
+const ProductTab = ({ itemToShow }: Props) => {
   const [isDescriptionSelected, setIsDescriptionSelected] = useState(true);
   const [isDetailsSelected, setIsDetailsSelected] = useState(false);
   const [isReviewsSelected, setIsReviewsSelected] = useState(false);
   const ratings = itemToShow.comments?.map((comment) => comment.rating);
-
-  useEffect(() => {
-    setIsDescriptionSelected(false);
-    setIsDetailsSelected(false);
-    setIsReviewsSelected(true);
-  }, [isShowInput]);
 
   return (
     <Container id="product-tab">
