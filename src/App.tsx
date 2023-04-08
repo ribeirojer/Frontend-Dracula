@@ -7,7 +7,15 @@ import styled from "styled-components";
 import { createContext, useEffect, useState } from "react";
 import { CartExtract, ProductExtract } from "./interfaces/Product";
 import { IUser } from "./interfaces/User";
-import { removeProductFromWishlist, saveProductToWishlist } from "./utils";
+import {
+  removeProductFromCart,
+  removeProductFromCompare,
+  removeProductFromWishlist,
+  saveProductToCart,
+  saveProductToCompare,
+  saveProductToWishlist,
+} from "./utils/localStorage";
+import axios from "axios";
 
 const WrapperWhatsapp = styled.a`
   position: fixed;
@@ -52,15 +60,44 @@ function App() {
   const [user, setUser] = useState<IUser>();
   const [cartItems, setCartItems] = useState<CartExtract[]>([]);
   const [wishlist, setWishlist] = useState<ProductExtract[]>([]);
+  const [compare, setCompare] = useState<ProductExtract[]>([]);
 
   useEffect(() => {
-    const existingCart = localStorage.getItem("Cart");
+    const existingToken = localStorage.getItem("token");
+    if (existingToken) {
+      axios
+        .get("/api/user", {
+          headers: {
+            Authorization: `Bearer ${existingToken}`,
+          },
+        })
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    const existingCart = localStorage.getItem("cart");
     if (existingCart) {
       const parsedCart: CartExtract[] = JSON.parse(existingCart);
       setCartItems(parsedCart);
     }
+
+    const existingWishlist = localStorage.getItem("wishlist");
+    if (existingWishlist) {
+      const parsedWishlist: ProductExtract[] = JSON.parse(existingWishlist);
+      setWishlist(parsedWishlist);
+    }
+
+    const existingCompare = localStorage.getItem("compare");
+    if (existingCompare) {
+      const parsedCompare: ProductExtract[] = JSON.parse(existingCompare);
+      setCompare(parsedCompare);
+    }
   }, []);
-  
+
   const addToCart = (item: CartExtract) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {
@@ -71,13 +108,22 @@ function App() {
             : cartItem
         )
       );
+      saveProductToCart({
+        id: item.id,
+        quantity: item.quantity,
+      });
     } else {
       setCartItems([...cartItems, item]);
+      saveProductToCart({
+        id: item.id,
+        quantity: item.quantity,
+      });
     }
   };
 
   const removeFromCart = (itemId: number) => {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
+    removeProductFromCart(itemId);
   };
 
   const addToWishlist = (item: ProductExtract) => {
@@ -95,6 +141,21 @@ function App() {
     setWishlist(wishlist.filter((item) => item.id !== product.id));
   };
 
+  const addToCompare = (item: ProductExtract) => {
+    const existingItem = compare.find(
+      (compareItem) => compareItem.id === item.id
+    );
+    if (!existingItem) {
+      saveProductToCompare(item);
+      setCompare([...compare, item]);
+    }
+  };
+
+  const removeFromCompare = (productId: number) => {
+    removeProductFromCompare(productId);
+    setCompare(compare.filter((item) => item.id !== productId));
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -103,10 +164,13 @@ function App() {
         cartItems,
         addToCart,
         removeFromCart,
+        setCartItems,
         wishlist,
         addToWishlist,
         removeFromWishlist,
-        setCartItems,
+        compare,
+        addToCompare,
+        removeFromCompare,
       }}
     >
       <Header />

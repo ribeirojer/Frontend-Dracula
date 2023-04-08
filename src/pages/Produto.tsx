@@ -1,30 +1,24 @@
-import {
-  Anchor,
-  Badge,
-  Button,
-  Heading,
-  Input,
-  Paragraph,
-} from "dracula-ui";
+import { Anchor, Badge, Button, Heading, Input, Paragraph } from "dracula-ui";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import CardProduct from "../components/CardProduct";
 import { data } from "../utils/cardsData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Envelope,
   FacebookLogo,
   GitDiff,
   GoogleLogo,
+  InstagramLogo,
   TwitterLogo,
+  WhatsappLogo,
 } from "phosphor-react";
 import Stars from "../components/Stars";
 import theme from "../utils/theme";
 import ProductTab from "../components/ProductTab";
 import { useSearchParams } from "react-router-dom";
-import { saveProductToCart, saveProductToWishlist } from "../utils";
-import { saveProductToCompare } from "../utils";
-import { CartExtract } from "../interfaces/Product";
+import { CartExtract, IElectronicProduct } from "../interfaces/Product";
+import { UserContext } from "../App";
 
 type Props = {};
 
@@ -119,12 +113,13 @@ const WrapperProdutos = styled.section`
 `;
 
 const Produtos = (props: Props) => {
+  const { addToCart, cartItems, addToWishlist, addToCompare } =
+    useContext(UserContext);
   const [quantity, setQuantity] = useState(1);
-  const [isProductSaveToCart, setIsProductSaveToCart] = useState(false);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("produtoId") as string;
   const navigate = useNavigate();
-  const itemToShow = data[parseInt(query) - 1];
+  const itemToShow: IElectronicProduct = data[parseInt(query) - 1];
   const qtdComments = itemToShow.comments?.length || 0;
   const priceToShow =
     itemToShow.salePercentage !== 0
@@ -133,27 +128,12 @@ const Produtos = (props: Props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const existingCart = localStorage.getItem("Cart");
-    if (existingCart) {
-      const parsedCart: CartExtract[] = JSON.parse(existingCart);
-      !!parsedCart.find((item) => item.id === itemToShow.id) &&
-        setIsProductSaveToCart(true);
-    }
   }, []);
 
-  useEffect(() => {
-    const existingCart = localStorage.getItem("Cart");
-    if (existingCart) {
-      const parsedCart: number[] = JSON.parse(existingCart);
-      !!parsedCart.find((item) => item === itemToShow.id) &&
-        setIsProductSaveToCart(true);
-    }
-  }, [isProductSaveToCart]);
-
-  function handleAddToCart(id: number) {
-    saveProductToCart({id, quantity});
-    setIsProductSaveToCart(true);
-  }
+  const isProductSaveToCart = !!cartItems.find(
+    (item: CartExtract) => item.id === itemToShow.id
+  );
+  const shareUrl = `${window.location.origin}/produto?produtoId=${itemToShow.id}`;
 
   return (
     <WrapperProdutos>
@@ -195,7 +175,7 @@ const Produtos = (props: Props) => {
             onClick={() =>
               isProductSaveToCart
                 ? navigate("/checkout")
-                : handleAddToCart(itemToShow.id)
+                : addToCart({ id: itemToShow.id, quantity: quantity })
             }
           >
             {isProductSaveToCart ? "Finalizar compra" : "ADICIONAR AO CARRINHO"}
@@ -203,7 +183,7 @@ const Produtos = (props: Props) => {
           <ul className="product-btns">
             <Button
               onClick={() =>
-                saveProductToCompare({
+                addToCompare({
                   id: itemToShow.id,
                   image: itemToShow.image,
                   name: itemToShow.name,
@@ -218,7 +198,7 @@ const Produtos = (props: Props) => {
             </Button>
             <Button
               onClick={() =>
-                saveProductToWishlist({
+                addToWishlist({
                   id: itemToShow.id,
                   image: itemToShow.image,
                   name: itemToShow.name,
@@ -240,29 +220,54 @@ const Produtos = (props: Props) => {
           </div>
           <div className="product-share">
             <Paragraph>COMPARTILHAR:</Paragraph>
-            <Anchor href="#" target="_blank">
+            <Anchor
+              href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
+              target="_blank"
+            >
               <FacebookLogo size={32}></FacebookLogo>
             </Anchor>
-            <Anchor href="#" target="_blank">
+            <Anchor
+              href={`https://twitter.com/intent/tweet?url=${shareUrl}`}
+              target="_blank"
+            >
               <TwitterLogo size={32}></TwitterLogo>
             </Anchor>
-            <Anchor href="#" target="_blank">
+            <Anchor
+              href={`https://plus.google.com/share?url=${shareUrl}`}
+              target="_blank"
+            >
               <GoogleLogo size={32}></GoogleLogo>
             </Anchor>
-            <Anchor href="#" target="_blank">
+            <Anchor
+              href={`mailto:?subject=Check%20out%20this%20product&body=${shareUrl}`}
+              target="_blank"
+            >
               <Envelope size={32}></Envelope>
+            </Anchor>
+            <Anchor
+              href={`https://api.whatsapp.com/send?text=${shareUrl}`}
+              target="_blank"
+            >
+              <WhatsappLogo size={32}></WhatsappLogo>
+            </Anchor>
+            <Anchor
+              href={`https://www.instagram.com/?url=${shareUrl}`}
+              target="_blank"
+            >
+              <InstagramLogo size={32}></InstagramLogo>
             </Anchor>
           </div>
         </div>
       </div>
       <ProductTab itemToShow={itemToShow}></ProductTab>
-      <Heading>Produtos Relacionados</Heading>
-      <div className="products-related">
-        {data.slice(0, 4).map((item) => {
-          return <CardProduct key={item.id} product={item}></CardProduct>;
-        })}
+      <div>
+        <Heading>Produtos Relacionados</Heading>
+        <div className="products-related">
+          {data.slice(0, 4).map((item) => {
+            return <CardProduct key={item.id} product={item}></CardProduct>;
+          })}
+        </div>
       </div>
-      {/*<Newsletter></Newsletter>*/}
     </WrapperProdutos>
   );
 };

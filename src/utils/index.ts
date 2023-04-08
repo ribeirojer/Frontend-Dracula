@@ -1,5 +1,3 @@
-import { CartExtract, ProductExtract } from "../interfaces/Product";
-
 export function countOccurrences(arr: number[]) {
   const counts: number[] = [];
   const total = arr.length;
@@ -32,67 +30,6 @@ export function fillStars(rating: number, index: number): "fill" | "regular" {
   }
 }
 
-export const saveProductToCart = (item: CartExtract) => {
-  const existingCart = localStorage.getItem("Cart");
-
-  if (existingCart) {
-    const parsedCart: CartExtract[] = JSON.parse(existingCart);
-    parsedCart.push(item);
-    localStorage.setItem("Cart", JSON.stringify(parsedCart));
-  } else {
-    const newCart: CartExtract[] = [item];
-    localStorage.setItem("Cart", JSON.stringify(newCart));
-  }
-};
-
-export const saveProductToWishlist = (product: ProductExtract) => {
-  const existingWishlist = localStorage.getItem("wishlist");
-
-  if (existingWishlist) {
-    const parsedWishlist: ProductExtract[] = JSON.parse(existingWishlist);
-    parsedWishlist.push(product);
-    localStorage.setItem("wishlist", JSON.stringify(parsedWishlist));
-  } else {
-    const newWishlist: ProductExtract[] = [product];
-    localStorage.setItem("wishlist", JSON.stringify(newWishlist));
-  }
-};
-
-export const saveProductToCompare = (product: ProductExtract) => {
-  const existingCompare = localStorage.getItem("compare");
-
-  if (existingCompare) {
-    const parsedCompare: ProductExtract[] = JSON.parse(existingCompare);
-    parsedCompare.push(product);
-    localStorage.setItem("compare", JSON.stringify(parsedCompare));
-  } else {
-    const newCompare: ProductExtract[] = [product];
-    localStorage.setItem("compare", JSON.stringify(newCompare));
-  }
-};
-
-export const removeProductFromCompare = (productId: number) => {
-  const existingCompare = localStorage.getItem("compare");
-
-  if (existingCompare) {
-    const parsedCompare: ProductExtract[] = JSON.parse(existingCompare);
-    const filteredCompare: ProductExtract[] = parsedCompare.filter(
-      (product) => product.id !== productId
-    );
-    localStorage.setItem("compare", JSON.stringify(filteredCompare));
-  }
-};
-
-export const removeProductFromWishlist = (product: ProductExtract) => {
-  const existingWishlist = localStorage.getItem("wishlist");
-
-  if (existingWishlist) {
-    const parsedWishlist: ProductExtract[] = JSON.parse(existingWishlist);
-    const updatedWishlist = parsedWishlist.filter((p) => p.id !== product.id);
-    localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
-  }
-};
-
 export function maskPhone(value: string) {
   value = value.replace(/\D/g, ""); // Remove tudo o que não é dígito
   value = value.replace(/^(\d{2})(\d)/g, "($1) $2"); // Coloca parênteses em volta dos dois primeiros dígitos
@@ -112,11 +49,11 @@ interface CheckoutData {
   city: string;
   state: string;
   tel: string;
-  paymentMethod: string,
-  termsAgreed: boolean,
-  createAccount: boolean,
-  password: string,
-  confirmPassword: string,
+  paymentMethod: string;
+  termsAgreed: boolean;
+  createAccount: boolean;
+  password: string;
+  confirmPassword: string;
 }
 
 export function validateCheckoutData(data: CheckoutData): any {

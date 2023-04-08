@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Button, Heading, Paragraph } from "dracula-ui";
 import { useContext, useEffect, useState } from "react";
 import { CartExtract, ProductExtract } from "../interfaces/Product";
-import { removeProductFromCompare } from "../utils";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +38,7 @@ type Props = {};
 
 const Compare = (props: Props) => {
   const [compare, setCompare] = useState<ProductExtract[]>([]);
-  const { addToCart, cartItems } = useContext(UserContext);
+  const { addToCart, cartItems, removeFromCompare } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const Compare = (props: Props) => {
                     (item: CartExtract) => item.id === product.id
                   )
                     ? navigate("/checkout")
-                    : addToCart({ id: product.id, quatity: 1 })
+                    : addToCart({ id: product.id, quantity: 1 })
                 }
                 color="animated"
               >
@@ -88,8 +87,7 @@ const Compare = (props: Props) => {
                 color="purple"
                 variant="outline"
                 onClick={() => {
-                  setCompare(compare.filter((item) => item.id !== product.id));
-                  removeProductFromCompare(product.id);
+                  removeFromCompare(product.id);
                 }}
               >
                 Remover da Comparação

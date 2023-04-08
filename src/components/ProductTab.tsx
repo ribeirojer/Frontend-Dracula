@@ -12,6 +12,7 @@ type Props = {
 };
 
 const Container = styled.div`
+  width: 100%;
   .tab-select {
     display: flex;
     justify-content: center;
@@ -26,7 +27,7 @@ const ProductTab = ({ itemToShow }: Props) => {
   const [isDescriptionSelected, setIsDescriptionSelected] = useState(true);
   const [isDetailsSelected, setIsDetailsSelected] = useState(false);
   const [isReviewsSelected, setIsReviewsSelected] = useState(false);
-  const ratings = itemToShow.comments?.map(comment => comment.rating);
+  const ratings = itemToShow.comments?.map((comment) => comment.rating);
 
   return (
     <Container id="product-tab">
@@ -75,13 +76,14 @@ const ProductTab = ({ itemToShow }: Props) => {
           <Paragraph>{itemToShow.description}</Paragraph>
         )}
         {isDetailsSelected && (
-          <Paragraph>
-            {JSON.stringify(itemToShow.features)}</Paragraph>
+          <Paragraph>{JSON.stringify(itemToShow.features)}</Paragraph>
         )}
         {isReviewsSelected && (
           <div className="row">
             <Rating ratings={ratings || []}></Rating>
-            <ReviewList notebookReviews={itemToShow.comments || []}></ReviewList>
+            <ReviewList
+              notebookReviews={itemToShow.comments || []}
+            ></ReviewList>
             <ProductForm></ProductForm>
           </div>
         )}

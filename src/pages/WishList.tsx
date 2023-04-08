@@ -74,7 +74,7 @@ function Wishlist() {
                     (item: CartExtract) => item.id === product.id
                   )
                     ? navigate("/checkout")
-                    : addToCart({ id: product.id, quatity: 1 })
+                    : addToCart({ id: product.id, quantity: 1 })
                 }
               >
                 {!!cartItems.find((item: CartExtract) => item.id === product.id)

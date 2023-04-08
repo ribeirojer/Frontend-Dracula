@@ -1,9 +1,8 @@
-import { Anchor, Badge, Button, Heading, Paragraph } from "dracula-ui";
-import { Eye, GitDiff, Star } from "phosphor-react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Anchor, Badge, Button, Paragraph } from "dracula-ui";
+import { Eye, GitDiff } from "phosphor-react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IElectronicProduct } from "../interfaces/Product";
-import { saveProductToWishlist, saveProductToCompare } from "../utils";
 import theme, { OldPriceProduct } from "../utils/theme";
 import Stars from "./Stars";
 import { useContext } from "react";
@@ -106,7 +105,7 @@ const CardContainer = styled.div`
 `;
 
 const CardProduct = ({ product }: Props) => {
-  const { addToCart, addToWishlist } = useContext(UserContext);
+  const { addToCart, addToWishlist, addToCompare } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -153,7 +152,7 @@ const CardProduct = ({ product }: Props) => {
           <div className="product-btns">
             <Button
               onClick={() => {
-                saveProductToCompare({
+                addToCompare({
                   id: product.id,
                   name: product.name,
                   price: product.price,
