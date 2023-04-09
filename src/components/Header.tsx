@@ -149,7 +149,7 @@ const Header = (props: Props) => {
           <li>
             <Link to={"/user"}>
               <Paragraph size="sm" mr="xs">
-                {user ? user.name : "Minha Conta"}
+                {user ? user.firstName : "Minha Conta"}
               </Paragraph>
               <UserCircle size={24} weight="fill"></UserCircle>
             </Link>

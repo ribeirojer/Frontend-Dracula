@@ -6,6 +6,7 @@ import { FacebookLogo, GoogleLogo } from "phosphor-react";
 import InputCheckout from "../components/InputCheckout";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import SignupForm from "../components/SignUp";
 
 type Props = {};
 
@@ -61,7 +62,7 @@ const Wrapper = styled.main`
 `;
 
 const User = (props: Props) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -80,10 +81,26 @@ const User = (props: Props) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setconfirmNewPassword] = useState("");
   const [editPassword, setEditPassword] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    user &&
+      setUserInfo({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        zipCode: "",
+        logradouro: user.address.zipCode,
+        numberAddress: "0",
+        complemento: "",
+        bairro: user.address.street,
+        city: user.address.city,
+        state: user.address.state,
+        tel: user.phoneNumber,
+      });
   }, []);
 
   const handleSubmit = async (event: any) => {
@@ -94,9 +111,20 @@ const User = (props: Props) => {
         email,
         password,
       });
-
-      const token = response.accessToken;
-      localStorage.setItem("token", token);
+      setUser(response);
+      setUserInfo({
+        firstName: response.firstName,
+        lastName: response.lastName,
+        email: response.email,
+        zipCode: "",
+        logradouro: response.address.zipCode,
+        numberAddress: "0",
+        complemento: "",
+        bairro: response.address.street,
+        city: response.address.city,
+        state: response.address.state,
+        tel: response.phoneNumber,
+      });
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -235,6 +263,17 @@ const User = (props: Props) => {
           )}
           <Button type={"submit"}>Salvar</Button>
         </main>
+      ) : isRegister ? (
+        <>
+          <SignupForm></SignupForm>
+          <Button
+            onClick={() => setIsRegister(false)}
+            color="cyanGreen"
+            variant="outline"
+          >
+            Cadastrar
+          </Button>
+        </>
       ) : (
         <div className="login-page">
           <Heading>Login</Heading>
@@ -264,6 +303,13 @@ const User = (props: Props) => {
               }}
             />
             <Button type="submit">Login</Button>
+            <Button
+              onClick={() => setIsRegister(true)}
+              color="green"
+              variant="ghost"
+            >
+              Cadastrar
+            </Button>
           </form>
           <div className="social-icons">
             <Heading size="md">Ou entre com</Heading>

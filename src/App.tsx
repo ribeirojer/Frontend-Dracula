@@ -15,7 +15,6 @@ import {
   saveProductToCompare,
   saveProductToWishlist,
 } from "./utils/localStorage";
-import axios from "axios";
 
 const WrapperWhatsapp = styled.a`
   position: fixed;
@@ -63,22 +62,6 @@ function App() {
   const [compare, setCompare] = useState<ProductExtract[]>([]);
 
   useEffect(() => {
-    const existingToken = localStorage.getItem("token");
-    if (existingToken) {
-      axios
-        .get("/api/user", {
-          headers: {
-            Authorization: `Bearer ${existingToken}`,
-          },
-        })
-        .then((response) => {
-          setUser(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-
     const existingCart = localStorage.getItem("cart");
     if (existingCart) {
       const parsedCart: CartExtract[] = JSON.parse(existingCart);

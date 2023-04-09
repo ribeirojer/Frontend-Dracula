@@ -21,7 +21,7 @@ type Props = {};
 
 const Checkout = (props: Props) => {
   const [dados, setDados] = useState(data);
-  const { cartItems } = useContext(UserContext);
+  const { cartItems, user } = useContext(UserContext);
 
   const [paymentInfo, setPaymentInfo] = useState({
     firstName: "",
@@ -109,6 +109,21 @@ const Checkout = (props: Props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    user &&
+      setPaymentInfo({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        zipCode: "",
+        logradouro: user.address.zipCode,
+        numberAddress: "0",
+        complemento: "",
+        bairro: user.address.street,
+        city: user.address.city,
+        state: user.address.state,
+        tel: user.phoneNumber,
+      });
   }, []);
 
   const handleSubmit = (event: any) => {
@@ -126,6 +141,7 @@ const Checkout = (props: Props) => {
       shippingCost,
       totalPrice,
     };
+    user && setCreateAccount(false);
     const errors = validateCheckoutData({
       ...data.paymentInfo,
       paymentMethod,
@@ -162,21 +178,23 @@ const Checkout = (props: Props) => {
           errorEmailRegex={errorEmailRegex}
           handleSubmitCep={handleSubmitCep}
         ></InputsCheckout>
-        <div
-          className={`input-checkbox ${createAccount ? "adjust-margin" : ""}`}
-        >
-          <Checkbox
-            id="create-account"
-            color="purple"
-            type="checkbox"
-            checked={createAccount}
-            onChange={(e: any) => setCreateAccount(e.target.checked)}
-          />
-          <label htmlFor="create-account" className="drac-text">
-            Criar conta?
-          </label>
-        </div>
-        {createAccount && (
+        {!user && (
+          <div
+            className={`input-checkbox ${createAccount ? "adjust-margin" : ""}`}
+          >
+            <Checkbox
+              id="create-account"
+              color="purple"
+              type="checkbox"
+              checked={createAccount}
+              onChange={(e: any) => setCreateAccount(e.target.checked)}
+            />
+            <label htmlFor="create-account" className="drac-text">
+              Criar conta?
+            </label>
+          </div>
+        )}
+        {!user && createAccount && (
           <div className="billing-details">
             <InputCheckout
               id="password"
