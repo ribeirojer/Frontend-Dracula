@@ -1,5 +1,4 @@
 import { Heading } from "dracula-ui";
-import React from "react";
 import InputCheckout from "../../components/InputCheckout";
 
 type Props = {

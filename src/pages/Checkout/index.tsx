@@ -116,12 +116,12 @@ const Checkout = (props: Props) => {
         lastName: user.lastName,
         email: user.email,
         zipCode: "",
-        logradouro: user.address.zipCode,
+        logradouro: user.address?.zipCode,
         numberAddress: "0",
         complemento: "",
-        bairro: user.address.street,
-        city: user.address.city,
-        state: user.address.state,
+        bairro: user.address?.street,
+        city: user.address?.city,
+        state: user.address?.state,
         tel: user.phoneNumber,
       });
   }, []);

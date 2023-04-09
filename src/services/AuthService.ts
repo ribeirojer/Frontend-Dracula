@@ -40,6 +40,28 @@ export class AuthService {
     return authData.user;
   }
 
+  static async update(data: IUser): Promise<IUser> {
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      throw new Error("Token not found");
+    }
+
+    const response = await axios.put<AuthResponse>(
+      "http://localhost:3000/api/auth/update",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    const authData = response.data;
+    localStorage.setItem("accessToken", authData.token);
+    return authData.user;
+  }
+
   static async logout(): Promise<void> {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {

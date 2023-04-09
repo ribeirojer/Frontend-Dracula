@@ -7,6 +7,9 @@ import InputCheckout from "../components/InputCheckout";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../components/SignUp";
+import InputsCheckout from "./Checkout/InputsCheckout";
+import { IAddress2, IUser } from "../interfaces/User";
+import Signin from "../components/Signin";
 
 type Props = {};
 
@@ -62,7 +65,7 @@ const Wrapper = styled.main`
 `;
 
 const User = (props: Props) => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, saveUserToContext } = useContext(UserContext);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -76,7 +79,20 @@ const User = (props: Props) => {
     state: "",
     tel: "",
   });
-  const [email, setEmail] = useState("");
+  const [userErrorInfo, setUserErrorInfo] = useState({
+    firstName: false,
+    lastName: false,
+    email: false,
+    zipCode: false,
+    logradouro: false,
+    numberAddress: false,
+    complemento: false,
+    bairro: false,
+    city: false,
+    state: false,
+    tel: false,
+  });
+  const [errorEmailRegex, setErrorEmailRegex] = useState(false);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setconfirmNewPassword] = useState("");
@@ -93,43 +109,53 @@ const User = (props: Props) => {
         lastName: user.lastName,
         email: user.email,
         zipCode: "",
-        logradouro: user.address.zipCode,
+        logradouro: user.address?.logradouro,
         numberAddress: "0",
         complemento: "",
-        bairro: user.address.street,
-        city: user.address.city,
-        state: user.address.state,
+        bairro: user.address?.street,
+        city: user.address?.city,
+        state: user.address?.state,
         tel: user.phoneNumber,
       });
-  }, []);
+  }, [user]);
 
-  const handleSubmit = async (event: any) => {
+  async function handleSubmitCep(event: any) {
     event.preventDefault();
+    const response = await fetch(
+      `https://brasilapi.com.br/api/cep/v1/${event.target.value}`
+    );
+    const data: IAddress2 = await response.json();
+    setUserInfo({
+      ...userInfo,
+      zipCode: data.cep,
+      logradouro: data.street,
+      bairro: data.neighborhood,
+      city: data.city,
+      state: data.state,
+    });
+  }
 
+  async function handleSaveUserData() {
     try {
-      const response = await AuthService.login({
-        email,
-        password,
-      });
-      setUser(response);
-      setUserInfo({
-        firstName: response.firstName,
-        lastName: response.lastName,
-        email: response.email,
-        zipCode: "",
-        logradouro: response.address.zipCode,
-        numberAddress: "0",
-        complemento: "",
-        bairro: response.address.street,
-        city: response.address.city,
-        state: response.address.state,
-        tel: response.phoneNumber,
-      });
+      const response = await AuthService.update({
+        ...userInfo,
+      } as unknown as IUser);
+      saveUserToContext(response);
       navigate("/");
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+
+  async function handleLogoffUser() {
+    try {
+      const response = await AuthService.logout();
+      saveUserToContext(response);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Wrapper>
@@ -141,90 +167,19 @@ const User = (props: Props) => {
             borderVariant="large"
             mb="sm"
           />
-          <Heading mb="md">Suas Informações</Heading>
-          <Input
-            color="purple"
-            type="text"
-            name="first-name"
-            placeholder="Primeiro nome"
-            value={userInfo.firstName}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, firstName: e.target.value })
-            }
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="last-name"
-            placeholder="Último nome"
-            value={userInfo.lastName}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, lastName: e.target.value })
-            }
-          />
-          <Input
-            color="purple"
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            value={userInfo.email}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, email: e.target.value })
-            }
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="zip-code"
-            placeholder="CEP"
-            value={userInfo.zipCode}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, zipCode: e.target.value })
-            }
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="address"
-            placeholder="Endereço"
-            value={userInfo.logradouro}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, logradouro: e.target.value })
-            }
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="city"
-            placeholder="Cidade"
-            value={userInfo.city}
-            onChange={(e) => setUserInfo({ ...userInfo, city: e.target.value })}
-          />
-          <Input
-            color="purple"
-            type="text"
-            name="country"
-            placeholder="País"
-            value={userInfo.state}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, state: e.target.value })
-            }
-          />
-          <Input
-            color="purple"
-            type="tel"
-            name="tel"
-            placeholder="Telefone"
-            value={userInfo.tel}
-            onChange={(e) =>
-              setUserInfo({ ...userInfo, firstName: e.target.value })
-            }
-          />
+          <InputsCheckout
+            title={"Suas Informações"}
+            info={userInfo}
+            setInfo={setUserInfo}
+            errorInfo={userErrorInfo}
+            errorEmailRegex={errorEmailRegex}
+            handleSubmitCep={handleSubmitCep}
+          ></InputsCheckout>
           <div className="input-checkbox">
             <Checkbox
+              id="edit-password"
               color="purple"
               type="checkbox"
-              id="edit-password"
               checked={editPassword}
               onChange={(e) => setEditPassword(e.target.checked)}
             />
@@ -261,70 +216,33 @@ const User = (props: Props) => {
               />
             </>
           )}
-          <Button type={"submit"}>Salvar</Button>
+          <Button onClick={() => handleSaveUserData()}>Salvar</Button>
+          <Button onClick={() => handleLogoffUser()} color="purple">
+            Sair
+          </Button>
         </main>
       ) : isRegister ? (
         <>
           <SignupForm></SignupForm>
           <Button
             onClick={() => setIsRegister(false)}
-            color="cyanGreen"
-            variant="outline"
+            color="green"
+            variant="ghost"
+          >
+            Login
+          </Button>
+        </>
+      ) : (
+        <>
+          <Signin></Signin>
+          <Button
+            onClick={() => setIsRegister(true)}
+            color="green"
+            variant="ghost"
           >
             Cadastrar
           </Button>
         </>
-      ) : (
-        <div className="login-page">
-          <Heading>Login</Heading>
-          <form onSubmit={handleSubmit}>
-            <InputCheckout
-              id="email"
-              color="purple"
-              error={false}
-              type="email"
-              label="E-mail"
-              placeholder="E-mail"
-              value={email}
-              onChange={(e: any) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <InputCheckout
-              id="password"
-              color="purple"
-              error={false}
-              label="Senha"
-              placeholder="Digite sua senha"
-              type="password"
-              value={password}
-              onChange={(e: any) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <Button type="submit">Login</Button>
-            <Button
-              onClick={() => setIsRegister(true)}
-              color="green"
-              variant="ghost"
-            >
-              Cadastrar
-            </Button>
-          </form>
-          <div className="social-icons">
-            <Heading size="md">Ou entre com</Heading>
-            <div>
-              <Button color="purpleCyan">
-                <FacebookLogo size={24} />
-                Facebook
-              </Button>
-              <Button color="yellowPink">
-                <GoogleLogo size={24} />
-                Google
-              </Button>
-            </div>
-          </div>
-        </div>
       )}
     </Wrapper>
   );

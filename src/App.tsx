@@ -81,6 +81,10 @@ function App() {
     }
   }, []);
 
+  const saveUserToContext = (user: IUser) => {
+    setUser(user);
+  };
+
   const addToCart = (item: CartExtract) => {
     const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
     if (existingItem) {
@@ -143,11 +147,10 @@ function App() {
     <UserContext.Provider
       value={{
         user,
-        setUser,
+        saveUserToContext,
         cartItems,
         addToCart,
         removeFromCart,
-        setCartItems,
         wishlist,
         addToWishlist,
         removeFromWishlist,

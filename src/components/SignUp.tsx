@@ -6,7 +6,7 @@ import { AuthService } from "../services/AuthService";
 import { UserContext } from "../App";
 
 function SignupForm() {
-  const { setUser } = useContext(UserContext);
+  const { saveUserToContext } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -53,7 +53,7 @@ function SignupForm() {
     if (isValid) {
       AuthService.register(formData)
         .then((data) => {
-          setUser(data);
+          saveUserToContext(data);
         })
         .catch((error) => {
           console.log(error);
@@ -73,7 +73,7 @@ function SignupForm() {
         placeholder="Primeiro nome"
         value={formData.firstName}
         onChange={(e: any) => {
-          setFormData({ ...formData, email: e.target.value });
+          setFormData({ ...formData, firstName: e.target.value });
         }}
       />
       <InputCheckout
@@ -85,7 +85,7 @@ function SignupForm() {
         placeholder="Último nome"
         value={formData.lastName}
         onChange={(e: any) => {
-          setFormData({ ...formData, email: e.target.value });
+          setFormData({ ...formData, lastName: e.target.value });
         }}
       />
       <InputCheckout

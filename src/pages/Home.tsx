@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import HotDealSection from "../components/HotDealSection";
 import Navigation from "../components/Navigation";
 import Newsletter from "../components/Newsletter";
@@ -8,6 +9,11 @@ import SectionC from "../components/SectionC";
 type Props = {};
 
 const Home = (props: Props) => {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   return (
     <>
       <Navigation></Navigation>
