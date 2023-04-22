@@ -1,22 +1,32 @@
-# ecommerce
-e-commerce de produtos de impressão a laser em madeira e acrílico.
-
-Projeto pessoal aberto a contribuição!
+# Drácula E-commerce
+Transforme seu lar em um castelo das trevas com os eletrônicos do e-commerce Drácula.
 
 ## Coisas para fazer:
-* Melhorar o cabeçalho (ao submit, levar para a pagina de produtos)
-* Melhorar a seção hero (colocar um carrousel com ao menos três itens)
-* desenvolver o card (card de produtos pode melhorar)
-* seção de depoimento
-* pagina do usuário
-* implementar endereço com autocomplete
 * implementar meio de pagamento com Stribe
-* prevenir ataques
 * Responsividade
-* atualizar fotos
+* site de referência: https://technext.github.io/feane/
 
-## Design:
-* Paleta: \#1a2026; \#8e5572; \#f2f7f2; \#88665d; \#a86815;
-* sistematizar o design (tamanho de texto e espaçamentos)
-* Fontes: Dancing Script, Open Sans
-* site para inspiração: https://technext.github.io/feane/
+[![alt text](./public/homepage.png "Link para a pagina")](https://maria-neon.vercel.app/)
+
+> ## Bibliotecas e Ferramentas
+
+* Typescript
+* React
+* React Testing Library
+* React Router DOM
+* Cypress
+* Vitest
+* Axios
+* Git
+
+> ## Features do React
+
+* Functional Components
+* UseState
+* UseContext
+* UseEffect
+
+> ## Features de Testes
+
+* Testes Unitários
+* Testes e2e
