@@ -3,24 +3,26 @@ import HotDealSection from "../components/HotDealSection";
 import Navigation from "../components/Navigation";
 import Newsletter from "../components/Newsletter";
 import SectionA from "../components/SectionA";
-import SectionB from "../components/SectionB";
 import SectionC from "../components/SectionC";
 
 type Props = {};
 
 const Home = (props: Props) => {
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   return (
     <>
       <Navigation></Navigation>
       <SectionA></SectionA>
-      <SectionB></SectionB>
+      <SectionC
+        title={"Novos Produtos"}
+        startsIndex={0}
+        endIndex={4}
+      ></SectionC>
       <HotDealSection></HotDealSection>
-      <SectionC></SectionC>
+      <SectionC title={"Mais Vendidos"} startsIndex={4} endIndex={8}></SectionC>
       <Newsletter></Newsletter>
     </>
   );

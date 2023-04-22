@@ -11,6 +11,12 @@ const WrapperSectionB = styled.section`
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
   .section-title {
     padding: 0 2rem 2rem;
     display: flex;
@@ -31,11 +37,10 @@ const WrapperSectionB = styled.section`
 `;
 
 const SectionB = (props: Props) => {
-
   return (
     <WrapperSectionB>
       <div className="section-title">
-        <Heading size="xl">Novos Produtos</Heading>
+        <Heading size="xl"></Heading>
         <ul className="section-nav">
           {dataList.map((item) => {
             return (
@@ -51,12 +56,7 @@ const SectionB = (props: Props) => {
 
       <div className="products">
         {data.slice(0, 4).map((item) => {
-          return (
-            <CardProduct
-              key={item.id}
-              product={item}
-            ></CardProduct>
-          );
+          return <CardProduct key={item.id} product={item}></CardProduct>;
         })}
       </div>
     </WrapperSectionB>

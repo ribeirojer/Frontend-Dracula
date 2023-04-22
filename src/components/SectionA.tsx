@@ -28,15 +28,22 @@ const WrapperSectionA = styled.section`
       width: 100%;
     }
     button {
-      background-color:#282A36;
+      background-color: #282a36;
     }
-    &:hover{
+    &:hover {
       box-shadow: 0px 0px 2rem ${theme.dracula.cyan};
-  }}
+    }
+  }
+
+  @media (max-width: 600px) {
+    .card {
+      width: 100%;
+    }
+  }
 `;
 
 const SectionA = (props: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const data = [
     {
       srcImg: shop01,
@@ -56,12 +63,23 @@ const SectionA = (props: Props) => {
     <WrapperSectionA>
       {data.map((item) => {
         return (
-          <Box key={item.srcImg} className="card" rounded="lg" color="purpleCyan" p="sm">
+          <Box
+            key={item.srcImg}
+            className="card"
+            rounded="lg"
+            color="purpleCyan"
+            p="sm"
+          >
             <img src={item.srcImg} alt="" />
             <Heading color="black" size="xl">
               {item.type}
             </Heading>
-            <Button onClick={()=>navigate(`/shop?c=${item.type}`)} variant="outline" color="purple" m="sm">
+            <Button
+              onClick={() => navigate(`/shop?c=${item.type}`)}
+              variant="outline"
+              color="purple"
+              m="sm"
+            >
               Ver
             </Button>
           </Box>

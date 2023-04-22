@@ -95,6 +95,17 @@ const HeaderWrapper = styled.header`
       }
     }
   }
+  @media (max-width: 600px) {
+    .notShow {
+      display: none;
+    }
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 0;
+    }
+  }
 `;
 
 const Header = (props: Props) => {
@@ -121,7 +132,7 @@ const Header = (props: Props) => {
     <HeaderWrapper>
       <nav>
         <ul>
-          <li>
+          <li className="notShow">
             <a
               href="https://api.whatsapp.com/send?phone=5512981580992&amp;text=Olá,%20Drácula!"
               target={"_blank"}
@@ -136,7 +147,7 @@ const Header = (props: Props) => {
               <Paragraph size="sm">contato@dracula.com</Paragraph>
             </a>
           </li>
-          <li>
+          <li className="notShow">
             <a href="https://goo.gl/maps/hMDFQ3zoR9mZDF5b8" target={"_blank"}>
               <MapPin weight="fill"></MapPin>
               <Paragraph size="sm">
@@ -162,20 +173,22 @@ const Header = (props: Props) => {
           <Logo></Logo>
         </Link>
         <form onSubmit={handleSubmit} className="form-header">
-          <Select
-            defaultValue="default"
-            size="medium"
-            color="purple"
-            onChange={handleSelectChange}
-          >
-            <option value="default" disabled>
-              Categorias
-            </option>
-            <option value="Laptops">Laptops</option>
-            <option value="Smartphones">Smartphones</option>
-            <option value="Câmeras">Câmeras</option>
-            <option value="Acessórios">Acessórios</option>
-          </Select>
+          <div className="notShow">
+            <Select
+              defaultValue="default"
+              size="medium"
+              color="purple"
+              onChange={handleSelectChange}
+            >
+              <option value="default" disabled>
+                Categorias
+              </option>
+              <option value="Laptops">Laptops</option>
+              <option value="Smartphones">Smartphones</option>
+              <option value="Câmeras">Câmeras</option>
+              <option value="Acessórios">Acessórios</option>
+            </Select>
+          </div>
           <div className="form-input">
             <MagnifyingGlass></MagnifyingGlass>
             <Input

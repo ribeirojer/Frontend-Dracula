@@ -53,6 +53,18 @@ const WrapperHotDealSection = styled.section`
       }
     }
   }
+  @media (max-width: 600px) {
+    .hot-deal {
+      gap: 2rem;
+
+      ul li {
+        margin: 0 5px;
+      }
+      .drac-badge {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
 `;
 
 const HotDealSection = (props: Props) => {

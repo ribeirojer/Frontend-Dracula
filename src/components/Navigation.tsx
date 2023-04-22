@@ -17,6 +17,9 @@ const WrapperNavigation = styled.section`
       color: ${theme.dracula.purple};
     }
   }
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Navigation = (props: Props) => {

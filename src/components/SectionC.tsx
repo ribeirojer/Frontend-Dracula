@@ -4,7 +4,11 @@ import styled from "styled-components";
 import { data, dataList } from "../utils/cardsData";
 import CardProduct from "./CardProduct";
 
-type Props = {};
+type Props = {
+  title: string;
+  startsIndex: number;
+  endIndex: number;
+};
 
 const WrapperSectionC = styled.section`
   display: flex;
@@ -33,19 +37,19 @@ const WrapperSectionC = styled.section`
     justify-content: center;
     flex-wrap: wrap;
   }
-  .products-slick {
-    display: flex;
-    flex-wrap: wrap;
+  @media (max-width: 600px) {
+    .section-title ul {
+      display: none;
+    }
   }
 `;
 
-const SectionC = (props: Props) => {
-
+const SectionC = ({ title, startsIndex, endIndex }: Props) => {
   return (
     <WrapperSectionC>
       <div className="section-title">
-        <Heading size="xl">Mais Vendidos</Heading>
-        <ul className="section-nav">
+        <Heading size="xl">{title}</Heading>
+        <ul className="section-nav notShow">
           {dataList.map((item) => {
             return (
               <li key={item.link} className="active">
@@ -57,14 +61,9 @@ const SectionC = (props: Props) => {
           })}
         </ul>
       </div>
-      <div className="products-slick" data-nav="#slick-nav-2">
-        {data.slice(4, 8).map((item) => {
-          return (
-            <CardProduct
-              key={item.id}
-              product={item}
-            ></CardProduct>
-          );
+      <div className="products" data-nav="#slick-nav-2">
+        {data.slice(startsIndex, endIndex).map((item) => {
+          return <CardProduct key={item.id} product={item}></CardProduct>;
         })}
       </div>
     </WrapperSectionC>
