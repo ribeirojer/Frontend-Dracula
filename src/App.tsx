@@ -149,6 +149,7 @@ function App() {
         user,
         saveUserToContext,
         cartItems,
+        setCartItems,
         addToCart,
         removeFromCart,
         wishlist,

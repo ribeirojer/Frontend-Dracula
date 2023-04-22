@@ -48,11 +48,13 @@ const Cart = (props: Props) => {
   }, []);
 
   const updateCartItemQuantity = (itemId: number, newQuantity: number) => {
-    setCartItems(
-      cartItems.map((item: CartExtract) =>
-        item.id === itemId ? { ...item, quantity: newQuantity } : item
-      )
-    );
+    if (newQuantity >= 0) {
+      setCartItems(
+        cartItems.map((item: CartExtract) =>
+          item.id === itemId ? { ...item, quantity: newQuantity } : item
+        )
+      );
+    }
   };
 
   return (
@@ -65,6 +67,7 @@ const Cart = (props: Props) => {
             <Heading>{data[item.id - 1].name}</Heading>
             <div>
               <Button
+                disabled={item.quantity <= 0}
                 onClick={() =>
                   updateCartItemQuantity(item.id, item.quantity - 1)
                 }
