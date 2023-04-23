@@ -1,9 +1,7 @@
 import { AuthService } from "../services/AuthService";
-import { Avatar, Button, Checkbox, Heading, Input } from "dracula-ui";
+import { Avatar, Button, Checkbox, Input } from "dracula-ui";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../App";
-import { FacebookLogo, GoogleLogo } from "phosphor-react";
-import InputCheckout from "../components/InputCheckout";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import SignupForm from "../components/SignUp";

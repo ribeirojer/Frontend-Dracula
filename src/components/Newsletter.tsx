@@ -3,7 +3,7 @@ import styled from "styled-components";
 import theme from "../utils/theme";
 import background from "../assets/rrrainbow.svg";
 import { Anchor, Button, Checkbox, Heading, Input, Radio } from "dracula-ui";
-import axios from "axios";
+import { AuthService } from "../services/AuthService";
 
 type Props = {};
 
@@ -51,6 +51,11 @@ const Container = styled.section`
       align-items: center;
     }
   }
+  @media (max-width: 600px) {
+    .newsletter {
+      width: 90%;
+    }
+  }
 `;
 
 const Newsletter = (props: Props) => {
@@ -73,12 +78,7 @@ const Newsletter = (props: Props) => {
       return;
     }
 
-    axios
-      .post(
-        "/api/newsletter",
-        { email },
-        { headers: { "Content-Type": "application/json" } }
-      )
+    AuthService.newsletter(email)
       .then((response) => {
         setEmail("");
         setError("");

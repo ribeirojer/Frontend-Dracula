@@ -99,11 +99,12 @@ const HeaderWrapper = styled.header`
     .notShow {
       display: none;
     }
+    .header .form-header {
+      display: none;
+    }
     .header {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 0;
+      padding: 1rem 2rem;
     }
   }
 `;
@@ -172,23 +173,21 @@ const Header = (props: Props) => {
         <Link to={"/"}>
           <Logo></Logo>
         </Link>
-        <form onSubmit={handleSubmit} className="form-header">
-          <div className="notShow">
-            <Select
-              defaultValue="default"
-              size="medium"
-              color="purple"
-              onChange={handleSelectChange}
-            >
-              <option value="default" disabled>
-                Categorias
-              </option>
-              <option value="Laptops">Laptops</option>
-              <option value="Smartphones">Smartphones</option>
-              <option value="Câmeras">Câmeras</option>
-              <option value="Acessórios">Acessórios</option>
-            </Select>
-          </div>
+        <form onSubmit={handleSubmit} className="form-header notShow">
+          <Select
+            defaultValue="default"
+            size="medium"
+            color="purple"
+            onChange={handleSelectChange}
+          >
+            <option value="default" disabled>
+              Categorias
+            </option>
+            <option value="Laptops">Laptops</option>
+            <option value="Smartphones">Smartphones</option>
+            <option value="Câmeras">Câmeras</option>
+            <option value="Acessórios">Acessórios</option>
+          </Select>
           <div className="form-input">
             <MagnifyingGlass></MagnifyingGlass>
             <Input

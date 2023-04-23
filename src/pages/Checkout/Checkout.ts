@@ -61,7 +61,6 @@ export const WrapperCheckout = styled.main`
     min-height: var(--spacing-40);
     padding: var(--spacing-4);
     margin-top: 1rem;
-    -webkit-appearance: textfield;
     background: var(--blackSecondary);
     border: 0.3rem solid transparent;
     border-radius: var(--rounded-lg);
@@ -88,5 +87,11 @@ export const WrapperCheckout = styled.main`
   }
   .adjust-margin {
     margin-bottom: -0.5rem;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column-reverse;
+    .col {
+      width: 100%;
+    }
   }
 `;

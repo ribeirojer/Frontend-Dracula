@@ -11,7 +11,7 @@ import { CartExtract } from "../../interfaces/Product";
 import { data } from "../../utils/cardsData";
 import InputCheckout from "../../components/InputCheckout";
 import { IAddress2 } from "../../interfaces/User";
-import { hasTrueFields, validateCheckoutData } from "../../utils";
+import { formatCurrency, hasTrueFields, validateCheckoutData } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import { WrapperCheckout } from "./Checkout";
 import InputsCheckout from "./InputsCheckout";
@@ -260,12 +260,7 @@ const Checkout = (props: Props) => {
                   {product.quantity}x {dados[product.id - 1].name}
                 </Paragraph>
                 <Paragraph>
-                  {(
-                    product.quantity * dados[product.id - 1].price
-                  ).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
+                  {formatCurrency(product.quantity * dados[product.id - 1].price)}
                 </Paragraph>
               </div>
             ))}
@@ -278,10 +273,7 @@ const Checkout = (props: Props) => {
             <div className="line">
               <Heading color="purple">TOTAL</Heading>
               <Heading color="purple">
-                {sumPrice.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
+                {formatCurrency(sumPrice)}
               </Heading>
             </div>
           </div>

@@ -16,6 +16,7 @@ import {
 import Stars from "../components/Stars";
 import theme from "../utils/theme";
 import ProductTab from "../components/ProductTab";
+import SectionC from "../components/SectionC";
 import { CartExtract, IElectronicProduct } from "../interfaces/Product";
 import { UserContext } from "../App";
 import { formatCurrency } from "../utils";
@@ -116,6 +117,18 @@ const WrapperProdutos = styled.section`
     > div {
       display: flex;
       flex-wrap: wrap;
+    }
+  }
+  @media screen {
+    .row {
+      flex-direction: column;
+      padding: 2rem;
+      .product-main-img {
+        width: 100%;
+      }
+      .product-details {
+        width: 100%;
+      }
     }
   }
 `;
@@ -287,14 +300,11 @@ const Produtos = (props: Props) => {
         </div>
       </div>
       <ProductTab itemToShow={itemToShow}></ProductTab>
-      <div className="products-related">
-        <Heading>Produtos Relacionados</Heading>
-        <div>
-          {data.slice(0, 4).map((item) => {
-            return <CardProduct key={item.id} product={item}></CardProduct>;
-          })}
-        </div>
-      </div>
+      <SectionC
+        title={"Produtos Relacionados"}
+        startsIndex={0}
+        endIndex={4}
+      ></SectionC>
     </WrapperProdutos>
   );
 };

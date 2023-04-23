@@ -59,48 +59,47 @@ const Cart = (props: Props) => {
 
   return (
     <Main>
-      <Heading size="2xl">Carrinho de compras</Heading>
+      <Heading size="xl">Carrinho de compras</Heading>
       <ul>
-        {cartItems.map((item: CartExtract) => (
-          <li key={item.id}>
-            <img src={data[item.id - 1].image} alt="" />
-            <Heading>{data[item.id - 1].name}</Heading>
-            <div>
+        {cartItems &&
+          cartItems.map((item: CartExtract) => (
+            <li key={item.id}>
+              <img src={data[item.id - 1].image} alt="" />
+              <Heading>{data[item.id - 1].name}</Heading>
+              <div>
+                <Button
+                  disabled={item.quantity <= 0}
+                  onClick={() =>
+                    updateCartItemQuantity(item.id, item.quantity - 1)
+                  }
+                >
+                  -
+                </Button>
+                <Badge variant="subtle">{item.quantity}</Badge>
+                <Button
+                  onClick={() =>
+                    updateCartItemQuantity(item.id, item.quantity + 1)
+                  }
+                >
+                  +
+                </Button>
+              </div>
               <Button
-                disabled={item.quantity <= 0}
-                onClick={() =>
-                  updateCartItemQuantity(item.id, item.quantity - 1)
-                }
+                variant="ghost"
+                color="red"
+                onClick={() => removeFromCart(item.id)}
               >
-                -
+                Remover
               </Button>
-              <Badge variant="subtle">{item.quantity}</Badge>
-              <Button
-                onClick={() =>
-                  updateCartItemQuantity(item.id, item.quantity + 1)
-                }
-              >
-                +
-              </Button>
-            </div>
-            <Button
-              variant="ghost"
-              color="red"
-              onClick={() => removeFromCart(item.id)}
-            >
-              Remover
-            </Button>
-          </li>
-        ))}
+            </li>
+          ))}
       </ul>
       <Button
-        onClick={() =>
-          cartItems.length ? navigate("/checkout") : navigate("/shop")
-        }
+        onClick={() => (cartItems ? navigate("/checkout") : navigate("/shop"))}
         mt="md"
         color="cyanGreen"
       >
-        {cartItems.length ? "Prosseguir para checkout" : "Ver produtos"}
+        {cartItems ? "Prosseguir para checkout" : "Ver produtos"}
       </Button>
     </Main>
   );

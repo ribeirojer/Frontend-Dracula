@@ -10,6 +10,7 @@ import {
 import { Anchor, Heading, List, Paragraph } from "dracula-ui";
 import Logo from "./Logo";
 import { dataList } from "../utils/cardsData";
+import theme from "../utils/theme";
 type Props = {};
 
 const Wrapper = styled.footer`
@@ -17,6 +18,7 @@ const Wrapper = styled.footer`
   flex-direction: column;
   background-color: #15161d;
   .footer {
+    padding: 1rem;
     display: flex;
     align-items: center;
     div {
@@ -34,37 +36,34 @@ const Wrapper = styled.footer`
       }
     }
   }
-  p {
-    background-color: #15161d;
+  .follow {
+    ul {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      list-style: none;
+      svg {
+        margin-top: 1rem;
+        color: ${theme.dracula.purple};
+        font-size: 48px;
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    .footer {
+      flex-wrap: wrap;
+      div {
+        margin: 1rem 0;
+        width: 100%;
+      }
+    }
   }
 `;
 
 const Footer = (props: Props) => {
   const today = new Date();
   const year = today.getFullYear();
-  /*
-  <ul className="newsletter-follow">
-  <li>
-    <a href="https://www.facebook.com/" target="_blank">
-      <FacebookLogo></FacebookLogo>
-    </a>
-  </li>
-  <li>
-    <a href="https://twitter.com/" target="_blank">
-      <TwitterLogo></TwitterLogo>
-    </a>
-  </li>
-  <li>
-    <a href="https://www.instagram.com/" target="_blank">
-      <InstagramLogo></InstagramLogo>
-    </a>
-  </li>
-  <li>
-    <a href="https://www.pinterest.com/" target="_blank">
-      <PinterestLogo></PinterestLogo>
-    </a>
-  </li>
-</ul>*/
+
   return (
     <Wrapper>
       <div className="footer">
@@ -199,9 +198,33 @@ const Footer = (props: Props) => {
           </List>
         </div>
       </div>
-      <Paragraph align="center" p="sm">
-        &copy; Dracula E-commerce {year} - Todos os direitos reservados
-      </Paragraph>
+      <div className="follow">
+        <ul>
+          <li>
+            <a href="https://www.facebook.com/" target="_blank">
+              <FacebookLogo></FacebookLogo>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/" target="_blank">
+              <TwitterLogo></TwitterLogo>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/" target="_blank">
+              <InstagramLogo></InstagramLogo>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.pinterest.com/" target="_blank">
+              <PinterestLogo></PinterestLogo>
+            </a>
+          </li>
+        </ul>
+        <Paragraph align="center" p="sm">
+          &copy; Dracula E-commerce {year} - Todos os direitos reservados
+        </Paragraph>
+      </div>
     </Wrapper>
   );
 };
