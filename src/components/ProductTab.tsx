@@ -30,6 +30,11 @@ const Container = styled.div`
   form {
     width: 25%;
   }
+  @media (max-width: 600px) {
+    form {
+      width: 100%;
+    }
+  }
 `;
 
 const ProductTab = ({ itemToShow }: Props) => {
@@ -87,10 +92,14 @@ const ProductTab = ({ itemToShow }: Props) => {
         )}
         {isReviewsSelected && (
           <div className="row">
-            <Rating ratings={ratings || []}></Rating>
-            <ReviewList
-              notebookReviews={itemToShow.comments || []}
-            ></ReviewList>
+            {itemToShow.comments && (
+              <>
+                <Rating ratings={ratings || []}></Rating>
+                <ReviewList
+                  notebookReviews={itemToShow.comments || []}
+                ></ReviewList>
+              </>
+            )}
             <ProductForm></ProductForm>
           </div>
         )}

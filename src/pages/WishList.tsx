@@ -52,7 +52,12 @@ function Wishlist() {
     <Container>
       <Heading size="xl">Lista de Desejos</Heading>
       {wishlist.length === 0 ? (
-        <Paragraph>Sua Lista de Desejos está vazia</Paragraph>
+        <>
+          <Paragraph mt="md">Sua Lista de Desejos está vazia</Paragraph>
+          <Button onClick={() => navigate("/shop")} mt="md" color="cyanGreen">
+            Ver produtos
+          </Button>
+        </>
       ) : (
         <ul>
           {wishlist.map((product) => (

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../App";
 import { CartExtract } from "../interfaces/Product";
-import { Badge, Button, Heading } from "dracula-ui";
+import { Badge, Button, Heading, Paragraph } from "dracula-ui";
 import { data } from "../utils/cardsData";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -61,7 +61,7 @@ const Cart = (props: Props) => {
     <Main>
       <Heading size="xl">Carrinho de compras</Heading>
       <ul>
-        {cartItems &&
+        {cartItems && cartItems.length ? (
           cartItems.map((item: CartExtract) => (
             <li key={item.id}>
               <img src={data[item.id - 1].image} alt="" />
@@ -92,14 +92,23 @@ const Cart = (props: Props) => {
                 Remover
               </Button>
             </li>
-          ))}
+          ))
+        ) : (
+          <Paragraph mt="md">Ainda não há produtos no carrinho</Paragraph>
+        )}
       </ul>
       <Button
-        onClick={() => (cartItems ? navigate("/checkout") : navigate("/shop"))}
+        onClick={() =>
+          cartItems && cartItems.length
+            ? navigate("/checkout")
+            : navigate("/shop")
+        }
         mt="md"
         color="cyanGreen"
       >
-        {cartItems ? "Prosseguir para checkout" : "Ver produtos"}
+        {cartItems && cartItems.length
+          ? "Prosseguir para checkout"
+          : "Ver produtos"}
       </Button>
     </Main>
   );

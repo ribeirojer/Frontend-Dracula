@@ -71,6 +71,17 @@ const Wrapper = styled.main`
       align-items: center;
     }
   }
+  @media (max-width: 600px) {
+    #aside {
+      display: none;
+    }
+    #store {
+      width: 100%;
+    }
+    .products-store > div {
+      width: 43%;
+    }
+  }
 `;
 
 const Shop = (props: Props) => {

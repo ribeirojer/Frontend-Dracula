@@ -5,59 +5,87 @@ import { AuthService } from "../services/AuthService";
 import { UserContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { FacebookLogo, GoogleLogo } from "phosphor-react";
+import { hasTrueFields } from "../utils";
 
 type Props = {};
 
 const Signin = (props: Props) => {
   const { saveUserToContext } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginInfo, setLoginInfo] = useState({
+    password: "",
+    email: "",
+  });
+  const [loginError, setLoginError] = useState({
+    email: false,
+    password: false,
+    emailRegex: false,
+    passwordStrong: false,
+  });
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: any) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
+
+  const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    try {
-      const response = await AuthService.login({
-        email,
-        password,
-      });
-      saveUserToContext(response);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
+    if (!loginInfo.email) {
+      setLoginError({ ...loginError, email: true });
+    }
+    if (!loginInfo.password) {
+      setLoginError({ ...loginError, password: true });
+    }
+    if (!emailRegex.test(loginInfo.email)) {
+      setLoginError({ ...loginError, emailRegex: true });
+    }
+    if (!passwordRegex.test(loginInfo.password)) {
+      setLoginError({ ...loginError, passwordStrong: true });
+    }
+
+    const isValid = hasTrueFields(loginError);
+
+    if (isValid) {
+      AuthService.login(loginInfo)
+        .then((data) => {
+          saveUserToContext(data);
+          navigate("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
   return (
     <div className="login-page">
-      <Heading>Login</Heading>
+      <Heading>Entrar</Heading>
       <form onSubmit={handleSubmit}>
         <InputCheckout
           id="email"
           color="purple"
-          error={false}
+          error={loginError.email}
           type="email"
           label="E-mail"
           placeholder="E-mail"
-          value={email}
+          value={loginInfo.email}
           onChange={(e: any) => {
-            setEmail(e.target.value);
+            setLoginInfo({ ...loginInfo, email: e.target.value });
           }}
         />
         <InputCheckout
           id="password"
           color="purple"
-          error={false}
+          error={loginError.password}
           label="Senha"
           placeholder="Digite sua senha"
           type="password"
-          value={password}
+          value={loginInfo.password}
           onChange={(e: any) => {
-            setPassword(e.target.value);
+            setLoginInfo({ ...loginInfo, password: e.target.value });
           }}
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Entrar</Button>
       </form>
       <div className="social-icons">
         <Heading size="md">Ou entre com</Heading>
