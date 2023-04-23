@@ -55,6 +55,9 @@ const Container = styled.section`
     .newsletter {
       width: 90%;
     }
+    .term a {
+      display: block;
+    }
   }
 `;
 

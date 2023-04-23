@@ -26,6 +26,14 @@ const ReviewListContainer = styled.div`
       }
     }
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+
+    .review-heading {
+      margin-top: 2rem;
+    }
+  }
 `;
 
 const ReviewList = ({ notebookReviews }: Props) => {

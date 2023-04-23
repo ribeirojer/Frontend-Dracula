@@ -90,8 +90,21 @@ export const WrapperCheckout = styled.main`
   }
   @media (max-width: 600px) {
     flex-direction: column-reverse;
+    padding: 1rem;
     .col {
       width: 100%;
+      .pedido {
+        padding: 1.5rem;
+        label a {
+          display: block;
+        }
+        #terms {
+          margin-right: 0.5rem;
+        }
+      }
+      .payment-method div input {
+        margin-right: 0.5rem;
+      }
     }
   }
 `;

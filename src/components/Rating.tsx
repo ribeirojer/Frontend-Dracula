@@ -67,6 +67,9 @@ const RatingContainer = styled.div`
       color: ${theme.dracula.green};
     }
   }
+  @media (max-width: 768px)  {
+    width: 100%;
+  }
 `;
 
 const Rating = ({ ratings }: RatingProps) => {

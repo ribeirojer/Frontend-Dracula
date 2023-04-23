@@ -28,7 +28,7 @@ const WrapperSectionA = styled.section`
       width: 100%;
     }
     button {
-      background-color: #282a36;
+      background-color: ${theme.dracula.blackSecondary};
     }
     &:hover {
       box-shadow: 0px 0px 2rem ${theme.dracula.cyan};
@@ -36,6 +36,7 @@ const WrapperSectionA = styled.section`
   }
 
   @media (max-width: 600px) {
+    padding: 1rem 1rem;
     .card {
       width: 100%;
     }

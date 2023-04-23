@@ -30,9 +30,18 @@ const Container = styled.div`
   form {
     width: 25%;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     form {
       width: 100%;
+    }
+    .tab-select {
+      padding: 0 1rem 1rem;
+      gap: 0 1rem;
+      margin-bottom: unset;
+      button {
+        font-size: 0.8rem;
+        padding: 0 0.8rem;
+      }
     }
   }
 `;

@@ -56,9 +56,14 @@ const WrapperHotDealSection = styled.section`
   @media (max-width: 600px) {
     .hot-deal {
       gap: 2rem;
+      width: 100%;
 
-      ul li {
-        margin: 0 5px;
+      ul {
+        width: 90%;
+        flex-wrap: wrap;
+        li {
+          margin: 0.5rem;
+        }
       }
       .drac-badge {
         padding: 0.5rem 1rem;

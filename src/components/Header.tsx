@@ -99,12 +99,24 @@ const HeaderWrapper = styled.header`
     .notShow {
       display: none;
     }
-    .header .form-header {
-      display: none;
+    nav {
+      padding: 1rem;
+      svg {
+        margin-right: 0.5rem;
+      }
+      ul li {
+        margin-right: 0;
+      }
     }
     .header {
       display: flex;
-      padding: 1rem 2rem;
+      padding: 1rem;
+      .form-header {
+        display: none;
+      }
+      a {
+        width: 50%;
+      }
     }
   }
 `;
@@ -170,10 +182,8 @@ const Header = (props: Props) => {
       </nav>
 
       <div className="header">
-        <Link to={"/"}>
-          <Logo></Logo>
-        </Link>
-        <form onSubmit={handleSubmit} className="form-header notShow">
+        <Logo></Logo>
+        <form onSubmit={handleSubmit} className="form-header">
           <Select
             defaultValue="default"
             size="medium"

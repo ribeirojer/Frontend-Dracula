@@ -60,6 +60,23 @@ const Wrapper = styled.main`
       }
     }
   }
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0 1rem;
+    .login-page {
+      width: 100%;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      button {
+        margin-top: 1rem;
+      }
+      h2 {
+        text-align: center;
+      }
+    }
+  }
 `;
 
 const User = (props: Props) => {

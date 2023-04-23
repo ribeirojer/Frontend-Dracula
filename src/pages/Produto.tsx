@@ -119,16 +119,19 @@ const WrapperProdutos = styled.section`
       flex-wrap: wrap;
     }
   }
-  @media screen {
+  @media (max-width: 768px) {
     .row {
       flex-direction: column;
-      padding: 2rem;
+      padding: 1rem;
       .product-main-img {
         width: 100%;
       }
       .product-details {
         width: 100%;
       }
+    }
+    .btns button {
+      font-size: 0.8rem;
     }
   }
 `;

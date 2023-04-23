@@ -166,7 +166,7 @@ function App() {
         target="_blank"
         rel="external"
         className="whats"
-        href="https://api.whatsapp.com/send?phone=5547988460695&amp;text=Olá,%20tudo%20bem?"
+        href="https://api.whatsapp.com/send?phone=5512981580992&amp;text=Olá,%20tudo%20bem?"
       >
         <img src={whats} className="logo" />
       </WrapperWhatsapp>
