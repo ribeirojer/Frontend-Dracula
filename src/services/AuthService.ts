@@ -1,54 +1,79 @@
 import axios from "axios";
-import { IUser } from "../interfaces/User";
+import {
+  AuthResponse,
+  Credentials,
+  IRegistration,
+  IUser,
+} from "../interfaces/User";
 
-interface Credentials {
-  email: string;
-  password: string;
-}
-
-interface AuthResponse {
-  token: string;
-  user: IUser;
-}
-
-export interface IRegistration {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
+const BASE_URL = "http://localhost:3000/api";
 
 export class AuthService {
   static async register(registration: IRegistration): Promise<IUser> {
-    const response = await axios.post<AuthResponse>(
-      "http://localhost:3000/api/auth/register",
-      registration
-    );
-    const authData = response.data;
-    localStorage.setItem("accessToken", authData.token);
-    return authData.user;
+    try {
+      const response = await axios.post<AuthResponse>(
+        `${BASE_URL}/auth/register`,
+        registration
+      );
+      const authData = response.data;
+      AuthService.setAccessToken(authData.token);
+      return authData.user;
+    } catch (error) {
+      console.error("Error registering user: ", error);
+      throw new Error("Error registering user");
+    }
   }
 
   static async login(credentials: Credentials): Promise<IUser> {
     const response = await axios.post<AuthResponse>(
-      "http://localhost:3000/api/auth/login",
+      `${BASE_URL}/auth/login`,
       credentials
     );
-    console.log(response);
     const authData = response.data;
-    localStorage.setItem("accessToken", authData.token);
+    AuthService.setAccessToken(authData.token);
     return authData.user;
   }
 
-  static async update(data: IUser): Promise<IUser> {
-    const accessToken = localStorage.getItem("accessToken");
+  static async refreshToken(): Promise<string> {
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!refreshToken) {
+      throw new Error("Refresh token not found");
+    }
 
+    try {
+      const response = await axios.post<{ token: string }>(
+        "http://localhost:3000/api/auth/refresh-token",
+        { refreshToken }
+      );
+      const newToken = response.data.token;
+      localStorage.setItem("accessToken", newToken);
+      return newToken;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Failed to refresh token");
+    }
+  }
+  
+  static async newsletter(email: string): Promise<string> {
+    try {
+      const response = await axios.post(`${BASE_URL}/newsletter`, email);
+
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.error("Error subscribing to newsletter: ", error);
+      throw new Error("Error subscribing to newsletter");
+    }
+  }
+
+  static async update(data: IUser): Promise<IUser> {
+    const accessToken = AuthService.getAccessToken();
     if (!accessToken) {
       throw new Error("Token not found");
     }
 
     const response = await axios.put<AuthResponse>(
-      "http://localhost:3000/api/auth/update",
+      `${BASE_URL}/auth/update`,
       data,
       {
         headers: {
@@ -58,25 +83,21 @@ export class AuthService {
     );
 
     const authData = response.data;
-    localStorage.setItem("accessToken", authData.token);
+    AuthService.setAccessToken(authData.token);
     return authData.user;
   }
 
   static async logout(): Promise<void> {
-    const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) {
-      return;
-    }
-    localStorage.removeItem("accessToken");
+    AuthService.removeAccessToken();
   }
 
   static async isLoggedIn(): Promise<boolean> {
-    const accessToken = localStorage.getItem("accessToken");
+    const accessToken = AuthService.getAccessToken();
     if (!accessToken) {
       return false;
     }
     try {
-      const response = await axios.get("http://localhost:3000/api/auth/check", {
+      const response = await axios.get(`${BASE_URL}/auth/check`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -89,20 +110,17 @@ export class AuthService {
   }
 
   static async checkTokenValidity() {
-    const token = localStorage.getItem("accessToken");
+    const token = AuthService.getAccessToken();
     if (!token) {
       return false;
     }
 
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/auth/check-token",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(`${BASE_URL}/auth/check-token`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.data.success) {
         return true;
@@ -112,5 +130,21 @@ export class AuthService {
     }
 
     return false;
+  }
+
+  private static getAccessToken(): string | null {
+    return localStorage.getItem("accessToken");
+  }
+
+  private static setAccessToken(token: string): void {
+    localStorage.setItem("accessToken", token);
+  }
+
+  private static removeAccessToken(): void {
+    const accessToken = AuthService.getAccessToken();
+    if (!accessToken) {
+      return;
+    }
+    localStorage.removeItem("accessToken");
   }
 }

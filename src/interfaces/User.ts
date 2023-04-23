@@ -4,23 +4,39 @@ export interface IUser {
   lastName: string;
   email: string;
   password: string;
-  phoneNumber: string;
-  address: {
+  phoneNumber?: string;
+  address?: {
     street: string;
     city: string;
     state: string;
     country: string;
     zipCode: string;
   };
-  billingInfo: {
+  billingInfo?: {
     cardNumber: string;
     cardHolderName: string;
     expirationDate: string;
     cvv: string;
   };
-  orders: IOrder[];
+  orders?: IOrder[];
 }
 
+export interface Credentials {
+  email: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  token: string;
+  user: IUser;
+}
+
+export interface IRegistration {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
 export interface IOrder {
   id: number;
   date: Date;
