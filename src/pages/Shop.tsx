@@ -79,7 +79,10 @@ const Wrapper = styled.main`
       width: 100%;
     }
     .products-store > div {
-      width: 43%;
+      width: 100%;
+    }
+    .store-sort {
+      flex-wrap: wrap;
     }
   }
 `;

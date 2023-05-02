@@ -110,13 +110,16 @@ const HeaderWrapper = styled.header`
     }
     .header {
       display: flex;
-      padding: 1rem;
+      padding: 1rem 1rem 1rem 0;
+      flex-wrap: wrap;
       .form-header {
         display: none;
       }
-      a {
-        width: 50%;
-      }
+    }
+  }
+  @media (max-width: 420px) {
+    .header {
+      justify-content: center;
     }
   }
 `;

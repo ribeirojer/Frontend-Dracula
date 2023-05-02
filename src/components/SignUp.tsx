@@ -23,6 +23,9 @@ const Wrapper = styled.form`
   .signin {
     cursor: pointer;
   }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 function Signup({ setIsLogin }: Props) {

@@ -47,6 +47,12 @@ const SignWrapper = styled.main`
       font-size: 1rem;
     }
   }
+  @media (max-width: 768px) {
+    form {
+      width: 100%;
+    }
+  
+  }
 `;
 
 const Signin = ({ setIsLogin }: Props) => {
