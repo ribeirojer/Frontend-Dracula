@@ -1,11 +1,31 @@
 import { useContext, useState } from "react";
 import InputCheckout from "./InputCheckout";
-import { Button, Heading } from "dracula-ui";
-import { hasTrueFields } from "../utils";
+import { Button, Heading, Paragraph } from "dracula-ui";
+import { emailRegex, hasTrueFields, passwordRegex } from "../utils";
 import { AuthService } from "../services/AuthService";
 import { UserContext } from "../App";
+import styled from "styled-components";
 
-function SignupForm() {
+type Props = {
+  setIsLogin?: any;
+};
+
+const Wrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  h2 {
+    text-align: center;
+  }
+  input {
+    margin: 0.2rem 0;
+  }
+  .signin {
+    cursor: pointer;
+  }
+`;
+
+function Signup({ setIsLogin }: Props) {
   const { saveUserToContext } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
@@ -22,30 +42,35 @@ function SignupForm() {
     password: false,
     passwordStrong: false,
   });
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    setErrorData((prev) => ({
+      email: false,
+      emailRegex: false,
+      password: false,
+      passwordStrong: false,
+      firstName: false,
+      lastName: false,
+    }));
 
     if (!formData.firstName) {
-      setErrorData({ ...errorData, firstName: true });
+      setErrorData((prev) => ({ ...prev, firstName: true }));
     }
     if (!formData.lastName) {
-      setErrorData({ ...errorData, lastName: true });
+      setErrorData((prev) => ({ ...prev, lastName: true }));
     }
     if (!formData.email) {
-      setErrorData({ ...errorData, email: true });
+      setErrorData((prev) => ({ ...prev, email: true }));
     }
     if (!formData.password) {
-      setErrorData({ ...errorData, password: true });
+      setErrorData((prev) => ({ ...prev, password: true }));
     }
     if (!emailRegex.test(formData.email)) {
-      setErrorData({ ...errorData, emailRegex: true });
+      setErrorData((prev) => ({ ...prev, emailRegex: true }));
     }
     if (!passwordRegex.test(formData.password)) {
-      setErrorData({ ...errorData, passwordStrong: true });
+      setErrorData((prev) => ({ ...prev, passwordStrong: true }));
     }
 
     const isValid = hasTrueFields(errorData);
@@ -61,8 +86,12 @@ function SignupForm() {
     }
   };
 
+  function handleSignin() {
+    setIsLogin(true);
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
+    <Wrapper onSubmit={handleSubmit}>
       <Heading mb="md">Cadastrar</Heading>
       <InputCheckout
         id="first-name"
@@ -98,8 +127,13 @@ function SignupForm() {
         value={formData.email}
         onChange={(e: any) => {
           setFormData({ ...formData, email: e.target.value });
-        }} //'Email inválido'
+        }}
       />
+      {errorData.emailRegex && (
+        <Paragraph color="red" my="xs">
+          E-mail inválido
+        </Paragraph>
+      )}
       <InputCheckout
         id="password"
         color="purple"
@@ -110,13 +144,25 @@ function SignupForm() {
         value={formData.password}
         onChange={(e: any) => {
           setFormData({ ...formData, password: e.target.value });
-        }} //'A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 letra minúscula e 1 número'
+        }}
       />
-      <Button color="cyanGreen" type="submit">
+      {errorData.passwordStrong && (
+        <Paragraph color="red" my="xs">
+          A senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1
+          letra minúscula e 1 número
+        </Paragraph>
+      )}
+      <Button color="cyanGreen" type="submit" my="sm">
         Cadastrar
       </Button>
-    </form>
+      <Paragraph align="center">
+        Já tem uma conta?{" "}
+        <span onClick={() => handleSignin()} className="signin drac-text-green">
+          Faça login
+        </span>
+      </Paragraph>
+    </Wrapper>
   );
 }
 
-export default SignupForm;
+export default Signup;

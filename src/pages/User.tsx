@@ -112,7 +112,7 @@ const User = (props: Props) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setconfirmNewPassword] = useState("");
   const [editPassword, setEditPassword] = useState(false);
-  const [isRegister, setIsRegister] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -236,28 +236,10 @@ const User = (props: Props) => {
             Sair
           </Button>
         </main>
-      ) : isRegister ? (
-        <>
-          <SignupForm></SignupForm>
-          <Button
-            onClick={() => setIsRegister(false)}
-            color="green"
-            variant="ghost"
-          >
-            Login
-          </Button>
-        </>
+      ) : isLogin ? (
+        <Signin setIsLogin={setIsLogin} />
       ) : (
-        <>
-          <Signin></Signin>
-          <Button
-            onClick={() => setIsRegister(true)}
-            color="green"
-            variant="ghost"
-          >
-            Cadastrar
-          </Button>
-        </>
+        <SignupForm setIsLogin={setIsLogin} />
       )}
     </Wrapper>
   );
