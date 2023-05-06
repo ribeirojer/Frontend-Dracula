@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { WrapperCheckout } from "./Checkout";
 import InputsCheckout from "./InputsCheckout";
 import { UserContext } from "../../App";
+import { CheckoutService } from "../../services/CheckoutService";
 
 type Props = {};
 
@@ -159,8 +160,29 @@ const Checkout = (props: Props) => {
     setErrorPassword(errors.password);
     setErrorConfirmPassword(errors.confirmPassword);
     const isValid = hasTrueFields(errors);
-    !isValid && navigate("/success");
-    // Aqui você pode enviar os dados para a API ou realizar outras operações com eles
+
+    !isValid &&
+      CheckoutService.placeOrder(
+        paymentInfo,
+        shippingInfo,
+        additionalInfo,
+        createAccount,
+        password,
+        confirmPassword,
+        cartItems
+      )
+        .then((response) => {
+          if (response.link) {
+            navigate("/success", {
+              state: {
+                link: response.link,
+              },
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   };
 
   const sumPrice =

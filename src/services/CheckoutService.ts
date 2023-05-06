@@ -4,24 +4,26 @@ import { IOrder } from "../interfaces/User";
 
 export class CheckoutService {
   static async placeOrder(
-    items: CartExtract[],
-    shippingAddress: string,
-    paymentMethod: string,
-    totalPrice: number
-  ): Promise<IOrder> {
-    const accessToken = localStorage.getItem("accessToken");
+    paymentInfo: any,
+    shippingInfo: any,
+    additionalInfo: string,
+    createAccount: boolean,
+    password: string,
+    confirmPassword: string,
+    cartItems: CartExtract[]
+  ): Promise<{ link: string }> {
+    const accessToken = localStorage.getItem("accessToken") || null;
 
-    if (!accessToken) {
-      throw new Error("Token not found");
-    }
-
-    const response = await axios.post<IOrder>(
+    const response = await axios.post<{ link: string }>(
       "http://localhost:3000/api/orders",
       {
-        items,
-        shippingAddress,
-        paymentMethod,
-        totalPrice,
+        paymentInfo,
+        shippingInfo,
+        additionalInfo,
+        createAccount,
+        password,
+        confirmPassword,
+        cartItems,
       },
       {
         headers: {

@@ -11,7 +11,7 @@ import { IElectronicProduct } from "../interfaces/Product";
 
 export const data: IElectronicProduct[] = [
   {
-    id: 1,
+    id: 4,
     name: "Dell XPS 13",
     brand: "Dell",
     rating: 4,
@@ -61,7 +61,7 @@ export const data: IElectronicProduct[] = [
     ],
   },
   {
-    id: 2,
+    id: 5,
     name: "Fone Gamer",
     brand: "HyperX",
     rating: 4,
@@ -81,7 +81,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 3,
+    id: 6,
     name: "Notebook Dell Inspiron 15",
     brand: "Dell",
     rating: 4,
@@ -124,7 +124,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 4,
+    id: 7,
     name: "Samsung Galaxy Tab S7+",
     brand: "Samsung",
     rating: 4,
@@ -145,7 +145,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 5,
+    id: 8,
     name: "Sony WH-1000XM4",
     brand: "Sony",
     rating: 4,
@@ -166,7 +166,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 6,
+    id: 9,
     name: "MSI GL75 Leopard",
     brand: "MSI",
     rating: 4,
@@ -186,7 +186,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 7,
+    id: 10,
     name: "Samsung Galaxy S21",
     brand: "Samsung",
     rating: 4,
@@ -206,7 +206,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 8,
+    id: 11,
     name: "Notebook Asus Zenbook",
     brand: "Asus",
     rating: 4,
@@ -227,7 +227,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 9,
+    id: 12,
     name: "Câmera DSLR Canon EOS Rebel T7",
     brand: "Canon",
     rating: 4,
@@ -247,7 +247,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 10,
+    id: 13,
     name: "Câmera Mirrorless Sony Alpha a7 III",
     brand: "Sony",
     rating: 4,
@@ -267,7 +267,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 11,
+    id: 14,
     name: "Sony Alpha a7 III",
     brand: "Sony",
     rating: 4,
@@ -288,7 +288,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 13,
+    id: 15,
     name: "Câmera Fotográfica Lenovo",
     brand: "Lenovo",
     rating: 4,
@@ -309,7 +309,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 14,
+    id: 16,
     name: "Lenovo ThinkPad X1 Carbon",
     brand: "Lenovo",
     rating: 4,
@@ -329,7 +329,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 15,
+    id: 17,
     name: "Apple iPad Pro",
     brand: "Apple",
     rating: 4,
@@ -350,7 +350,7 @@ export const data: IElectronicProduct[] = [
     },
   },
   {
-    id: 16,
+    id: 18,
     name: "Fone de ouvido Bluetooth",
     brand: "Sony",
     rating: 4,

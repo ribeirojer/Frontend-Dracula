@@ -46,6 +46,7 @@ export interface IOrder {
     price: number;
     quantity: number;
   }[];
+  status: "pending" | "processing" | "delivered" | "canceled";
   total: number;
   shippingAddress: {
     street: string;
@@ -53,12 +54,6 @@ export interface IOrder {
     state: string;
     country: string;
     zipCode: string;
-  };
-  paymentInfo: {
-    cardNumber: string;
-    cardHolderName: string;
-    expirationDate: string;
-    cvv: string;
   };
 }
 
