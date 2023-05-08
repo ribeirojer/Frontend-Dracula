@@ -78,7 +78,7 @@ function Signup({ setIsLogin }: Props) {
 
     const isValid = hasTrueFields(errorData);
 
-    if (isValid) {
+    if (!isValid) {
       AuthService.register(formData)
         .then((data) => {
           saveUserToContext(data);
