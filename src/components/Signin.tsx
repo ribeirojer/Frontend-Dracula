@@ -91,11 +91,10 @@ const Signin = ({ setIsLogin }: Props) => {
     if (!passwordRegex.test(loginInfo.password)) {
       setLoginError((prev) => ({ ...prev, passwordStrong: true }));
     }
-    console.log(loginInfo);
-    console.log(loginError);
+
     const isValid = hasTrueFields(loginError);
 
-    if (isValid) {
+    if (!isValid) {
       AuthService.login(loginInfo)
         .then((data) => {
           saveUserToContext(data);

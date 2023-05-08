@@ -6,7 +6,7 @@ import {
   IUser,
 } from "../interfaces/User";
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export class AuthService {
   static async register(registration: IRegistration): Promise<IUser> {
